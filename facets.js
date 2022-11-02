@@ -1,14 +1,14 @@
 $(document).ready(function () {
-  let facets = [];
+  let textFacets = [];
   $('.facets-text').each(function () {
-    facets.push($(this).attr('data-facet'));
+    textFacets.push($(this).attr('data-facet'));
   });
 
   $('input').change(function () {
     $('#objects li').each(function () {
       $(this).attr('data-toshow', true);
     });
-    facets.forEach(function (f) {
+    textFacets.forEach(function (f) {
       filterOutItems = $(
         '.facets-text[data-facet=' + f + '] input[type=checkbox]:not(:checked)'
       );
