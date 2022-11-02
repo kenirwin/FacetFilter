@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facet Search Demo</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="facets.js"></script>
+</head>
+<body class="container">
+    <h1>Facet Test</h1>
+    <div id="facets-color" class="facets" data-facet="color">
+        <span class="facet-label">Color: </span>
+        <input type="checkbox" id="red" data-filter="color-red" checked />
+        <label for="red">Red</label>
+      
+        <input type="checkbox" id="orange" data-filter="color-orange" checked />
+        <label for="orange">Orange</label>
+      
+        <input type="checkbox" id="yellow" data-filter="color-yellow" checked />
+        <label for="yellow">Yellow</label>
+      
+        <input type="checkbox" id="green" data-filter="color-green" checked />
+        <label for="green">Green</label>
+      
+        <input type="checkbox" id="blue" data-filter="color-blue" checked />
+        <label for="blue">Blue</label>
+      
+        <input type="checkbox" id="purple" data-filter="color-purple" checked />
+        <label for="purple">Purple</label>
+      </div>
+      
+      <div id="facets-letter" class="facets" data-facet="letter">
+        <span class="facet-label">Letter Type: </span>
+      
+        <input type="checkbox" id="vowel" checked />
+        <label for="vowel">Vowel</label>
+      
+        <input type="checkbox" id="consonant" checked />
+        <label for="consonant">Consonant</label>
+      </div>
+      <ul id="objects">
+        <li data-decade="2000" data-color="red" class="red" data-value="1" data-letter="vowel">A1</li>
+        <li data-decade="1960" data-color="blue" class="blue" data-value="2" data-letter="consonant">B2</li>
+        <li data-decade="1970" data-color="green" class="green" data-value="3" data-letter="consonant">C3</li>
+        <li class="orange" data-color="orange" data-value="4" data-letter="consonant">D4</li>
+        <li class="purple" data-color="purple" data-value="5" data-letter="vowel">E5</li>
+        <li class="yellow" data-color="yellow" data-value="6" data-letter="consonant">F6</li>
+        <li class="red" data-color="red" data-value="7" data-letter="consonant">G7</li>
+        <li class="yellow" data-color="yellow" data-value="8" data-letter="consonant">H8</li>
+        <li class="green" data-color="green" data-value="9" data-letter="vowel">I9</li>
+        <li class="blue" data-color="blue" data-value="10" data-letter="consonant">J10</li>
+        <li class="orange" data-color="orange" data-value="11" data-letter="consonant">K11</li>
+        <li class="red" data-color="red" data-value="12" data-letter="consonant">L12</li>
+        <li class="blue" data-color="blue" data-value="13" data-letter="consonant">M13</li>
+      </ul>
+</body>
+</html>
