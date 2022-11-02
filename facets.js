@@ -1,6 +1,6 @@
 $(document).ready(function () {
   let facets = [];
-  $('.facets').each(function () {
+  $('.facets-text').each(function () {
     facets.push($(this).attr('data-facet'));
   });
 
@@ -10,7 +10,7 @@ $(document).ready(function () {
     });
     facets.forEach(function (f) {
       filterOutItems = $(
-        '.facets[data-facet=' + f + '] input[type=checkbox]:not(:checked)'
+        '.facets-text[data-facet=' + f + '] input[type=checkbox]:not(:checked)'
       );
       let filterOutValues = [];
       $(filterOutItems).each(function () {
