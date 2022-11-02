@@ -19,19 +19,16 @@ function showHide() {
 function processNumericFacets() {
   let numMinFacets = [];
   $('.facets-num-min').each(function () {
-    console.log($(this));
     numMinFacets.push($(this).attr('data-facet'));
   });
-  console.log(numMinFacets);
+  //   console.log(numMinFacets);
   numMinFacets.forEach(function (f) {
     let min = $('#' + f + '-min').val() || null;
     let max = $('#' + f + '-max').val() || null;
-    console.log('min,max' + ':', min, max);
     $('#objects li').each(function () {
       let val = parseInt($(this).attr('data-' + f));
       if ((min != null && val < min) || (max != null && val > max)) {
         $(this).attr('data-toshow', false);
-        console.log('hiding', $(this).text());
       }
     });
   });
@@ -55,6 +52,6 @@ function processTextFacets() {
     filterOutValues.forEach(function (val) {
       $('#objects li[' + attrName + '=' + val + ']').attr('data-toshow', false);
     });
-    console.log(f + ':', filterOutValues);
+    // console.log(f + ':', filterOutValues);
   });
 }
