@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  $.getJSON('data.json', function (json) {
+    displayObjects(json.data);
+  });
   $('input').change(function () {
     setAllToShow();
     processTextFacets();
@@ -6,6 +9,19 @@ $(document).ready(function () {
     showHide();
   });
 });
+
+function displayObjects(data) {
+  $('#objects').empty();
+  data.forEach(function (object) {
+    $('#objects').append(
+      '<li class="object ' +
+        object.color +
+        '"><h3>' +
+        object.label +
+        '</h3></li>'
+    );
+  });
+}
 
 function setAllToShow() {
   $('#objects li').each(function () {

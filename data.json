@@ -1,0 +1,276 @@
+{
+    "schema": {
+        "fields": [
+            {
+                "field": "label",
+                "type": "string",
+                "sortable": true
+            },
+            {
+                "field": "letter",
+                "type": "string",
+                "sortable": true
+            },
+            {
+                "field": "number",
+                "type": "int",
+                "sortable": true
+            },
+            {
+                "field": "type",
+                "type": "list",
+                "options": [
+                    "vowel",
+                    "consonant"
+                ],
+                "sortable": true
+            },
+            {
+                "field": "color",
+                "type": "list",
+                "options": [
+                    "red",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                    "purple"
+                ],
+                "sortable": true
+            }
+        ]
+    },
+    "data": [
+        {
+            "label": "Q1",
+            "letter": "Q",
+            "number": 1,
+            "type": "consonant",
+            "color": "blue"
+        },
+        {
+            "label": "P14",
+            "letter": "P",
+            "number": 14,
+            "type": "consonant",
+            "color": "red"
+        },
+        {
+            "label": "N4",
+            "letter": "N",
+            "number": 4,
+            "type": "consonant",
+            "color": "yellow"
+        },
+        {
+            "label": "M9",
+            "letter": "M",
+            "number": 9,
+            "type": "consonant",
+            "color": "purple"
+        },
+        {
+            "label": "A3",
+            "letter": "A",
+            "number": 3,
+            "type": "vowel",
+            "color": "green"
+        },
+        {
+            "label": "Z13",
+            "letter": "Z",
+            "number": 13,
+            "type": "consonant",
+            "color": "orange"
+        },
+        {
+            "label": "X6",
+            "letter": "X",
+            "number": 6,
+            "type": "consonant",
+            "color": "blue"
+        },
+        {
+            "label": "W2",
+            "letter": "W",
+            "number": 2,
+            "type": "consonant",
+            "color": "green"
+        },
+        {
+            "label": "V7",
+            "letter": "V",
+            "number": 7,
+            "type": "consonant",
+            "color": "red"
+        },
+        {
+            "label": "U12",
+            "letter": "U",
+            "number": 12,
+            "type": "vowel",
+            "color": "orange"
+        },
+        {
+            "label": "T5",
+            "letter": "T",
+            "number": 5,
+            "type": "consonant",
+            "color": "red"
+        },
+        {
+            "label": "S10",
+            "letter": "S",
+            "number": 10,
+            "type": "consonant",
+            "color": "yellow"
+        },
+        {
+            "label": "R1",
+            "letter": "R",
+            "number": 1,
+            "type": "consonant",
+            "color": "purple"
+        },
+        {
+            "label": "Q14",
+            "letter": "Q",
+            "number": 14,
+            "type": "consonant",
+            "color": "red"
+        },
+        {
+            "label": "P4",
+            "letter": "P",
+            "number": 4,
+            "type": "consonant",
+            "color": "red"
+        },
+        {
+            "label": "N9",
+            "letter": "N",
+            "number": 9,
+            "type": "consonant",
+            "color": "yellow"
+        },
+        {
+            "label": "M3",
+            "letter": "M",
+            "number": 3,
+            "type": "consonant",
+            "color": "green"
+        },
+        {
+            "label": "A13",
+            "letter": "A",
+            "number": 13,
+            "type": "vowel",
+            "color": "blue"
+        },
+        {
+            "label": "Z6",
+            "letter": "Z",
+            "number": 6,
+            "type": "consonant",
+            "color": "yellow"
+        },
+        {
+            "label": "X2",
+            "letter": "X",
+            "number": 2,
+            "type": "consonant",
+            "color": "purple"
+        },
+        {
+            "label": "W7",
+            "letter": "W",
+            "number": 7,
+            "type": "consonant",
+            "color": "green"
+        },
+        {
+            "label": "V12",
+            "letter": "V",
+            "number": 12,
+            "type": "consonant",
+            "color": "blue"
+        },
+        {
+            "label": "U5",
+            "letter": "U",
+            "number": 5,
+            "type": "vowel",
+            "color": "orange"
+        },
+        {
+            "label": "T10",
+            "letter": "T",
+            "number": 10,
+            "type": "consonant",
+            "color": "red"
+        },
+        {
+            "label": "S1",
+            "letter": "S",
+            "number": 1,
+            "type": "consonant",
+            "color": "purple"
+        },
+        {
+            "label": "R14",
+            "letter": "R",
+            "number": 14,
+            "type": "consonant",
+            "color": "yellow"
+        },
+        {
+            "label": "I4",
+            "letter": "I",
+            "number": 4,
+            "type": "vowel",
+            "color": "green"
+        },
+        {
+            "label": "P9",
+            "letter": "P",
+            "number": 9,
+            "type": "consonant",
+            "color": "blue"
+        },
+        {
+            "label": "N3",
+            "letter": "N",
+            "number": 3,
+            "type": "consonant",
+            "color": "green"
+        },
+        {
+            "label": "M13",
+            "letter": "M",
+            "number": 13,
+            "type": "consonant",
+            "color": "red"
+        },
+        {
+            "label": "A6",
+            "letter": "A",
+            "number": 6,
+            "type": "vowel",
+            "color": "blue"
+        },
+        {
+            "label": "Z2",
+            "letter": "Z",
+            "number": 2,
+            "type": "consonant",
+            "color": "yellow"
+        },
+        {
+            "label": "A3",
+            "letter": "A",
+            "number": 3,
+            "type": "vowel",
+            "color": "orange"
+        }
+    ]
+}
