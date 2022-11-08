@@ -4,53 +4,20 @@
     <title>Facet Search Test</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="FacetFilter.js"></script>
-    <script src="render.js"></script>
+    <script src="RenderFacets.js"></script>
 </head>
 <body class="container">
     <h1>Facet Test</h1>
-    <!-- <div id="facets-number" class="facets-num-min" data-facet="value">
-        <span  class="facet-label">Minimum Number: </span>
-        <input type="number" id="value-min" value="1">
+    <div class="row">
+        <div id="facets" class="col-md-3">
+        </div>
+        <ul id="objects" class="col-md-9">
+        </ul>
     </div>
-    <div id="facets-number" class="facets-num-max" data-facet="value">
-        <span  class="facet-label">Maximum Number: </span>
-        <input type="number" id="value-max" value="26">
-    </div> -->
-<!-- 
-    <div id="facets-color" class="facets-text" data-facet="color">
-        <span class="facet-label">Color: </span>
-        <input type="checkbox" id="red" data-filter="color-red" checked />
-        <label for="red">Red</label>
-      
-        <input type="checkbox" id="orange" data-filter="color-orange" checked />
-        <label for="orange">Orange</label>
-      
-        <input type="checkbox" id="yellow" data-filter="color-yellow" checked />
-        <label for="yellow">Yellow</label>
-      
-        <input type="checkbox" id="green" data-filter="color-green" checked />
-        <label for="green">Green</label>
-      
-        <input type="checkbox" id="blue" data-filter="color-blue" checked />
-        <label for="blue">Blue</label>
-      
-        <input type="checkbox" id="purple" data-filter="color-purple" checked />
-        <label for="purple">Purple</label>
-      </div>
-      
-      <div id="facets-letter" class="facets-text" data-facet="letter">
-        <span class="facet-label">Letter Type: </span>
-      
-        <input type="checkbox" id="vowel" checked />
-        <label for="vowel">Vowel</label>
-      
-        <input type="checkbox" id="consonant" checked />
-        <label for="consonant">Consonant</label>
-      </div> -->
-      <div id="facets">
-      </div>
-      <ul id="objects">
-      </ul>
+
+
 </body>
 </html>
