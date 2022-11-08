@@ -10,7 +10,8 @@
             {
                 "field": "letter",
                 "type": "string",
-                "sortable": true
+                "sortable": true,
+                "displayFacet": false
             },
             {
                 "field": "number",
@@ -19,7 +20,7 @@
             },
             {
                 "field": "type",
-                "type": "string",
+                "type": "tag",
                 "options": [
                     "vowel",
                     "consonant"
@@ -37,7 +38,8 @@
                     "blue",
                     "purple"
                 ],
-                "sortable": true
+                "sortable": true,
+                "displayFacet": false
             }
         ]
     },

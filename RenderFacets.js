@@ -1,4 +1,4 @@
-$.getJSON('data.json', function (json) {
+$.getJSON('testData.json', function (json) {
   var conf = json;
   var facetFilter = new FacetFilter(conf.schema, conf.data);
   if (typeof itemFormat !== 'undefined') {
@@ -9,19 +9,31 @@ $.getJSON('data.json', function (json) {
 
   let textFacets = facetFilter.getTextFacetNames();
   let numberFacets = facetFilter.getNumberFacetNames();
-
-  textFacets.forEach(function (facet) {
-    $('#facets').append(facetFilter.generateTextFacet(facet));
-  });
+  let tagFacets = facetFilter.getTagFacetNames();
 
   numberFacets.forEach(function (facet) {
     $('#facets').append(facetFilter.generateNumberFacet(facet));
+  });
+
+  tagFacets.forEach(function (facet) {
+    $('#facets').append(facetFilter.generateTagFacet(facet));
+  });
+
+  textFacets.forEach(function (facet) {
+    $('#facets').append(facetFilter.generateTextFacet(facet));
   });
 
   displayObjects(facetFilter.data, facetFilter.format);
 
   $('#facets input').on('change', function () {
     filterObjectsByFacets(facetFilter);
+  });
+
+  $('#facets .facet-tag').on('click', function () {
+    $(this).toggleClass('active');
+    facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
+    filterObjectsByFacets(facetFilter);
+    // console.log('remaining data', facetFilter.data);
   });
 });
 
@@ -33,6 +45,8 @@ function displayObjects(data, format) {
 }
 
 function filterObjectsByFacets(facetFilter) {
+  let tagFacets = facetFilter.getTagFacetNames();
+
   let textFacets = [];
   $('.facet[data-type="text"]').each(function (el) {
     textFacets.push($(this).data('facet'));
@@ -42,6 +56,9 @@ function filterObjectsByFacets(facetFilter) {
     numberFacets.push($(this).data('facet'));
   });
   facetFilter.reset();
+
+  facetFilter.applyAllTagFilters();
+
   textFacets.forEach(function (field) {
     const values = [];
     $('#facets input[data-field="' + field + '"]:checked').each(function () {
@@ -53,9 +70,9 @@ function filterObjectsByFacets(facetFilter) {
   numberFacets.forEach(function (field) {
     let min = $('#' + field + '-min').val();
     let max = $('#' + field + '-max').val();
-    console.log(field, min, max);
+    // console.log(field, min, max);
     facetFilter.applyNumberFilter(field, min, max);
-    console.log(facetFilter.data);
+    // console.log(facetFilter.data);
   });
 
   displayObjects(facetFilter.data, facetFilter.format);

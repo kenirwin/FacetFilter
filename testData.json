@@ -10,20 +10,22 @@
             {
                 "field": "letter",
                 "type": "string",
-                "sortable": true
+                "sortable": true,
+                "displayFacet": false
+            },
+            {
+                "field": "dataTags",
+                "type": "tag",
+                "sortable": false
+            },
+            {
+                "field": "tags",
+                "type": "tag",
+                "sortable": false
             },
             {
                 "field": "number",
                 "type": "int",
-                "sortable": true
-            },
-            {
-                "field": "type",
-                "type": "string",
-                "options": [
-                    "vowel",
-                    "consonant"
-                ],
                 "sortable": true
             },
             {
@@ -45,6 +47,10 @@
         {
             "label": "A3",
             "letter": "A",
+            "dataTags": [
+                "vowels",
+                "pointy"
+            ],
             "number": 3,
             "type": "vowel",
             "color": "orange",
@@ -55,6 +61,10 @@
         {
             "label": "A6",
             "letter": "A",
+            "dataTags": [
+                "vowels",
+                "pointy"
+            ],
             "number": 6,
             "type": "vowel",
             "color": "blue",
@@ -66,18 +76,25 @@
         {
             "label": "B13",
             "letter": "B",
+            "dataTags": [
+                "consonants",
+                "curvy"
+            ],
             "number": 13,
             "type": "consonant",
-            "color": "red",
-            "tags": "humanities"
+            "color": "red"
         },
         {
-            "label": "C2",
-            "letter": "C",
+            "label": "U2",
+            "letter": "U",
+            "dataTags": [
+                "vowels",
+                "curvy",
+                "band-names"
+            ],
             "number": 2,
-            "type": "consonant",
-            "color": "yellow",
-            "tags": []
+            "type": "vowel",
+            "color": "yellow"
         }
     ]
 }

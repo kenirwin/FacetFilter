@@ -17,7 +17,7 @@
     list-style: none;
     width: 400px;
   }
-  li {
+  li.object {
     height: 110px;
     width: 110px;
     font-size: 40pt;
