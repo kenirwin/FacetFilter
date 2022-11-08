@@ -11,6 +11,22 @@ describe('FacetFilter constructor', () => {
   });
 });
 
+describe('FacetFilter.setFormat', () => {
+  it('should set a default format if no argument', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.setFormat();
+    expect(facetFilter.format).toEqual(
+      '<li class="object default"><div class="datum">label: <%= label %></div><div class="datum">letter: <%= letter %></div><div class="datum">number: <%= number %></div><div class="datum">type: <%= type %></div><div class="datum">color: <%= color %></div></li>'
+    );
+  });
+  it('should set a format if argument', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const format =
+      '<li class="object" id="<%= object.id %>"><%= object.id %></li>';
+    facetFilter.setFormat(format);
+    expect(facetFilter.format).toEqual(format);
+  });
+});
 describe('FacetFilter applyTextFilter', () => {
   it('should filter correctly by a single string', () => {
     const facetFilter = new FacetFilter(schema, data);
