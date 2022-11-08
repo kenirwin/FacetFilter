@@ -1,4 +1,3 @@
-// const { describe } = require('yargs');
 const FacetFilter = require('./FacetFilter');
 const setup = require('./testData.json');
 const data = setup.data;
@@ -26,6 +25,13 @@ describe('FacetFilter applyTextFilter', () => {
     expect(facetFilter.data.length).toEqual(2);
     expect(facetFilter.data[0].label).toEqual('A6');
     expect(facetFilter.data[1].label).toEqual('B13');
+  });
+  it('should filter correctly by two filters', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.applyTextFilter('color', ['blue', 'red']);
+    facetFilter.applyTextFilter('letter', 'A');
+    expect(facetFilter.data.length).toEqual(1);
+    expect(facetFilter.data[0].label).toEqual('A6');
   });
 });
 
@@ -78,6 +84,23 @@ describe('getKnownValues', () => {
   });
   // it('should get all tag values for a tag field', () => {});
 });
+
+describe('getTextFacetLabels', () => {
+  it('should get all text facets, omitting displayFacet:false', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const facets = facetFilter.getTextFacetNames();
+    expect(facets).toEqual(['letter', 'type', 'color']);
+  });
+});
+
+describe('getNumberFacetLabels', () => {
+  it('should get all number facets', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const facets = facetFilter.getNumberFacetNames();
+    expect(facets).toEqual(['number']);
+  });
+});
+
 // describe('createTextFacet', () => {
 //   it('should create an html element for a text facet, built on known values', () => {});
 // });

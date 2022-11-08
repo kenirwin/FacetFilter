@@ -37,4 +37,8 @@
     background-color: goldenrod;
     color: white;
   }
+  .checkbox-set {
+    display: inline;
+    margin-right: 10px;
+  }
   

@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facet Search Demo</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" crossorigin="anonymous">
+    <title>Facet Search Test</title>
     <link rel="stylesheet" href="style.css">
-    <script src="facets.js"></script>
-    <script>
-
-    </script>
-
-
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="FacetFilter.js"></script>
+    <script src="render.js"></script>
 </head>
 <body class="container">
     <h1>Facet Test</h1>
-    <div id="facets-number" class="facets-num-min" data-facet="value">
+    <!-- <div id="facets-number" class="facets-num-min" data-facet="value">
         <span  class="facet-label">Minimum Number: </span>
         <input type="number" id="value-min" value="1">
     </div>
     <div id="facets-number" class="facets-num-max" data-facet="value">
         <span  class="facet-label">Maximum Number: </span>
         <input type="number" id="value-max" value="26">
-    </div>
+    </div> -->
+<!-- 
     <div id="facets-color" class="facets-text" data-facet="color">
         <span class="facet-label">Color: </span>
         <input type="checkbox" id="red" data-filter="color-red" checked />
@@ -55,6 +47,8 @@
       
         <input type="checkbox" id="consonant" checked />
         <label for="consonant">Consonant</label>
+      </div> -->
+      <div id="facets">
       </div>
       <ul id="objects">
       </ul>

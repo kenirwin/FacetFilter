@@ -2,8 +2,12 @@ class FacetFilter {
   constructor(schema, data) {
     this.schema = schema;
     this.data = data;
+    this.originalData = data;
   }
 
+  reset() {
+    this.data = this.originalData;
+  }
   applyTextFilter(filterName, values) {
     if (typeof values == 'string') {
       values = [values];
@@ -48,6 +52,46 @@ class FacetFilter {
     }
     return [...new Set(values)];
   }
-}
 
+  getFacetsByType(type) {
+    let facets = [];
+    this.schema.fields.forEach((facet) => {
+      if (
+        facet.type == type &&
+        (facet.displayFacet == null || facet.displayFacet == true)
+      ) {
+        facets.push(facet.field);
+      }
+    });
+    return facets;
+  }
+  getTextFacetNames() {
+    return this.getFacetsByType('string');
+  }
+  getNumberFacetNames() {
+    return this.getFacetsByType('int');
+  }
+
+  generateTextFacet(fieldName) {
+    const values = this.getKnownValues(fieldName, 'text');
+    let options = values.map((value) => {
+      let id = fieldName + '-' + value;
+      return `<span class="checkbox-set"><label for="${id}">${value}</label><input type="checkbox" id="${id}" value="${value}" data-field="${fieldName}" checked /></span>`;
+    });
+    return `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="text"><h3>${fieldName}</h3><div class="facet-options">${options.join(
+      ''
+    )}</div></div>`;
+  }
+
+  generateNumberFacet(fieldName) {
+    const values = this.getKnownValues(fieldName, 'number');
+    let min = values[0];
+    let max = values[values.length - 1];
+    let id = fieldName;
+    return `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="number"><h3>${fieldName}</h3>
+    <label for="${id}-min">Minimum</label><input type="number" id="${id}-min" data-field="${fieldName}" value="${min}" /></div>
+    <label for="${id}-max">Maximum</label><input type="number" id="${id}-max" data-field="${fieldName}" value="${max}" /></div>
+    </div>`;
+  }
+}
 module.exports = FacetFilter;

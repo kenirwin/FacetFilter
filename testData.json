@@ -4,7 +4,8 @@
             {
                 "field": "label",
                 "type": "string",
-                "sortable": true
+                "sortable": true,
+                "displayFacet": false
             },
             {
                 "field": "letter",
@@ -18,7 +19,7 @@
             },
             {
                 "field": "type",
-                "type": "list",
+                "type": "string",
                 "options": [
                     "vowel",
                     "consonant"
@@ -27,7 +28,7 @@
             },
             {
                 "field": "color",
-                "type": "list",
+                "type": "string",
                 "options": [
                     "red",
                     "orange",
