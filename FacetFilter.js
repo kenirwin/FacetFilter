@@ -5,6 +5,24 @@ class FacetFilter {
     this.originalData = data;
   }
 
+  setFormat(format) {
+    if (format) {
+      this.format = format;
+    } else {
+      this.format = this.defaultFormat();
+    }
+  }
+
+  defaultFormat() {
+    let format = '';
+    this.schema.fields.forEach((field) => {
+      console.log(field);
+      format += `<div class="datum">${field.field}: <%= ${field.field} %></div>`;
+    });
+    format = `<li class="object default">${format}</li>`;
+    return format;
+  }
+
   reset() {
     this.data = this.originalData;
   }
