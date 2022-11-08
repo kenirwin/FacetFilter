@@ -94,11 +94,11 @@ class FacetFilter {
     const values = this.getKnownValues(fieldName, 'text');
     let options = values.map((value) => {
       let id = fieldName + '-' + value;
-      return `<span class="checkbox-set"><label for="${id}">${value}</label><input type="checkbox" id="${id}" value="${value}" data-field="${fieldName}" checked /></span>`;
+      return `<span class="checkbox-set"><label for="${id}">${value}</label><input type="checkbox" class="form-check-inline" id="${id}" value="${value}" data-field="${fieldName}" checked /></span>`;
     });
-    return `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="text"><h3>${fieldName}</h3><div class="facet-options">${options.join(
+    return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="text"><legend class="facet-name">${fieldName}</legend><div class="facet-options">${options.join(
       ''
-    )}</div></div>`;
+    )}</div></fieldset>`;
   }
 
   generateNumberFacet(fieldName) {
@@ -106,10 +106,11 @@ class FacetFilter {
     let min = values[0];
     let max = values[values.length - 1];
     let id = fieldName;
-    return `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="number"><h3>${fieldName}</h3>
-    <label for="${id}-min">Minimum</label><input type="number" id="${id}-min" data-field="${fieldName}" value="${min}" /></div>
-    <label for="${id}-max">Maximum</label><input type="number" id="${id}-max" data-field="${fieldName}" value="${max}" /></div>
-    </div>`;
+    return `<fieldset class="facet form-group" id="facet-${fieldName}" data-facet="${fieldName}" data-type="number">
+    <legend class="facet-name">${fieldName}</legend>
+    <label for="${id}-min">Minimum</label><input class="form-control" type="number" id="${id}-min" data-field="${fieldName}" value="${min}" />
+    <label for="${id}-max">Maximum</label><input class="form-control" type="number" id="${id}-max" data-field="${fieldName}" value="${max}" /></div>
+    </fieldset>`;
   }
 }
 module.exports = FacetFilter;
