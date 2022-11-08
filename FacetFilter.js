@@ -107,7 +107,7 @@ class FacetFilter {
     let max = values[values.length - 1];
     let id = fieldName;
     return `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="number"><h3>${fieldName}</h3>
-    <label for="${id}-min">Minimum</label><input type="number" id="${id}-min" data-field="${fieldName}" value="${min}" /></div>
+    <label for="${id}-min">Minimum</label><input type="number" id="${id}-min" data-field="${fieldName}" value="${min}" />
     <label for="${id}-max">Maximum</label><input type="number" id="${id}-max" data-field="${fieldName}" value="${max}" /></div>
     </div>`;
   }
