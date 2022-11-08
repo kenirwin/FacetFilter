@@ -37,4 +37,10 @@
     background-color: goldenrod;
     color: white;
   }
+  .checkbox-set {
+    display: inline;
+    margin-right: 10px;
+  }
+  label { margin-right: 2px}
+  footer { margin: 1em;}
   

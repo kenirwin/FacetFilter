@@ -1,0 +1,23 @@
+{
+  "name": "facet-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "FacetFilter.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenirwin/FacetFilter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kenirwin/FacetFilter/issues"
+  },
+  "homepage": "https://github.com/kenirwin/FacetFilter#readme",
+  "dependencies": {
+    "jest": "^29.2.2",
+    "jquery": "^3.6.1"
+  }
+}

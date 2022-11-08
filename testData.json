@@ -1,0 +1,83 @@
+{
+    "schema": {
+        "fields": [
+            {
+                "field": "label",
+                "type": "string",
+                "sortable": true,
+                "displayFacet": false
+            },
+            {
+                "field": "letter",
+                "type": "string",
+                "sortable": true
+            },
+            {
+                "field": "number",
+                "type": "int",
+                "sortable": true
+            },
+            {
+                "field": "type",
+                "type": "string",
+                "options": [
+                    "vowel",
+                    "consonant"
+                ],
+                "sortable": true
+            },
+            {
+                "field": "color",
+                "type": "string",
+                "options": [
+                    "red",
+                    "orange",
+                    "yellow",
+                    "green",
+                    "blue",
+                    "purple"
+                ],
+                "sortable": true
+            }
+        ]
+    },
+    "data": [
+        {
+            "label": "A3",
+            "letter": "A",
+            "number": 3,
+            "type": "vowel",
+            "color": "orange",
+            "tags": [
+                "language"
+            ]
+        },
+        {
+            "label": "A6",
+            "letter": "A",
+            "number": 6,
+            "type": "vowel",
+            "color": "blue",
+            "tags": [
+                "literature",
+                "science"
+            ]
+        },
+        {
+            "label": "B13",
+            "letter": "B",
+            "number": 13,
+            "type": "consonant",
+            "color": "red",
+            "tags": "humanities"
+        },
+        {
+            "label": "C2",
+            "letter": "C",
+            "number": 2,
+            "type": "consonant",
+            "color": "yellow",
+            "tags": []
+        }
+    ]
+}
