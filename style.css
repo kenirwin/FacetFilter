@@ -1,8 +1,17 @@
 .facet-label {
     font-weight: bold;
   }
-  .facet {
+  fieldset.facet {
     margin-bottom: 1em;
+    background-color: rgba(175, 238, 238, 0.402);
+    padding: .25em;
+    /* rounded corners */
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  .facet-name {
+    text-transform: capitalize;
   }
   ul {
     list-style: none;
@@ -46,10 +55,6 @@
   .yellow {
     background-color: goldenrod;
     color: white;
-  }
-  .checkbox-set {
-    display: inline;
-    margin-right: 10px;
   }
   label { margin-right: 2px}
   footer { margin: 1em;}
