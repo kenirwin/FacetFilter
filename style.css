@@ -6,12 +6,19 @@
     width: 400px;
   }
   li {
-    height: 100px;
-    width: 100px;
+    height: 110px;
+    width: 110px;
     font-size: 40pt;
     text-align: center;
     display: inline-grid;
     margin: 3px;
+  }
+  li.default {
+    font-size: 10pt;
+    text-align: left;
+    border: 1px solid lightblue;
+    margin: .25em;
+    padding: .25em;
   }
   .blue {
     background-color: blue;

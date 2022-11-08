@@ -1,6 +1,12 @@
 $.getJSON('data.json', function (json) {
   var conf = json;
   var facetFilter = new FacetFilter(conf.schema, conf.data);
+  if (typeof itemFormat !== 'undefined') {
+    facetFilter.setFormat(itemFormat);
+  } else {
+    facetFilter.setFormat();
+  }
+
   let textFacets = facetFilter.getTextFacetNames();
   let numberFacets = facetFilter.getNumberFacetNames();
 
@@ -12,19 +18,17 @@ $.getJSON('data.json', function (json) {
     $('#facets').append(facetFilter.generateNumberFacet(facet));
   });
 
-  displayObjects(facetFilter.data);
+  displayObjects(facetFilter.data, facetFilter.format);
 
   $('#facets input').on('change', function () {
     filterObjectsByFacets(facetFilter);
   });
 });
 
-function displayObjects(data) {
+function displayObjects(data, format) {
   $('#objects').empty();
   data.forEach(function (object) {
-    $('#objects').append(
-      '<li class="object ' + object.color + '">' + object.label + '</li>'
-    );
+    $('#objects').append(ejs.render(format, object));
   });
 }
 
@@ -54,5 +58,5 @@ function filterObjectsByFacets(facetFilter) {
     console.log(facetFilter.data);
   });
 
-  displayObjects(facetFilter.data);
+  displayObjects(facetFilter.data, facetFilter.format);
 }
