@@ -1,6 +1,9 @@
 .facet-label {
     font-weight: bold;
   }
+  .facet {
+    margin-bottom: 1em;
+  }
   ul {
     list-style: none;
     width: 400px;
