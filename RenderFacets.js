@@ -7,23 +7,40 @@ $.getJSON('data.json', function (json) {
     facetFilter.setFormat();
   }
 
+  facetFilter.countAllTags();
+
   let textFacets = facetFilter.getTextFacetNames();
   let numberFacets = facetFilter.getNumberFacetNames();
-
-  textFacets.forEach(function (facet) {
-    $('#facets').append(facetFilter.generateTextFacet(facet));
-  });
+  let tagFacets = facetFilter.getTagFacetNames();
 
   numberFacets.forEach(function (facet) {
     $('#facets').append(facetFilter.generateNumberFacet(facet));
   });
 
-  displayObjects(facetFilter.data, facetFilter.format);
+  tagFacets.forEach(function (facet) {
+    $('#facets').append(facetFilter.generateTagFacet(facet));
+  });
 
+  textFacets.forEach(function (facet) {
+    $('#facets').append(facetFilter.generateTextFacet(facet));
+  });
+
+  displayObjects(facetFilter.data, facetFilter.format);
+  bindControls(facetFilter);
+});
+
+function bindControls(facetFilter) {
   $('#facets input').on('change', function () {
     filterObjectsByFacets(facetFilter);
   });
-});
+
+  $('#facets .facet-tag').on('click', function () {
+    $(this).toggleClass('active');
+    facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
+    filterObjectsByFacets(facetFilter);
+    // console.log('remaining data', facetFilter.data);
+  });
+}
 
 function displayObjects(data, format) {
   $('#objects').empty();
@@ -32,7 +49,17 @@ function displayObjects(data, format) {
   });
 }
 
+function updateTagFacets(facetFilter) {
+  let tagFacets = facetFilter.getTagFacetNames();
+  tagFacets.forEach(function (facet) {
+    html = facetFilter.generateTagFacet(facet);
+    $('#facets [data-facet="' + facet + '"]').html(html);
+  });
+}
+
 function filterObjectsByFacets(facetFilter) {
+  let tagFacets = facetFilter.getTagFacetNames();
+
   let textFacets = [];
   $('.facet[data-type="text"]').each(function (el) {
     textFacets.push($(this).data('facet'));
@@ -42,6 +69,9 @@ function filterObjectsByFacets(facetFilter) {
     numberFacets.push($(this).data('facet'));
   });
   facetFilter.reset();
+
+  facetFilter.applyAllTagFilters();
+
   textFacets.forEach(function (field) {
     const values = [];
     $('#facets input[data-field="' + field + '"]:checked').each(function () {
@@ -53,10 +83,14 @@ function filterObjectsByFacets(facetFilter) {
   numberFacets.forEach(function (field) {
     let min = $('#' + field + '-min').val();
     let max = $('#' + field + '-max').val();
-    console.log(field, min, max);
+    // console.log(field, min, max);
     facetFilter.applyNumberFilter(field, min, max);
-    console.log(facetFilter.data);
+    // console.log(facetFilter.data);
   });
 
+  facetFilter.countAllTags();
+  console.log(facetFilter.tagCounts);
   displayObjects(facetFilter.data, facetFilter.format);
+  updateTagFacets(facetFilter);
+  bindControls(facetFilter);
 }

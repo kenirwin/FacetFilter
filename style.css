@@ -17,7 +17,7 @@
     list-style: none;
     width: 400px;
   }
-  li {
+  li.object {
     height: 110px;
     width: 110px;
     font-size: 40pt;
@@ -57,5 +57,8 @@
     color: white;
   }
   label { margin-right: 2px}
-  footer { margin: 1em;}
+  footer { 
+    padding: 1em; 
+    background-color: white;
+}
   
