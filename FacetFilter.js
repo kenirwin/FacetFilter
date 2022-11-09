@@ -136,8 +136,16 @@ class FacetFilter {
   generateTagFacet(fieldName) {
     const values = this.getKnownValues(fieldName, 'tag').filter((item) => item);
     let html = '';
+    let addClass;
     let options = values.map((value) => {
-      html += `<li><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value}</a></li>`;
+      addClass = '';
+      if (
+        this.filters.hasOwnProperty(fieldName) &&
+        this.filters[fieldName].includes(value)
+      ) {
+        addClass = 'fw-bold';
+      }
+      html += `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value}</a></li>`;
     });
     return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldName}</legend>${html}</fieldset>`;
     // let options = values.map((value) => {
