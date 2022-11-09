@@ -44,6 +44,14 @@ function displayObjects(data, format) {
   });
 }
 
+function updateTagFacets(facetFilter) {
+  let tagFacets = facetFilter.getTagFacetNames();
+  tagFacets.forEach(function (facet) {
+    html = facetFilter.generateTagFacet(facet);
+    $('#facets [data-facet="' + facet + '"]').html(html);
+  });
+}
+
 function filterObjectsByFacets(facetFilter) {
   let tagFacets = facetFilter.getTagFacetNames();
 
@@ -76,4 +84,6 @@ function filterObjectsByFacets(facetFilter) {
   });
 
   displayObjects(facetFilter.data, facetFilter.format);
+
+  updateTagFacets(facetFilter);
 }
