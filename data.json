@@ -335,6 +335,17 @@
             "letter type": "vowel",
             "letter shape": "pointy",
             "color": "orange"
+        },
+        {
+            "label": "Y9",
+            "letter": "Y",
+            "number": 9,
+            "letter type": [
+                "vowel",
+                "consonant"
+            ],
+            "letter shape": "pointy",
+            "color": "blue"
         }
     ]
 }

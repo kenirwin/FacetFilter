@@ -27,6 +27,8 @@ class FacetFilter {
 
   reset() {
     this.data = this.originalData;
+    // this.format = {};
+    // this.countAllTags();
   }
 
   addTagFilter(fieldName, value) {
