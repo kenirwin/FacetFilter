@@ -24,7 +24,10 @@ $.getJSON('data.json', function (json) {
   });
 
   displayObjects(facetFilter.data, facetFilter.format);
+  bindControls(facetFilter);
+});
 
+function bindControls(facetFilter) {
   $('#facets input').on('change', function () {
     filterObjectsByFacets(facetFilter);
   });
@@ -35,7 +38,7 @@ $.getJSON('data.json', function (json) {
     filterObjectsByFacets(facetFilter);
     // console.log('remaining data', facetFilter.data);
   });
-});
+}
 
 function displayObjects(data, format) {
   $('#objects').empty();
@@ -84,6 +87,6 @@ function filterObjectsByFacets(facetFilter) {
   });
 
   displayObjects(facetFilter.data, facetFilter.format);
-
   updateTagFacets(facetFilter);
+  bindControls(facetFilter);
 }
