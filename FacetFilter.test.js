@@ -136,6 +136,18 @@ describe('FacetFilter applyTagFilter', () => {
     facetFilter.applyTagFilter('dataTags', 'bogus');
     expect(facetFilter.data.length).toEqual(0);
   });
+
+  it('should work when some entries lack the tag field', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.applyTagFilter('tags', 'literature');
+    expect(facetFilter.data.length).toEqual(1);
+    expect(facetFilter.data[0].label).toEqual('A6');
+  });
+  it('should work (return empty set) when all entries lack the tag field', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.applyTagFilter('bogusTagField', 'vowels');
+    expect(facetFilter.data.length).toEqual(0);
+  });
 });
 
 describe('getKnownValues', () => {

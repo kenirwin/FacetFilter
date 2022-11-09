@@ -62,6 +62,9 @@ class FacetFilter {
       values = [values];
     }
     this.data = this.data.filter((item) => {
+      if (item[filterName] == null) {
+        return false;
+      }
       return values.every((value) => {
         return item[filterName].includes(value);
       });
