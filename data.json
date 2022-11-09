@@ -25,7 +25,7 @@
                     "vowel",
                     "consonant"
                 ],
-                "sortable": true
+                "sortable": false
             },
             {
                 "field": "letter shape",

@@ -220,6 +220,43 @@ describe('getTagFacetNames', () => {
     expect(facets).toEqual(['dataTags', 'tags']);
   });
 });
-// describe('createTextFacet', () => {
-//   it('should create an html element for a text facet, built on known values', () => {});
-// });
+
+describe('getFacetByFieldName', () => {
+  it('should get a facet by field name', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const facet = facetFilter.getFacetByFieldName('letter');
+    expect(facet).toEqual({
+      field: 'letter',
+      type: 'string',
+      sortable: true,
+      displayFacet: false,
+    });
+  });
+});
+
+describe('getSortableFields', () => {
+  it('should get all sortable fields', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const sortableFields = facetFilter.getSortableFields();
+    expect(sortableFields).toEqual(['label', 'letter', 'number', 'color']);
+  });
+});
+
+describe('sortDataByFacet', () => {
+  it('should sort data by a text facet', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.sortDataByFacet('color');
+    expect(facetFilter.data[0].label).toEqual('A6');
+    expect(facetFilter.data[1].label).toEqual('A3');
+    expect(facetFilter.data[2].label).toEqual('B13');
+    expect(facetFilter.data[3].label).toEqual('U2');
+  });
+  it('should sort data by a number facet', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.sortDataByFacet('number');
+    expect(facetFilter.data[0].label).toEqual('U2');
+    expect(facetFilter.data[1].label).toEqual('A3');
+    expect(facetFilter.data[2].label).toEqual('A6');
+    expect(facetFilter.data[3].label).toEqual('B13');
+  });
+});

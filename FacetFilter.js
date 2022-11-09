@@ -142,6 +142,53 @@ class FacetFilter {
     return this.getFacetsByType('tag');
   }
 
+  /* sorting */
+
+  getFacetByFieldName(fieldName) {
+    return this.schema.fields.find((facet) => facet.field == fieldName);
+  }
+
+  getSortableFields() {
+    let sortableFields = [];
+    this.schema.fields.forEach((facet) => {
+      if (facet.sortable == true) {
+        sortableFields.push(facet.field);
+      }
+    });
+    return sortableFields;
+  }
+
+  sortDataByFacet(fieldName) {
+    const facet = this.getFacetByFieldName(fieldName);
+    if (facet.type == 'int') {
+      this.data.sort((a, b) => a[fieldName] - b[fieldName]);
+      // console.log(ff.data);
+    } else {
+      console.log('not an int');
+      this.data.sort((a, b) => {
+        let aCopy = a[fieldName];
+        let bCopy = b[fieldName];
+        if (a[fieldName] == null) {
+          aCopy = '';
+        }
+        if (b[fieldName] == null) {
+          bCopy = '';
+        }
+        aCopy = aCopy.toUpperCase() || '';
+        bCopy = bCopy.toUpperCase() || '';
+        if (aCopy < bCopy) {
+          return -1;
+        }
+        if (aCopy > bCopy) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+  }
+
+  /* generate Facet HTML */
+
   generateTextFacet(fieldName) {
     const values = this.getKnownValues(fieldName, 'text');
     let options = values.map((value) => {

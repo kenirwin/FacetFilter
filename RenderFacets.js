@@ -9,6 +9,8 @@ $.getJSON('data.json', function (json) {
 
   facetFilter.countAllTags();
 
+  createSorter(facetFilter);
+
   let textFacets = facetFilter.getTextFacetNames();
   let numberFacets = facetFilter.getNumberFacetNames();
   let tagFacets = facetFilter.getTagFacetNames();
@@ -46,8 +48,23 @@ function bindControls(facetFilter) {
   $('#show-all').on('click', function () {
     location.reload();
   });
+  $('#sorter').on('change', function () {
+    console.log('sorter changed: ', $(this).val());
+    facetFilter.sortDataByFacet($(this).val());
+    console.log('sorted data', facetFilter.data);
+    displayObjects(facetFilter.data, facetFilter.format);
+  });
 }
 
+function createSorter(facetFilter) {
+  let sorters = facetFilter.getSortableFields();
+  $('#facets').append(
+    '<label for="sorter" class="visually-hidden">Sort By</label><span class="input-group mb-3"><span class="input-group-text" id="basic-sort"><i class="bi bi-sort-down"></i></span><select id="sorter" class="form-control"><option>Sort by:</option></select></span>'
+  );
+  sorters.forEach(function (field) {
+    $('#sorter').append('<option value="' + field + '">' + field + '</option>');
+  });
+}
 function displayObjects(data, format) {
   $('#objects').empty();
   data.forEach(function (object) {
