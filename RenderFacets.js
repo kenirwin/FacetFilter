@@ -7,6 +7,8 @@ $.getJSON('data.json', function (json) {
     facetFilter.setFormat();
   }
 
+  facetFilter.countAllTags();
+
   let textFacets = facetFilter.getTextFacetNames();
   let numberFacets = facetFilter.getNumberFacetNames();
   let tagFacets = facetFilter.getTagFacetNames();
@@ -86,6 +88,8 @@ function filterObjectsByFacets(facetFilter) {
     // console.log(facetFilter.data);
   });
 
+  facetFilter.countAllTags();
+  console.log(facetFilter.tagCounts);
   displayObjects(facetFilter.data, facetFilter.format);
   updateTagFacets(facetFilter);
   bindControls(facetFilter);

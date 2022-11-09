@@ -4,6 +4,8 @@ class FacetFilter {
     this.data = data;
     this.originalData = data;
     this.filters = {};
+    this.tagCounts = {};
+    // this.countAllTags();
   }
 
   setFormat(format) {
@@ -88,6 +90,34 @@ class FacetFilter {
     return [...new Set(values)];
   }
 
+  countAllTags() {
+    this.getTagFacetNames().forEach((fieldName) => {
+      this.countTags(fieldName);
+    });
+  }
+
+  countTags(fieldName) {
+    console.log('countTags for:', fieldName);
+    let counts = {};
+    this.data.forEach((item) => {
+      console.log('item:', item);
+      if (item[fieldName] == null) {
+        return;
+      }
+      if (typeof item[fieldName] == 'string') {
+        item[fieldName] = [item[fieldName]];
+      }
+      item[fieldName].forEach((tag) => {
+        if (counts[tag] == null) {
+          counts[tag] = 1;
+        } else {
+          counts[tag] += 1;
+        }
+      });
+    });
+    this.tagCounts[fieldName] = counts;
+  }
+
   getFacetsByType(type) {
     let facets = [];
     this.schema.fields.forEach((facet) => {
@@ -136,8 +166,8 @@ class FacetFilter {
   generateTagFacet(fieldName) {
     const values = this.getKnownValues(fieldName, 'tag').filter((item) => item);
     let html = '';
-    let addClass;
-    let options = values.map((value) => {
+    let addClass, itemCount;
+    values.map((value) => {
       addClass = '';
       if (
         this.filters.hasOwnProperty(fieldName) &&
@@ -145,7 +175,8 @@ class FacetFilter {
       ) {
         addClass = 'fw-bold';
       }
-      html += `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value}</a></li>`;
+      itemCount = this.tagCounts[fieldName][value];
+      html += `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a></li>`;
     });
     return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldName}</legend>${html}</fieldset>`;
     // let options = values.map((value) => {

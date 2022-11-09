@@ -174,6 +174,29 @@ describe('getKnownValues', () => {
   });
 });
 
+describe('countAllTags', () => {
+  it('should recount totals for all tag fields', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.countAllTags();
+    expect(facetFilter.tagCounts.hasOwnProperty('dataTags')).toBeTruthy();
+    expect(facetFilter.tagCounts.hasOwnProperty('tags')).toBeTruthy();
+  });
+});
+
+describe('countTags', () => {
+  it('should get the correct counts for a tag field', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.countTags('dataTags');
+    expect(facetFilter.tagCounts['dataTags']).toEqual({
+      'band-names': 1,
+      consonants: 1,
+      curvy: 2,
+      pointy: 2,
+      vowels: 3,
+    });
+  });
+});
+
 describe('getTextFacetNames', () => {
   it('should get all text facets, omitting displayFacet:false', () => {
     const facetFilter = new FacetFilter(schema, data);
