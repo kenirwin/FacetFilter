@@ -25,6 +25,9 @@ $.getJSON('data.json', function (json) {
     $('#facets').append(facetFilter.generateTextFacet(facet));
   });
 
+  $('#facets').append(
+    '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
+  );
   displayObjects(facetFilter.data, facetFilter.format);
   bindControls(facetFilter);
 });
@@ -39,6 +42,9 @@ function bindControls(facetFilter) {
     facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
     filterObjectsByFacets(facetFilter);
     // console.log('remaining data', facetFilter.data);
+  });
+  $('#show-all').on('click', function () {
+    location.reload();
   });
 }
 
