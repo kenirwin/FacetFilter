@@ -17,6 +17,9 @@
     list-style: none;
     width: 400px;
   }
+  #objects a  { 
+    text-decoration: none;
+  }
   li.object {
     height: 110px;
     width: 110px;
