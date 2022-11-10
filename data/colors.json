@@ -19,7 +19,7 @@
                 "sortable": true
             },
             {
-                "field": "letter type",
+                "field": "letterType",
                 "type": "tag",
                 "options": [
                     "vowel",
@@ -28,7 +28,7 @@
                 "sortable": false
             },
             {
-                "field": "letter shape",
+                "field": "letterShape",
                 "type": "tag",
                 "options": [
                     "curvy",
@@ -57,16 +57,16 @@
             "label": "Q1",
             "letter": "Q",
             "number": 1,
-            "letter type": "consonant",
-            "letter shape": "curvy",
+            "letterType": "consonant",
+            "letterShape": "curvy",
             "color": "blue"
         },
         {
             "label": "P14",
             "letter": "P",
             "number": 14,
-            "letter type": "consonant",
-            "letter shape": [
+            "letterType": "consonant",
+            "letterShape": [
                 "curvy",
                 "pointy"
             ],
@@ -76,88 +76,88 @@
             "label": "N4",
             "letter": "N",
             "number": 4,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "yellow"
         },
         {
             "label": "M9",
             "letter": "M",
             "number": 9,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "purple"
         },
         {
             "label": "A3",
             "letter": "A",
             "number": 3,
-            "letter type": "vowel",
-            "letter shape": "pointy",
+            "letterType": "vowel",
+            "letterShape": "pointy",
             "color": "green"
         },
         {
             "label": "Z13",
             "letter": "Z",
             "number": 13,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "orange"
         },
         {
             "label": "X6",
             "letter": "X",
             "number": 6,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "blue"
         },
         {
             "label": "W2",
             "letter": "W",
             "number": 2,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "green"
         },
         {
             "label": "V7",
             "letter": "V",
             "number": 7,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "red"
         },
         {
             "label": "U12",
             "letter": "U",
             "number": 12,
-            "letter type": "vowel",
-            "letter shape": "curvy",
+            "letterType": "vowel",
+            "letterShape": "curvy",
             "color": "orange"
         },
         {
             "label": "T5",
             "letter": "T",
             "number": 5,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "red"
         },
         {
             "label": "S10",
             "letter": "S",
             "number": 10,
-            "letter type": "consonant",
-            "letter shape": "curvy",
+            "letterType": "consonant",
+            "letterShape": "curvy",
             "color": "yellow"
         },
         {
             "label": "R1",
             "letter": "R",
             "number": 1,
-            "letter type": "consonant",
-            "letter shape": [
+            "letterType": "consonant",
+            "letterShape": [
                 "pointy",
                 "curvy"
             ],
@@ -167,16 +167,16 @@
             "label": "Q14",
             "letter": "Q",
             "number": 14,
-            "letter type": "consonant",
-            "letter shape": "curvy",
+            "letterType": "consonant",
+            "letterShape": "curvy",
             "color": "red"
         },
         {
             "label": "P4",
             "letter": "P",
             "number": 4,
-            "letter type": "consonant",
-            "letter shape": [
+            "letterType": "consonant",
+            "letterShape": [
                 "pointy",
                 "curvy"
             ],
@@ -186,8 +186,8 @@
             "label": "N9",
             "letter": "N",
             "number": 9,
-            "letter type": "consonant",
-            "letter shape": [
+            "letterType": "consonant",
+            "letterShape": [
                 "pointy"
             ],
             "color": "yellow"
@@ -196,80 +196,80 @@
             "label": "M3",
             "letter": "M",
             "number": 3,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "green"
         },
         {
             "label": "A13",
             "letter": "A",
             "number": 13,
-            "letter type": "vowel",
-            "letter shape": "pointy",
+            "letterType": "vowel",
+            "letterShape": "pointy",
             "color": "blue"
         },
         {
             "label": "Z6",
             "letter": "Z",
             "number": 6,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "yellow"
         },
         {
             "label": "X2",
             "letter": "X",
             "number": 2,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "purple"
         },
         {
             "label": "W7",
             "letter": "W",
             "number": 7,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "green"
         },
         {
             "label": "V12",
             "letter": "V",
             "number": 12,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "blue"
         },
         {
             "label": "U5",
             "letter": "U",
             "number": 5,
-            "letter type": "vowel",
-            "letter shape": "curvy",
+            "letterType": "vowel",
+            "letterShape": "curvy",
             "color": "orange"
         },
         {
             "label": "T10",
             "letter": "T",
             "number": 10,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "red"
         },
         {
             "label": "S1",
             "letter": "S",
             "number": 1,
-            "letter type": "consonant",
-            "letter shape": "curvy",
+            "letterType": "consonant",
+            "letterShape": "curvy",
             "color": "purple"
         },
         {
             "label": "R14",
             "letter": "R",
             "number": 14,
-            "letter type": "consonant",
-            "letter shape": [
+            "letterType": "consonant",
+            "letterShape": [
                 "pointy",
                 "curvy"
             ],
@@ -279,16 +279,16 @@
             "label": "I4",
             "letter": "I",
             "number": 4,
-            "letter type": "vowel",
-            "letter shape": "pointy",
+            "letterType": "vowel",
+            "letterShape": "pointy",
             "color": "green"
         },
         {
             "label": "P9",
             "letter": "P",
             "number": 9,
-            "letter type": "consonant",
-            "letter shape": [
+            "letterType": "consonant",
+            "letterShape": [
                 "pointy",
                 "curvy"
             ],
@@ -298,8 +298,8 @@
             "label": "N3",
             "letter": "N",
             "number": 3,
-            "letter type": "consonant",
-            "letter shape": [
+            "letterType": "consonant",
+            "letterShape": [
                 "pointy"
             ],
             "color": "green"
@@ -308,43 +308,43 @@
             "label": "M13",
             "letter": "M",
             "number": 13,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "red"
         },
         {
             "label": "A6",
             "letter": "A",
             "number": 6,
-            "letter type": "vowel",
-            "letter shape": "pointy",
+            "letterType": "vowel",
+            "letterShape": "pointy",
             "color": "blue"
         },
         {
             "label": "Z2",
             "letter": "Z",
             "number": 2,
-            "letter type": "consonant",
-            "letter shape": "pointy",
+            "letterType": "consonant",
+            "letterShape": "pointy",
             "color": "yellow"
         },
         {
             "label": "A3",
             "letter": "A",
             "number": 3,
-            "letter type": "vowel",
-            "letter shape": "pointy",
+            "letterType": "vowel",
+            "letterShape": "pointy",
             "color": "orange"
         },
         {
             "label": "Y9",
             "letter": "Y",
             "number": 9,
-            "letter type": [
+            "letterType": [
                 "vowel",
                 "consonant"
             ],
-            "letter shape": "pointy",
+            "letterShape": "pointy",
             "color": "blue"
         }
     ]
