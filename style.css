@@ -20,6 +20,9 @@
   #objects a  { 
     text-decoration: none;
   }
+  #objects a:focus {
+    outline: 5px dashed black;
+  }
   li.object {
     height: 110px;
     width: 110px;
