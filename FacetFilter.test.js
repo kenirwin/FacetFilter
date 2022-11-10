@@ -1,5 +1,5 @@
 const FacetFilter = require('./FacetFilter');
-const setup = require('./testData.json');
+const setup = require('./data/testData.json');
 const data = setup.data;
 const schema = setup.schema;
 
@@ -44,6 +44,16 @@ describe('FacetFilter.addTagFilter', () => {
     const facetFilter = new FacetFilter(schema, data);
     facetFilter.addTagFilter('dataTags', 'a');
     expect(facetFilter.filters.dataTags).toEqual(['a']);
+  });
+});
+
+describe('FacetFilter.removeTagFilter', () => {
+  it('should add a tag filter', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.addTagFilter('dataTags', 'a');
+    facetFilter.addTagFilter('dataTags', 'b');
+    facetFilter.removeTagFilter('dataTags', 'a');
+    expect(facetFilter.filters.dataTags).toEqual(['b']);
   });
 });
 

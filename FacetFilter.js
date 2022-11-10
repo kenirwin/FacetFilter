@@ -37,6 +37,15 @@ class FacetFilter {
     }
     this.filters[fieldName].push(value);
   }
+  removeTagFilter(fieldName, value) {
+    if (this.filters[fieldName] == null) {
+      return;
+    }
+    const index = this.filters[fieldName].indexOf(value);
+    if (index > -1) {
+      this.filters[fieldName].splice(index, 1);
+    }
+  }
   applyAllTagFilters() {
     Object.keys(this.filters).forEach((filterName) => {
       this.applyTagFilter(filterName, this.filters[filterName]);
@@ -99,10 +108,10 @@ class FacetFilter {
   }
 
   countTags(fieldName) {
-    console.log('countTags for:', fieldName);
+    // console.log('countTags for:', fieldName);
     let counts = {};
     this.data.forEach((item) => {
-      console.log('item:', item);
+      // console.log('item:', item);
       if (item[fieldName] == null) {
         return;
       }
@@ -164,7 +173,7 @@ class FacetFilter {
       this.data.sort((a, b) => a[fieldName] - b[fieldName]);
       // console.log(ff.data);
     } else {
-      console.log('not an int');
+      // console.log('not an int');
       this.data.sort((a, b) => {
         let aCopy = a[fieldName];
         let bCopy = b[fieldName];
@@ -215,17 +224,19 @@ class FacetFilter {
   generateTagFacet(fieldName) {
     const values = this.getKnownValues(fieldName, 'tag').filter((item) => item);
     let html = '';
-    let addClass, itemCount;
+    let addClass, itemCount, removeButton;
     values.map((value) => {
       addClass = '';
+      removeButton = '';
       if (
         this.filters.hasOwnProperty(fieldName) &&
         this.filters[fieldName].includes(value)
       ) {
         addClass = 'fw-bold';
+        removeButton = `<a href="#" class="remove-tag" data-facet="${fieldName}" data-value="${value}"><i class="bi bi-x-circle text-danger"></i></a>`;
       }
       itemCount = this.tagCounts[fieldName][value];
-      html += `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a></li>`;
+      html += `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;
     });
     return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldName}</legend>${html}</fieldset>`;
     // let options = values.map((value) => {
