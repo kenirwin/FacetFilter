@@ -54,6 +54,11 @@ function bindControls(facetFilter) {
     console.log('sorted data', facetFilter.data);
     displayObjects(facetFilter.data, facetFilter.format);
   });
+  $('#facets .remove-tag').on('click', function () {
+    console.log('remove tag clicked');
+    facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
+    filterObjectsByFacets(facetFilter);
+  });
 }
 
 function createSorter(facetFilter) {
