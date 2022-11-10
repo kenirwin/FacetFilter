@@ -40,11 +40,14 @@ function bindControls(facetFilter) {
     console.log('filtering', facetFilter.data);
   });
 
-  $('#facets .facet-tag').on('click', function () {
+  $('#facets .facet-tag').on('click', async function () {
+    // console.log($(this));
+
     $(this).toggleClass('active');
     facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
-    filterObjectsByFacets(facetFilter);
+    await filterObjectsByFacets(facetFilter);
     console.log('remaining data', facetFilter.data);
+    refocusOnFacet($(this));
   });
   $('#show-all').on('click', function () {
     location.reload();
@@ -56,18 +59,28 @@ function bindControls(facetFilter) {
     displayObjects(facetFilter.data, facetFilter.format);
   });
   $('#facets .remove-tag').on('click', function () {
-    console.log('remove tag clicked');
     facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
-    console.log('tag facets', facetFilter.filters);
     facetFilter.reset();
-    console.log('back to all data', facetFilter.data);
     filterObjectsByFacets(facetFilter);
-    console.log('filtered data by facets', facetFilter.data);
     filterObjectsByFacets(facetFilter);
     displayObjects(facetFilter.data, facetFilter.format);
+    refocusOnFacet($(this));
   });
 }
 
+function refocusOnFacet(link) {
+  let facet = $(link).data('facet');
+  let value = $(link).data('value');
+  setTimeout(function () {
+    $(
+      '#facets .facet-tag[data-facet="' +
+        facet +
+        '"][data-value="' +
+        value +
+        '"]'
+    ).focus();
+  }, 100);
+}
 function createSorter(facetFilter) {
   let sorters = facetFilter.getSortableFields();
   $('#facets').append(
@@ -129,3 +142,18 @@ function filterObjectsByFacets(facetFilter) {
   updateTagFacets(facetFilter);
   bindControls(facetFilter);
 }
+
+/* Keyboard navigation */
+
+$(document).on('keydown', function (e) {
+  focusable =
+    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+  switch (e.key) {
+    case 'ArrowLeft':
+      $('#facets').find(focusable).first().focus();
+      break;
+    case 'ArrowRight':
+      $('#objects').find(focusable).first().focus();
+      break;
+  }
+});
