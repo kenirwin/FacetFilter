@@ -108,10 +108,10 @@ class FacetFilter {
   }
 
   countTags(fieldName) {
-    console.log('countTags for:', fieldName);
+    // console.log('countTags for:', fieldName);
     let counts = {};
     this.data.forEach((item) => {
-      console.log('item:', item);
+      // console.log('item:', item);
       if (item[fieldName] == null) {
         return;
       }
@@ -173,7 +173,7 @@ class FacetFilter {
       this.data.sort((a, b) => a[fieldName] - b[fieldName]);
       // console.log(ff.data);
     } else {
-      console.log('not an int');
+      // console.log('not an int');
       this.data.sort((a, b) => {
         let aCopy = a[fieldName];
         let bCopy = b[fieldName];
@@ -234,7 +234,7 @@ class FacetFilter {
       ) {
         addClass = 'fw-bold';
         removeButton =
-          '<a href="#" class="remove-tag"><i class="bi bi-x-circle text-danger"></i></a>';
+          '<a href="#" class="remove-tag" data-facet="<%= fieldName %>" data-value="<%= value %>"><i class="bi bi-x-circle text-danger"></i></a>';
       }
       itemCount = this.tagCounts[fieldName][value];
       html += `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;

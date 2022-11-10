@@ -37,27 +37,34 @@ $.getJSON(dataFile, function (json) {
 function bindControls(facetFilter) {
   $('#facets input').on('change', function () {
     filterObjectsByFacets(facetFilter);
+    console.log('filtering', facetFilter.data);
   });
 
   $('#facets .facet-tag').on('click', function () {
     $(this).toggleClass('active');
     facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
     filterObjectsByFacets(facetFilter);
-    // console.log('remaining data', facetFilter.data);
+    console.log('remaining data', facetFilter.data);
   });
   $('#show-all').on('click', function () {
     location.reload();
   });
   $('#sorter').on('change', function () {
-    console.log('sorter changed: ', $(this).val());
+    // console.log('sorter changed: ', $(this).val());
     facetFilter.sortDataByFacet($(this).val());
-    console.log('sorted data', facetFilter.data);
+    // console.log('sorted data', facetFilter.data);
     displayObjects(facetFilter.data, facetFilter.format);
   });
   $('#facets .remove-tag').on('click', function () {
     console.log('remove tag clicked');
-    facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
+    // facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
+    console.log('tag facets', facetFilter.filters);
+    facetFilter.reset();
+    console.log('back to all data', facetFilter.data);
     filterObjectsByFacets(facetFilter);
+    console.log('filtered data', facetFilter.data);
+    filterObjectsByFacets(facetFilter);
+    displayObjects(facetFilter.data, facetFilter.format);
   });
 }
 
@@ -117,7 +124,7 @@ function filterObjectsByFacets(facetFilter) {
   });
 
   facetFilter.countAllTags();
-  console.log(facetFilter.tagCounts);
+  // console.log(facetFilter.tagCounts);
   displayObjects(facetFilter.data, facetFilter.format);
   updateTagFacets(facetFilter);
   bindControls(facetFilter);
