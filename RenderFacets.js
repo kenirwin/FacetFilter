@@ -1,4 +1,4 @@
-$.getJSON('data.json', function (json) {
+$.getJSON(dataFile, function (json) {
   var conf = json;
   var facetFilter = new FacetFilter(conf.schema, conf.data);
   if (typeof itemFormat !== 'undefined') {
