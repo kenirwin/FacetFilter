@@ -1,5 +1,5 @@
 const FacetFilter = require('./FacetFilter');
-const setup = require('./testData.json');
+const setup = require('./data/testData.json');
 const data = setup.data;
 const schema = setup.schema;
 
