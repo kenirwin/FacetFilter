@@ -233,8 +233,7 @@ class FacetFilter {
         this.filters[fieldName].includes(value)
       ) {
         addClass = 'fw-bold';
-        removeButton =
-          '<a href="#" class="remove-tag" data-facet="<%= fieldName %>" data-value="<%= value %>"><i class="bi bi-x-circle text-danger"></i></a>';
+        removeButton = `<a href="#" class="remove-tag" data-facet="${fieldName}" data-value="${value}"><i class="bi bi-x-circle text-danger"></i></a>`;
       }
       itemCount = this.tagCounts[fieldName][value];
       html += `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;

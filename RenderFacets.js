@@ -57,12 +57,12 @@ function bindControls(facetFilter) {
   });
   $('#facets .remove-tag').on('click', function () {
     console.log('remove tag clicked');
-    // facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
+    facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
     console.log('tag facets', facetFilter.filters);
     facetFilter.reset();
     console.log('back to all data', facetFilter.data);
     filterObjectsByFacets(facetFilter);
-    console.log('filtered data', facetFilter.data);
+    console.log('filtered data by facets', facetFilter.data);
     filterObjectsByFacets(facetFilter);
     displayObjects(facetFilter.data, facetFilter.format);
   });
