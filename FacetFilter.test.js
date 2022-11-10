@@ -47,6 +47,16 @@ describe('FacetFilter.addTagFilter', () => {
   });
 });
 
+describe('FacetFilter.removeTagFilter', () => {
+  it('should add a tag filter', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    facetFilter.addTagFilter('dataTags', 'a');
+    facetFilter.addTagFilter('dataTags', 'b');
+    facetFilter.removeTagFilter('dataTags', 'a');
+    expect(facetFilter.filters.dataTags).toEqual(['b']);
+  });
+});
+
 describe('FacetFilter applyTextFilter', () => {
   it('should filter correctly by a single string', () => {
     const facetFilter = new FacetFilter(schema, data);
