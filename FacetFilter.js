@@ -168,6 +168,7 @@ class FacetFilter {
   }
 
   sortDataByFacet(fieldName) {
+    console.log('sortDataByFacet:', fieldName);
     const facet = this.getFacetByFieldName(fieldName);
     if (facet.type == 'int') {
       this.data.sort((a, b) => a[fieldName] - b[fieldName]);
@@ -177,14 +178,27 @@ class FacetFilter {
       this.data.sort((a, b) => {
         let aCopy = a[fieldName];
         let bCopy = b[fieldName];
+        if (Array.isArray(aCopy)) {
+          aCopy = aCopy[0];
+        }
+        if (Array.isArray(bCopy)) {
+          bCopy = bCopy[0];
+        }
         if (a[fieldName] == null) {
           aCopy = '';
         }
         if (b[fieldName] == null) {
           bCopy = '';
         }
-        aCopy = aCopy.toUpperCase() || '';
-        bCopy = bCopy.toUpperCase() || '';
+        try {
+          aCopy = aCopy.toUpperCase() || '';
+          bCopy = bCopy.toUpperCase() || '';
+        } catch (e) {
+          console.log('error sorting:', e);
+          console.log('a:', aCopy);
+          console.log('b:', bCopy);
+        }
+
         if (aCopy < bCopy) {
           return -1;
         }
