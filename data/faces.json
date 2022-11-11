@@ -28,7 +28,7 @@
             {
                 "field": "decades",
                 "type": "tag",
-                "sortable": false,
+                "sortable": true,
                 "displayFacet": true
             },
             {
