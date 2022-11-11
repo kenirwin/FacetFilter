@@ -145,7 +145,7 @@ class FacetFilter {
     return this.getFacetsByType('string');
   }
   getNumberFacetNames() {
-    return this.getFacetsByType('int');
+    return this.getFacetsByType('number');
   }
   getTagFacetNames() {
     return this.getFacetsByType('tag');
@@ -170,11 +170,11 @@ class FacetFilter {
   sortDataByFacet(fieldName) {
     console.log('sortDataByFacet:', fieldName);
     const facet = this.getFacetByFieldName(fieldName);
-    if (facet.type == 'int') {
+    if (facet.type == 'number') {
       this.data.sort((a, b) => a[fieldName] - b[fieldName]);
       // console.log(ff.data);
     } else {
-      // console.log('not an int');
+      // console.log('not a number');
       this.data.sort((a, b) => {
         let aCopy = a[fieldName];
         let bCopy = b[fieldName];

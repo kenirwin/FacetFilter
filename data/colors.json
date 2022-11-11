@@ -1,25 +1,25 @@
 {
     "schema": [
         {
-            "field": "label",
-            "type": "string",
+            "fieldName": "label",
+            "fieldType": "string",
             "sortable": true,
             "displayFacet": false
         },
         {
-            "field": "letter",
-            "type": "string",
+            "fieldName": "letter",
+            "fieldType": "string",
             "sortable": true,
             "displayFacet": false
         },
         {
-            "field": "number",
-            "type": "int",
+            "fieldName": "number",
+            "fieldType": "number",
             "sortable": true
         },
         {
-            "field": "letterType",
-            "type": "tag",
+            "fieldName": "letterType",
+            "fieldType": "tag",
             "options": [
                 "vowel",
                 "consonant"
@@ -27,8 +27,8 @@
             "sortable": false
         },
         {
-            "field": "letterShape",
-            "type": "tag",
+            "fieldName": "letterShape",
+            "fieldType": "tag",
             "options": [
                 "curvy",
                 "pointy"
@@ -36,8 +36,8 @@
             "sortable": false
         },
         {
-            "field": "color",
-            "type": "string",
+            "fieldName": "color",
+            "fieldType": "string",
             "options": [
                 "red",
                 "orange",

@@ -24,7 +24,7 @@
         },
         {
             "fieldName": "number",
-            "fieldType": "int",
+            "fieldType": "number",
             "sortable": true
         },
         {
