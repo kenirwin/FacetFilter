@@ -1,0 +1,248 @@
+{
+    "schema": {
+        "fields": [
+            {
+                "field": "firstName",
+                "type": "string",
+                "sortable": false,
+                "displayFacet": false
+            },
+            {
+                "field": "lastName",
+                "type": "string",
+                "sortable": true,
+                "displayFacet": false
+            },
+            {
+                "field": "raceOrEthnicity",
+                "type": "tag",
+                "sortable": false,
+                "displayFacet": true
+            },
+            {
+                "field": "gender",
+                "type": "tag",
+                "sortable": true,
+                "displayFacet": true
+            },
+            {
+                "field": "decades",
+                "type": "tag",
+                "sortable": false,
+                "displayFacet": true
+            },
+            {
+                "field": "photo",
+                "type": "string",
+                "sortable": false,
+                "displayFacet": false
+            },
+            {
+                "field": "url",
+                "type": "string",
+                "sortable": false,
+                "displayFacet": false
+            }
+        ]
+    },
+    "data": [
+        {
+            "firstName": "Ali",
+            "lastName": "Casey",
+            "raceOrEthnicity": "White",
+            "gender": "Women",
+            "decades": "1960s",
+            "photo": "https://randomuser.me/api/portraits/women/75.jpg",
+            "url": "https://randomuser.me/api/portraits/women/75.jpg"
+        },
+        {
+            "firstName": "Ashley",
+            "lastName": "Raymond",
+            "raceOrEthnicity": "White",
+            "gender": "Women",
+            "decades": "2000s",
+            "photo": "https://randomuser.me/api/portraits/women/47.jpg",
+            "url": "https://randomuser.me/api/portraits/women/47.jpg"
+        },
+        {
+            "firstName": "Brendon",
+            "lastName": "Dyer",
+            "raceOrEthnicity": "Hispanic",
+            "gender": "Men",
+            "decades": "1920s",
+            "photo": "https://randomuser.me/api/portraits/men/20.jpg",
+            "url": "https://randomuser.me/api/portraits/men/20.jpg"
+        },
+        {
+            "firstName": "Brennen",
+            "lastName": "Armstrong",
+            "raceOrEthnicity": "Black",
+            "gender": "Men",
+            "decades": "1980s",
+            "photo": "https://randomuser.me/api/portraits/men/91.jpg",
+            "url": "https://randomuser.me/api/portraits/men/91.jpg"
+        },
+        {
+            "firstName": "Cameron",
+            "lastName": "Mercer",
+            "raceOrEthnicity": [
+                "Native American",
+                "Hispanic"
+            ],
+            "gender": "Women",
+            "decades": "1940s",
+            "photo": "https://randomuser.me/api/portraits/women/40.jpg",
+            "url": "https://randomuser.me/api/portraits/women/40.jpg"
+        },
+        {
+            "firstName": "Deacon",
+            "lastName": "Humphrey",
+            "raceOrEthnicity": "Asian",
+            "gender": "Men",
+            "decades": [
+                "1950s",
+                "1960s"
+            ],
+            "photo": "https://randomuser.me/api/portraits/men/65.jpg",
+            "url": "https://randomuser.me/api/portraits/men/65.jpg"
+        },
+        {
+            "firstName": "Erin",
+            "lastName": "Taylor",
+            "raceOrEthnicity": [
+                "Black",
+                "Native American"
+            ],
+            "gender": "Women",
+            "decades": "2010s",
+            "photo": "https://randomuser.me/api/portraits/women/6.jpg",
+            "url": "https://randomuser.me/api/portraits/women/6.jpg"
+        },
+        {
+            "firstName": "Greta",
+            "lastName": "Schroeder",
+            "raceOrEthnicity": "Black",
+            "gender": "Women",
+            "decades": [
+                "2010s",
+                "2020s"
+            ],
+            "photo": "https://randomuser.me/api/portraits/women/62.jpg",
+            "url": "https://randomuser.me/api/portraits/women/62.jpg"
+        },
+        {
+            "firstName": "Izabella",
+            "lastName": "Merritt",
+            "raceOrEthnicity": "Asian",
+            "gender": "Women",
+            "decades": "1980s",
+            "photo": "https://randomuser.me/api/portraits/women/80.jpg",
+            "url": "https://randomuser.me/api/portraits/women/80.jpg"
+        },
+        {
+            "firstName": "Jaylynn",
+            "lastName": "Mcguire",
+            "raceOrEthnicity": "Asian",
+            "gender": "Women",
+            "decades": "1970s",
+            "photo": "https://randomuser.me/api/portraits/women/42.jpg",
+            "url": "https://randomuser.me/api/portraits/women/42.jpg"
+        },
+        {
+            "firstName": "Jerry",
+            "lastName": "Clark",
+            "raceOrEthnicity": "Asian",
+            "gender": "Men",
+            "decades": "1930s",
+            "photo": "https://randomuser.me/api/portraits/men/58.jpg",
+            "url": "https://randomuser.me/api/portraits/men/58.jpg"
+        },
+        {
+            "firstName": "Julianna",
+            "lastName": "Mason",
+            "raceOrEthnicity": "Native American",
+            "gender": "Women",
+            "decades": "2010s",
+            "photo": "https://randomuser.me/api/portraits/women/8.jpg",
+            "url": "https://randomuser.me/api/portraits/women/8.jpg"
+        },
+        {
+            "firstName": "Julien",
+            "lastName": "Gutierrez",
+            "raceOrEthnicity": "Hispanic",
+            "gender": "Men",
+            "decades": "1960s",
+            "photo": "https://randomuser.me/api/portraits/men/93.jpg",
+            "url": "https://randomuser.me/api/portraits/men/93.jpg"
+        },
+        {
+            "firstName": "Lilian",
+            "lastName": "Holmes",
+            "raceOrEthnicity": "Black",
+            "gender": "Women",
+            "decades": "1930s",
+            "photo": "https://randomuser.me/api/portraits/women/69.jpg",
+            "url": "https://randomuser.me/api/portraits/women/69.jpg"
+        },
+        {
+            "firstName": "Luciano",
+            "lastName": "Freeman",
+            "raceOrEthnicity": "Native American",
+            "gender": "Men",
+            "decades": "2000s",
+            "photo": "https://randomuser.me/api/portraits/men/67.jpg",
+            "url": "https://randomuser.me/api/portraits/men/67.jpg"
+        },
+        {
+            "firstName": "Maria",
+            "lastName": "Lopez",
+            "raceOrEthnicity": "Hispanic",
+            "gender": "Women",
+            "decades": [
+                "1990s",
+                "2000s"
+            ],
+            "photo": "https://randomuser.me/api/portraits/women/61.jpg",
+            "url": "https://randomuser.me/api/portraits/women/61.jpg"
+        },
+        {
+            "firstName": "Marley",
+            "lastName": "Quinn",
+            "raceOrEthnicity": "Black",
+            "gender": "Non-Binary",
+            "decades": [
+                "1940s",
+                "1950s"
+            ],
+            "photo": "https://randomuser.me/api/portraits/men/59.jpg",
+            "url": "https://randomuser.me/api/portraits/men/59.jpg"
+        },
+        {
+            "firstName": "River",
+            "lastName": "Stewart",
+            "raceOrEthnicity": "Black",
+            "gender": "Men",
+            "decades": "1970s",
+            "photo": "https://randomuser.me/api/portraits/men/54.jpg",
+            "url": "https://randomuser.me/api/portraits/men/54.jpg"
+        },
+        {
+            "firstName": "Sophie",
+            "lastName": "Snyder",
+            "raceOrEthnicity": "Asian",
+            "gender": "Non-Binary",
+            "decades": "1920s",
+            "photo": "https://randomuser.me/api/portraits/women/37.jpg",
+            "url": "https://randomuser.me/api/portraits/women/37.jpg"
+        },
+        {
+            "firstName": "Ulises",
+            "lastName": "Herman",
+            "raceOrEthnicity": "White",
+            "gender": "Men",
+            "decades": "1990s",
+            "photo": "https://randomuser.me/api/portraits/men/9.jpg",
+            "url": "https://randomuser.me/api/portraits/men/9.jpg"
+        }
+    ]
+}

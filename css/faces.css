@@ -1,0 +1,52 @@
+/* Facet styles */
+.facet-label {
+    font-weight: bold;
+  }
+  fieldset.facet {
+    margin-bottom: 1em;
+    background-color: rgba(175, 238, 238, 0.402);
+    padding: .25em;
+    /* rounded corners */
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  .facet-name {
+    text-transform: capitalize;
+  }
+
+    /* Object styles */
+
+    ul {
+        list-style: none;
+        width: 400px;
+      }
+      #objects li {
+        display: inline-grid;
+        margin: 3px;
+      }
+      #objects .card {
+        width: 15rem;
+      }
+      #objects a {
+       text-decoration: none;
+      }
+      #objects .card-body {
+        background-color: darkgrey;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        height: 5em;
+      }
+
+      /* other styles*/
+
+      body {
+        margin: 0 auto;
+        width: 90%;
+      }
+      footer { 
+        text-align:center;
+        padding: 1em; 
+    }
