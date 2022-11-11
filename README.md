@@ -1,6 +1,6 @@
 # FacetFilter
 
-**FacetFilter** is a client-side tool for creating a facet-based sorting/limiting interface for exploring web-based content based on an array of JSON objects. The content format is customizable.
+**FacetFilter** is a client-side tool for creating a facet-based sorting/limiting interface for exploring web-based content based on an array of JSON objects. The content format is customizable. It is ideal guiding users to content for small sets of data (e.g. dozens or hundreds of entries) that can be represented in a static JSON file.
 
 ## Dependencies
 
