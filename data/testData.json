@@ -4,13 +4,13 @@
             "fieldName": "label",
             "fieldType": "string",
             "sortable": true,
-            "displayFacet": false
+            "filterable": false
         },
         {
             "fieldName": "letter",
             "fieldType": "string",
             "sortable": true,
-            "displayFacet": false
+            "filterable": false
         },
         {
             "fieldName": "dataTags",

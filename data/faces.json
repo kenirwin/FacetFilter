@@ -4,49 +4,49 @@
             "fieldName": "firstName",
             "fieldType": "string",
             "sortable": false,
-            "displayFacet": false
+            "filterable": false
         },
         {
             "fieldName": "lastName",
             "fieldType": "string",
             "sortable": true,
-            "displayFacet": false
+            "filterable": false
         },
         {
             "fieldName": "raceOrEthnicity",
             "fieldType": "tag",
             "sortable": false,
-            "displayFacet": true
+            "filterable": true
         },
         {
             "fieldName": "gender",
             "fieldType": "tag",
             "sortable": true,
-            "displayFacet": true
+            "filterable": true
         },
         {
             "fieldName": "decades",
             "fieldType": "tag",
             "sortable": true,
-            "displayFacet": true
+            "filterable": true
         },
         {
             "fieldName": "theme",
             "fieldType": "tag",
             "sortable": false,
-            "displayFacet": true
+            "filterable": true
         },
         {
             "fieldName": "photo",
             "fieldType": "string",
             "sortable": false,
-            "displayFacet": false
+            "filterable": false
         },
         {
             "fieldName": "url",
             "fieldType": "string",
             "sortable": false,
-            "displayFacet": false
+            "filterable": false
         }
     ],
     "data": [

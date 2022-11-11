@@ -208,7 +208,7 @@ describe('countTags', () => {
 });
 
 describe('getTextFacetNames', () => {
-  it('should get all text facets, omitting displayFacet:false', () => {
+  it('should get all text facets, omitting filterable:false', () => {
     const facetFilter = new FacetFilter(schema, data);
     const facets = facetFilter.getTextFacetNames();
     expect(facets).toEqual(['color']);
@@ -239,7 +239,7 @@ describe('getFacetByFieldName', () => {
       fieldName: 'letter',
       fieldType: 'string',
       sortable: true,
-      displayFacet: false,
+      filterable: false,
     });
   });
 });
