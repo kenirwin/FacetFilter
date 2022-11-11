@@ -1,0 +1,29 @@
+/* Facet styles */
+.facet-label {
+    font-weight: bold;
+  }
+  fieldset.facet {
+    margin-bottom: 1em;
+    background-color: rgba(175, 238, 238, 0.402);
+    padding: .25em;
+    /* rounded corners */
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  .facet-name {
+    text-transform: capitalize;
+  }
+
+      /* Object styles */
+
+      ul {
+        list-style: none;
+        width: 400px;
+      }
+      #objects li {
+        display: inline-grid;
+        margin: 5px;
+        border: 1px solid black;
+        padding: 5px;
+      }

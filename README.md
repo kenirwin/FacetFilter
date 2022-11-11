@@ -100,3 +100,5 @@ Once you have copied this code, there are two elements to configure: `itemFormat
 ```
 const itemFormat = '<a href="<%= url %>"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %></div></li></a><li>'
 ```
+
+Note: `itemFormat` and `dataFile` should be defined before loading `RenderFacets.js`. If `itemFormat` is left undefined, the object will be listed as a list of text attributes. See the [Unformatted](https://kenirwin.github.io/FacetFilter/unformatted.html) demo for an example.
