@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- forward to another page-->
-    <script>
-        window.location.href = "faces.html";
-        </script>
+    <title>FacetFilter</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
 </head>
-<body>
+<body class="container">
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">Facet Filter</a>
@@ -31,5 +31,51 @@
   
                 </ul>
     </nav>
+    <h1>FacetFilter</h1>
+    <p>FacetFilter is a client-side tool for creating a facet-based sorting/limiting interface for exploring web-based content based on an array of JSON objects. The content format is customizable. It is ideal guiding users to content for small sets of data (e.g. dozens or hundreds of entries) that can be represented in a static JSON file.
+    </p>
+
+    <h2>Download</h2>
+    <p>FacetFilter is available as an open-source solution on <a href="https://github.com/kenirwin/FacetFilter">GitHub</a>.</p>
+    
+    <h2>Demos</h2>
+    Because the content is natively in JSON format, it can be easily formatted in a variety of ways. These demos illustrate some different ways that the content can be presented:
+
+    
+    <div class="row mt-4">
+        <div class="col-md-2 ">
+            <a href="faces.html">
+                <img src="images/faces.png" style="width:100%">
+            </a>
+        </div>
+        <div class="col-md-8">
+            <h3><a href="faces.html">Demo: Faces</a></h3>
+            <p>An image-based demo that uses images and text to represent the content.</p>
+        </div>
+    </div>
+ 
+    <div class="row mt-4">
+        <div class="col-md-2">
+            <a href="colors.html">
+                <img src="images/colors.png" style="width:100%">
+            </a>
+        </div>
+        <div class="col-md-8">
+            <h3><a href="colors.html">Demo: Colors & Numbers</a></h3>
+            <p>A non-image based arrangement that demonstrates three different kinds of facets: string, number, and tag formats.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-md-2">
+            <a href="unformatted.html">
+                <img src="images/unformatted.png" style="width:100%">
+            </a>
+        </div>
+        <div class="col-md-8">
+            <h3><a href="unformatted.html">Demo: Unformatted</a></h3>
+            <p>This demo illustrates the standard, unformatted appearance when an item format is not defined. This example uses only a little bit of CSS to clean up the output.</p>
+        </div>
+    </div>
 </body>
 </html>
