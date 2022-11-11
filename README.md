@@ -14,8 +14,8 @@ The interfaces is built on a JSON object with two main properties: schema and da
 
 The schema has a "fields" array; that array holds one object for each data field used in by the data objects:
 
-1. field: the name of the field; fieldName should use letters and numbers only (e.g. "address1" or "fieldName") with no spaces or dashes. Do _not_ use "field name" or "field-name".
-2. type: can be "int", "string", or "tag" -- tags are arrays, e.g. ["propOne","propTwo"]
+1. fieldName: the name of the field; fieldName should use letters and numbers only (e.g. "address1" or "firstName") with no spaces or dashes. Do _not_ use "first name" or "first-name".
+2. type: can be "number", "string", or "tag" -- tags are arrays, e.g. ["propOne","propTwo"]
 3. sortable: true/false; should this field appear in the list of sort options? If data are sorted by tag, only the first tag value will be used in the sorting process.
 4. displayFacet: true/false; should a facet be displayed for this value. Facets should typically be use on fields where multiple objects will have the same values (e.g. "color" or "shape") rather than more-or-less unique properties like "name, "address", etc.
 
@@ -23,45 +23,36 @@ A very simple JSON object for configuring the interface might look like:
 
 ```
 {
-    "schema": {
-        "fields": [
-            {
-                "field": "letter",
-                "type": "string",
-                "sortable": true,
-                "displayFacet": false
-            },
-            {
-                "field": "number",
-                "type": "int",
-                "sortable": true
-            },
-            {
-                "field": "letterType",
-                "type": "tag",
-                "options": [
-                    "vowel",
-                    "consonant"
-                ],
-                "sortable": false
-            }
-        ]
-    },
+    "schema": [
+        {
+            "fieldName": "letter",
+            "fieldType": "string",
+            "sortable": true,
+            "displayFacet": false
+        },
+        {
+            "fieldName": "number",
+            "fieldType": "int",
+            "sortable": true
+        },
+        {
+            "fieldName": "letterType",
+            "fieldType": "tag",
+            "sortable": false
+        }
+    ],
     "data": [
         {
-            "label": "Q1",
             "letter": "Q",
             "number": 1,
             "letterType": "consonant"
         },
         {
-            "label": "P14",
             "letter": "P",
             "number": 14,
             "letterType": "consonant"
         },
         {
-            "label": "N4",
             "letter": "N",
             "number": 4,
             "letterType": "consonant"
