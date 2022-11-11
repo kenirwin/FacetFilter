@@ -237,7 +237,7 @@ describe('getFacetByFieldName', () => {
     const facet = facetFilter.getFacetByFieldName('letter');
     expect(facet).toEqual({
       fieldName: 'letter',
-      type: 'string',
+      fieldType: 'string',
       sortable: true,
       displayFacet: false,
     });

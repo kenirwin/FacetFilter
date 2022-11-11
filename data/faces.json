@@ -2,49 +2,49 @@
     "schema": [
         {
             "fieldName": "firstName",
-            "type": "string",
+            "fieldType": "string",
             "sortable": false,
             "displayFacet": false
         },
         {
             "fieldName": "lastName",
-            "type": "string",
+            "fieldType": "string",
             "sortable": true,
             "displayFacet": false
         },
         {
             "fieldName": "raceOrEthnicity",
-            "type": "tag",
+            "fieldType": "tag",
             "sortable": false,
             "displayFacet": true
         },
         {
             "fieldName": "gender",
-            "type": "tag",
+            "fieldType": "tag",
             "sortable": true,
             "displayFacet": true
         },
         {
             "fieldName": "decades",
-            "type": "tag",
+            "fieldType": "tag",
             "sortable": true,
             "displayFacet": true
         },
         {
             "fieldName": "theme",
-            "type": "tag",
+            "fieldType": "tag",
             "sortable": false,
             "displayFacet": true
         },
         {
             "fieldName": "photo",
-            "type": "string",
+            "fieldType": "string",
             "sortable": false,
             "displayFacet": false
         },
         {
             "fieldName": "url",
-            "type": "string",
+            "fieldType": "string",
             "sortable": false,
             "displayFacet": false
         }

@@ -133,7 +133,7 @@ class FacetFilter {
     let facets = [];
     this.schema.forEach((facet) => {
       if (
-        facet.type == type &&
+        facet.fieldType == type &&
         (facet.displayFacet == null || facet.displayFacet == true)
       ) {
         facets.push(facet.fieldName);
