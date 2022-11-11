@@ -18,8 +18,8 @@ class FacetFilter {
 
   defaultFormat() {
     let format = '';
-    this.schema.fields.forEach((field) => {
-      format += `<div class="datum">${field.field}: <%= ${field.field} %></div>`;
+    this.schema.forEach((schemaEntry) => {
+      format += `<div class="datum">${schemaEntry.field}: <%= ${schemaEntry.field} %></div>`;
     });
     format = `<li class="object default">${format}</li>`;
     return format;
@@ -131,7 +131,7 @@ class FacetFilter {
 
   getFacetsByType(type) {
     let facets = [];
-    this.schema.fields.forEach((facet) => {
+    this.schema.forEach((facet) => {
       if (
         facet.type == type &&
         (facet.displayFacet == null || facet.displayFacet == true)
@@ -154,12 +154,12 @@ class FacetFilter {
   /* sorting */
 
   getFacetByFieldName(fieldName) {
-    return this.schema.fields.find((facet) => facet.field == fieldName);
+    return this.schema.find((facet) => facet.field == fieldName);
   }
 
   getSortableFields() {
     let sortableFields = [];
-    this.schema.fields.forEach((facet) => {
+    this.schema.forEach((facet) => {
       if (facet.sortable == true) {
         sortableFields.push(facet.field);
       }

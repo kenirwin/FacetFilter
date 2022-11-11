@@ -1,57 +1,55 @@
 {
-    "schema": {
-        "fields": [
-            {
-                "field": "label",
-                "type": "string",
-                "sortable": true,
-                "displayFacet": false
-            },
-            {
-                "field": "letter",
-                "type": "string",
-                "sortable": true,
-                "displayFacet": false
-            },
-            {
-                "field": "number",
-                "type": "int",
-                "sortable": true
-            },
-            {
-                "field": "letterType",
-                "type": "tag",
-                "options": [
-                    "vowel",
-                    "consonant"
-                ],
-                "sortable": false
-            },
-            {
-                "field": "letterShape",
-                "type": "tag",
-                "options": [
-                    "curvy",
-                    "pointy"
-                ],
-                "sortable": false
-            },
-            {
-                "field": "color",
-                "type": "string",
-                "options": [
-                    "red",
-                    "orange",
-                    "yellow",
-                    "green",
-                    "blue",
-                    "purple"
-                ],
-                "sortable": true,
-                "displayFacet": true
-            }
-        ]
-    },
+    "schema": [
+        {
+            "field": "label",
+            "type": "string",
+            "sortable": true,
+            "displayFacet": false
+        },
+        {
+            "field": "letter",
+            "type": "string",
+            "sortable": true,
+            "displayFacet": false
+        },
+        {
+            "field": "number",
+            "type": "int",
+            "sortable": true
+        },
+        {
+            "field": "letterType",
+            "type": "tag",
+            "options": [
+                "vowel",
+                "consonant"
+            ],
+            "sortable": false
+        },
+        {
+            "field": "letterShape",
+            "type": "tag",
+            "options": [
+                "curvy",
+                "pointy"
+            ],
+            "sortable": false
+        },
+        {
+            "field": "color",
+            "type": "string",
+            "options": [
+                "red",
+                "orange",
+                "yellow",
+                "green",
+                "blue",
+                "purple"
+            ],
+            "sortable": true,
+            "displayFacet": true
+        }
+    ],
     "data": [
         {
             "label": "Q1",
