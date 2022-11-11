@@ -1,48 +1,46 @@
 {
-    "schema": {
-        "fields": [
-            {
-                "field": "label",
-                "type": "string",
-                "sortable": true,
-                "displayFacet": false
-            },
-            {
-                "field": "letter",
-                "type": "string",
-                "sortable": true,
-                "displayFacet": false
-            },
-            {
-                "field": "dataTags",
-                "type": "tag",
-                "sortable": false
-            },
-            {
-                "field": "tags",
-                "type": "tag",
-                "sortable": false
-            },
-            {
-                "field": "number",
-                "type": "int",
-                "sortable": true
-            },
-            {
-                "field": "color",
-                "type": "string",
-                "options": [
-                    "red",
-                    "orange",
-                    "yellow",
-                    "green",
-                    "blue",
-                    "purple"
-                ],
-                "sortable": true
-            }
-        ]
-    },
+    "schema": [
+        {
+            "fieldName": "label",
+            "fieldType": "string",
+            "sortable": true,
+            "filterable": false
+        },
+        {
+            "fieldName": "letter",
+            "fieldType": "string",
+            "sortable": true,
+            "filterable": false
+        },
+        {
+            "fieldName": "dataTags",
+            "fieldType": "tag",
+            "sortable": false
+        },
+        {
+            "fieldName": "tags",
+            "fieldType": "tag",
+            "sortable": false
+        },
+        {
+            "fieldName": "number",
+            "fieldType": "number",
+            "sortable": true
+        },
+        {
+            "fieldName": "color",
+            "fieldType": "string",
+            "options": [
+                "red",
+                "orange",
+                "yellow",
+                "green",
+                "blue",
+                "purple"
+            ],
+            "sortable": true
+        }
+    ],
     "data": [
         {
             "label": "A3",

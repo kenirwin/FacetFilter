@@ -18,8 +18,8 @@ class FacetFilter {
 
   defaultFormat() {
     let format = '';
-    this.schema.fields.forEach((field) => {
-      format += `<div class="datum">${field.field}: <%= ${field.field} %></div>`;
+    this.schema.forEach((schemaEntry) => {
+      format += `<div class="datum">${schemaEntry.fieldName}: <%= ${schemaEntry.fieldName} %></div>`;
     });
     format = `<li class="object default">${format}</li>`;
     return format;
@@ -131,12 +131,12 @@ class FacetFilter {
 
   getFacetsByType(type) {
     let facets = [];
-    this.schema.fields.forEach((facet) => {
+    this.schema.forEach((facet) => {
       if (
-        facet.type == type &&
-        (facet.displayFacet == null || facet.displayFacet == true)
+        facet.fieldType == type &&
+        (facet.filterable == null || facet.filterable == true)
       ) {
-        facets.push(facet.field);
+        facets.push(facet.fieldName);
       }
     });
     return facets;
@@ -145,7 +145,7 @@ class FacetFilter {
     return this.getFacetsByType('string');
   }
   getNumberFacetNames() {
-    return this.getFacetsByType('int');
+    return this.getFacetsByType('number');
   }
   getTagFacetNames() {
     return this.getFacetsByType('tag');
@@ -154,14 +154,14 @@ class FacetFilter {
   /* sorting */
 
   getFacetByFieldName(fieldName) {
-    return this.schema.fields.find((facet) => facet.field == fieldName);
+    return this.schema.find((facet) => facet.fieldName == fieldName);
   }
 
   getSortableFields() {
     let sortableFields = [];
-    this.schema.fields.forEach((facet) => {
+    this.schema.forEach((facet) => {
       if (facet.sortable == true) {
-        sortableFields.push(facet.field);
+        sortableFields.push(facet.fieldName);
       }
     });
     return sortableFields;
@@ -170,11 +170,11 @@ class FacetFilter {
   sortDataByFacet(fieldName) {
     console.log('sortDataByFacet:', fieldName);
     const facet = this.getFacetByFieldName(fieldName);
-    if (facet.type == 'int') {
+    if (facet.type == 'number') {
       this.data.sort((a, b) => a[fieldName] - b[fieldName]);
       // console.log(ff.data);
     } else {
-      // console.log('not an int');
+      // console.log('not a number');
       this.data.sort((a, b) => {
         let aCopy = a[fieldName];
         let bCopy = b[fieldName];

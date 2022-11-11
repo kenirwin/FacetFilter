@@ -1,56 +1,54 @@
 {
-    "schema": {
-        "fields": [
-            {
-                "field": "firstName",
-                "type": "string",
-                "sortable": false,
-                "displayFacet": false
-            },
-            {
-                "field": "lastName",
-                "type": "string",
-                "sortable": true,
-                "displayFacet": false
-            },
-            {
-                "field": "raceOrEthnicity",
-                "type": "tag",
-                "sortable": false,
-                "displayFacet": true
-            },
-            {
-                "field": "gender",
-                "type": "tag",
-                "sortable": true,
-                "displayFacet": true
-            },
-            {
-                "field": "decades",
-                "type": "tag",
-                "sortable": true,
-                "displayFacet": true
-            },
-            {
-                "field": "theme",
-                "type": "tag",
-                "sortable": false,
-                "displayFacet": true
-            },
-            {
-                "field": "photo",
-                "type": "string",
-                "sortable": false,
-                "displayFacet": false
-            },
-            {
-                "field": "url",
-                "type": "string",
-                "sortable": false,
-                "displayFacet": false
-            }
-        ]
-    },
+    "schema": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "string",
+            "sortable": false,
+            "filterable": false
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "string",
+            "sortable": true,
+            "filterable": false
+        },
+        {
+            "fieldName": "raceOrEthnicity",
+            "fieldType": "tag",
+            "sortable": false,
+            "filterable": true
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "tag",
+            "sortable": true,
+            "filterable": true
+        },
+        {
+            "fieldName": "decades",
+            "fieldType": "tag",
+            "sortable": true,
+            "filterable": true
+        },
+        {
+            "fieldName": "theme",
+            "fieldType": "tag",
+            "sortable": false,
+            "filterable": true
+        },
+        {
+            "fieldName": "photo",
+            "fieldType": "string",
+            "sortable": false,
+            "filterable": false
+        },
+        {
+            "fieldName": "url",
+            "fieldType": "string",
+            "sortable": false,
+            "filterable": false
+        }
+    ],
     "data": [
         {
             "firstName": "Ali",
