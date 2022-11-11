@@ -32,6 +32,12 @@
                 "displayFacet": true
             },
             {
+                "field": "theme",
+                "type": "tag",
+                "sortable": false,
+                "displayFacet": true
+            },
+            {
                 "field": "photo",
                 "type": "string",
                 "sortable": false,
@@ -52,6 +58,7 @@
             "raceOrEthnicity": "White",
             "gender": "Women",
             "decades": "1960s",
+            "theme": "identity",
             "photo": "https://randomuser.me/api/portraits/women/75.jpg",
             "url": "https://randomuser.me/api/portraits/women/75.jpg"
         },
@@ -61,6 +68,7 @@
             "raceOrEthnicity": "White",
             "gender": "Women",
             "decades": "2000s",
+            "theme": "resistance",
             "photo": "https://randomuser.me/api/portraits/women/47.jpg",
             "url": "https://randomuser.me/api/portraits/women/47.jpg"
         },
@@ -70,6 +78,7 @@
             "raceOrEthnicity": "Hispanic",
             "gender": "Men",
             "decades": "1920s",
+            "theme": "employment",
             "photo": "https://randomuser.me/api/portraits/men/20.jpg",
             "url": "https://randomuser.me/api/portraits/men/20.jpg"
         },
@@ -79,6 +88,10 @@
             "raceOrEthnicity": "Black",
             "gender": "Men",
             "decades": "1980s",
+            "theme": [
+                "recruitment",
+                "identity"
+            ],
             "photo": "https://randomuser.me/api/portraits/men/91.jpg",
             "url": "https://randomuser.me/api/portraits/men/91.jpg"
         },
@@ -91,6 +104,7 @@
             ],
             "gender": "Women",
             "decades": "1940s",
+            "theme": "athletics",
             "photo": "https://randomuser.me/api/portraits/women/40.jpg",
             "url": "https://randomuser.me/api/portraits/women/40.jpg"
         },
@@ -103,6 +117,7 @@
                 "1950s",
                 "1960s"
             ],
+            "theme": "identity",
             "photo": "https://randomuser.me/api/portraits/men/65.jpg",
             "url": "https://randomuser.me/api/portraits/men/65.jpg"
         },
@@ -115,6 +130,10 @@
             ],
             "gender": "Women",
             "decades": "2010s",
+            "theme": [
+                "resistance",
+                "athletics"
+            ],
             "photo": "https://randomuser.me/api/portraits/women/6.jpg",
             "url": "https://randomuser.me/api/portraits/women/6.jpg"
         },
@@ -127,6 +146,7 @@
                 "2010s",
                 "2020s"
             ],
+            "theme": "employment",
             "photo": "https://randomuser.me/api/portraits/women/62.jpg",
             "url": "https://randomuser.me/api/portraits/women/62.jpg"
         },
@@ -136,6 +156,7 @@
             "raceOrEthnicity": "Asian",
             "gender": "Women",
             "decades": "1980s",
+            "theme": "recruitment",
             "photo": "https://randomuser.me/api/portraits/women/80.jpg",
             "url": "https://randomuser.me/api/portraits/women/80.jpg"
         },
@@ -145,6 +166,7 @@
             "raceOrEthnicity": "Asian",
             "gender": "Women",
             "decades": "1970s",
+            "theme": "athletics",
             "photo": "https://randomuser.me/api/portraits/women/42.jpg",
             "url": "https://randomuser.me/api/portraits/women/42.jpg"
         },
@@ -154,6 +176,10 @@
             "raceOrEthnicity": "Asian",
             "gender": "Men",
             "decades": "1930s",
+            "theme": [
+                "identity",
+                "athletics"
+            ],
             "photo": "https://randomuser.me/api/portraits/men/58.jpg",
             "url": "https://randomuser.me/api/portraits/men/58.jpg"
         },
@@ -163,6 +189,7 @@
             "raceOrEthnicity": "Native American",
             "gender": "Women",
             "decades": "2010s",
+            "theme": "resistance",
             "photo": "https://randomuser.me/api/portraits/women/8.jpg",
             "url": "https://randomuser.me/api/portraits/women/8.jpg"
         },
@@ -172,6 +199,7 @@
             "raceOrEthnicity": "Hispanic",
             "gender": "Men",
             "decades": "1960s",
+            "theme": "employment",
             "photo": "https://randomuser.me/api/portraits/men/93.jpg",
             "url": "https://randomuser.me/api/portraits/men/93.jpg"
         },
@@ -181,6 +209,7 @@
             "raceOrEthnicity": "Black",
             "gender": "Women",
             "decades": "1930s",
+            "theme": "recruitment",
             "photo": "https://randomuser.me/api/portraits/women/69.jpg",
             "url": "https://randomuser.me/api/portraits/women/69.jpg"
         },
@@ -190,6 +219,7 @@
             "raceOrEthnicity": "Native American",
             "gender": "Men",
             "decades": "2000s",
+            "theme": "athletics",
             "photo": "https://randomuser.me/api/portraits/men/67.jpg",
             "url": "https://randomuser.me/api/portraits/men/67.jpg"
         },
@@ -202,6 +232,7 @@
                 "1990s",
                 "2000s"
             ],
+            "theme": "identity",
             "photo": "https://randomuser.me/api/portraits/women/61.jpg",
             "url": "https://randomuser.me/api/portraits/women/61.jpg"
         },
@@ -214,6 +245,7 @@
                 "1940s",
                 "1950s"
             ],
+            "theme": "resistance",
             "photo": "https://randomuser.me/api/portraits/men/59.jpg",
             "url": "https://randomuser.me/api/portraits/men/59.jpg"
         },
@@ -223,6 +255,7 @@
             "raceOrEthnicity": "Black",
             "gender": "Men",
             "decades": "1970s",
+            "theme": "employment",
             "photo": "https://randomuser.me/api/portraits/men/54.jpg",
             "url": "https://randomuser.me/api/portraits/men/54.jpg"
         },
@@ -232,6 +265,7 @@
             "raceOrEthnicity": "Asian",
             "gender": "Non-Binary",
             "decades": "1920s",
+            "theme": "recruitment",
             "photo": "https://randomuser.me/api/portraits/women/37.jpg",
             "url": "https://randomuser.me/api/portraits/women/37.jpg"
         },
@@ -241,6 +275,7 @@
             "raceOrEthnicity": "White",
             "gender": "Men",
             "decades": "1990s",
+            "theme": "athletics",
             "photo": "https://randomuser.me/api/portraits/men/9.jpg",
             "url": "https://randomuser.me/api/portraits/men/9.jpg"
         }
