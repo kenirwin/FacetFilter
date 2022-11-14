@@ -13,7 +13,8 @@
     <script>
         const conf = {
             itemFormat: '<a href="<%= url %>"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %><br><%= decades %></div></li></a><li>',
-            dataFile: 'data/faces.json'
+            dataFile: 'data/faces.json',
+            facetDivId: '#facets',
         }
         createFacets(conf);
     </script>

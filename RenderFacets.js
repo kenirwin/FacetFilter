@@ -1,10 +1,12 @@
 function createFacets(facetConf) {
   let dataFile = facetConf.dataFile;
   const tempFormat = facetConf.itemFormat;
+  const facetDivId = facetConf.facetDivId;
 
   $.getJSON(dataFile, function (json) {
     var conf = json;
     var facetFilter = new FacetFilter(conf.schema, conf.data);
+    facetFilter.facetDivId = facetDivId;
 
     if (typeof tempFormat != 'undefined') {
       facetFilter.setFormat(facetConf.itemFormat);
@@ -21,18 +23,18 @@ function createFacets(facetConf) {
     let tagFacets = facetFilter.getTagFacetNames();
 
     numberFacets.forEach(function (facet) {
-      $('#facets').append(facetFilter.generateNumberFacet(facet));
+      $(facetDivId).append(facetFilter.generateNumberFacet(facet));
     });
 
     tagFacets.forEach(function (facet) {
-      $('#facets').append(facetFilter.generateTagFacet(facet));
+      $(facetDivId).append(facetFilter.generateTagFacet(facet));
     });
 
     textFacets.forEach(function (facet) {
-      $('#facets').append(facetFilter.generateTextFacet(facet));
+      $(facetDivId).append(facetFilter.generateTextFacet(facet));
     });
 
-    $('#facets').append(
+    $(facetDivId).append(
       '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
     );
     displayObjects(facetFilter.data, facetFilter.format);
@@ -41,13 +43,14 @@ function createFacets(facetConf) {
 }
 
 function bindControls(facetFilter) {
-  $('#facets input').on('change', function () {
+  console.log('bindControls');
+  $(facetFilter.facetDivId + ' input').on('change', function () {
     filterObjectsByFacets(facetFilter);
     console.log('filtering', facetFilter.data);
   });
 
-  $('#facets .facet-tag').on('click', async function () {
-    // console.log($(this));
+  $(facetFilter.facetDivId + ' .facet-tag').on('click', async function () {
+    console.log('click');
 
     $(this).toggleClass('active');
     facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
@@ -64,7 +67,8 @@ function bindControls(facetFilter) {
     // console.log('sorted data', facetFilter.data);
     displayObjects(facetFilter.data, facetFilter.format);
   });
-  $('#facets .remove-tag').on('click', function () {
+  $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
+    console.log('clicked remove tag');
     facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
     facetFilter.reset();
     filterObjectsByFacets(facetFilter);
@@ -89,7 +93,7 @@ function refocusOnFacet(link) {
 }
 function createSorter(facetFilter) {
   let sorters = facetFilter.getSortableFields();
-  $('#facets').append(
+  $(facetFilter.facetDivId).append(
     '<label for="sorter" class="visually-hidden">Sort By</label><span class="input-group mb-3"><span class="input-group-text" id="basic-sort"><i class="bi bi-sort-down"></i></span><select id="sorter" class="form-control"><option>Sort by:</option></select></span>'
   );
   sorters.forEach(function (field) {
@@ -107,7 +111,7 @@ function updateTagFacets(facetFilter) {
   let tagFacets = facetFilter.getTagFacetNames();
   tagFacets.forEach(function (facet) {
     html = facetFilter.generateTagFacet(facet);
-    $('#facets [data-facet="' + facet + '"]').html(html);
+    $(facetFilter.facetDivId + ' [data-facet="' + facet + '"]').html(html);
   });
 }
 
@@ -128,7 +132,9 @@ function filterObjectsByFacets(facetFilter) {
 
   textFacets.forEach(function (field) {
     const values = [];
-    $('#facets input[data-field="' + field + '"]:checked').each(function () {
+    $(
+      facetFilter.facetDivId + ' input[data-field="' + field + '"]:checked'
+    ).each(function () {
       values.push($(this).val());
     });
     facetFilter.applyTextFilter(field, values);
@@ -156,7 +162,7 @@ $(document).on('keydown', function (e) {
     'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
   switch (e.key) {
     case 'ArrowLeft':
-      $('#facets').find(focusable).first().focus();
+      $(facetFilter.facetDivId).find(focusable).first().focus();
       break;
     case 'ArrowRight':
       $('#objects').find(focusable).first().focus();
