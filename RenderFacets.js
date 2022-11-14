@@ -1,38 +1,44 @@
-$.getJSON(dataFile, function (json) {
-  var conf = json;
-  var facetFilter = new FacetFilter(conf.schema, conf.data);
-  if (typeof itemFormat !== 'undefined') {
-    facetFilter.setFormat(itemFormat);
-  } else {
-    facetFilter.setFormat();
-  }
+function createFacets(facetConf) {
+  let dataFile = facetConf.dataFile;
+  const tempFormat = facetConf.itemFormat;
 
-  facetFilter.countAllTags();
+  $.getJSON(dataFile, function (json) {
+    var conf = json;
+    var facetFilter = new FacetFilter(conf.schema, conf.data);
 
-  createSorter(facetFilter);
+    if (typeof tempFormat != 'undefined') {
+      facetFilter.setFormat(facetConf.itemFormat);
+    } else {
+      facetFilter.setFormat();
+    }
 
-  let textFacets = facetFilter.getTextFacetNames();
-  let numberFacets = facetFilter.getNumberFacetNames();
-  let tagFacets = facetFilter.getTagFacetNames();
+    facetFilter.countAllTags();
 
-  numberFacets.forEach(function (facet) {
-    $('#facets').append(facetFilter.generateNumberFacet(facet));
+    createSorter(facetFilter);
+
+    let textFacets = facetFilter.getTextFacetNames();
+    let numberFacets = facetFilter.getNumberFacetNames();
+    let tagFacets = facetFilter.getTagFacetNames();
+
+    numberFacets.forEach(function (facet) {
+      $('#facets').append(facetFilter.generateNumberFacet(facet));
+    });
+
+    tagFacets.forEach(function (facet) {
+      $('#facets').append(facetFilter.generateTagFacet(facet));
+    });
+
+    textFacets.forEach(function (facet) {
+      $('#facets').append(facetFilter.generateTextFacet(facet));
+    });
+
+    $('#facets').append(
+      '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
+    );
+    displayObjects(facetFilter.data, facetFilter.format);
+    bindControls(facetFilter);
   });
-
-  tagFacets.forEach(function (facet) {
-    $('#facets').append(facetFilter.generateTagFacet(facet));
-  });
-
-  textFacets.forEach(function (facet) {
-    $('#facets').append(facetFilter.generateTextFacet(facet));
-  });
-
-  $('#facets').append(
-    '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
-  );
-  displayObjects(facetFilter.data, facetFilter.format);
-  bindControls(facetFilter);
-});
+}
 
 function bindControls(facetFilter) {
   $('#facets input').on('change', function () {
