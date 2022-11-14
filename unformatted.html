@@ -11,12 +11,14 @@
     <script src="FacetFilter.js"></script>
     <script src="RenderFacets.js"></script> 
     <script>
-        const conf = {
+        $(document).ready(function() {
+            const conf = {
             dataFile: 'data/colors.json',
             facetDivId: '#facets',
             contentDivId: '#objects'
         } ;
-        createFacets(conf);
+        facets(conf);
+        });
     </script>        
 </head>
 <body class="container">
