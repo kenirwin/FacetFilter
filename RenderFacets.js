@@ -1,63 +1,78 @@
-function createFacets(facetConf) {
+function facets(facetConf) {
   let dataFile = facetConf.dataFile;
-  const tempFormat = facetConf.itemFormat;
-  const facetDivId = facetConf.facetDivId;
-  const contentDivId = facetConf.contentDivId;
-
-  $.getJSON(dataFile, function (json) {
-    var conf = json;
-    var facetFilter = new FacetFilter(conf.schema, conf.data);
-    facetFilter.facetDivId = facetDivId;
-    facetFilter.contentDivId = contentDivId;
-    console.log(facetFilter.facetDivId, facetFilter.contentDivId);
-    if (typeof tempFormat != 'undefined') {
-      facetFilter.setFormat(facetConf.itemFormat);
-    } else {
-      facetFilter.setFormat();
-    }
-
-    facetFilter.countAllTags();
-
-    createSorter(facetFilter);
-
-    let textFacets = facetFilter.getTextFacetNames();
-    let numberFacets = facetFilter.getNumberFacetNames();
-    let tagFacets = facetFilter.getTagFacetNames();
-
-    numberFacets.forEach(function (facet) {
-      $(facetDivId).append(facetFilter.generateNumberFacet(facet));
+  let facetFilter;
+  if (facetConf.hasOwnProperty('schema') && facetConf.hasOwnProperty('data')) {
+    facetFilter = new FacetFilter(facetConf.schema, facetConf.data);
+  } else if (facetConf.hasOwnProperty('dataFile')) {
+    $.ajax({
+      type: 'GET',
+      url: dataFile,
+      dataType: 'json',
+      success: function (fileContents) {
+        facetFilter = new FacetFilter(fileContents.schema, fileContents.data);
+      },
+      async: false,
     });
+  } else {
+    console.error('Error: no dataFile or schema/data provided');
+  }
 
-    tagFacets.forEach(function (facet) {
-      $(facetDivId).append(facetFilter.generateTagFacet(facet));
-    });
+  facetFilter.facetDivId = facetConf.facetDivId;
+  facetFilter.contentDivId = facetConf.contentDivId;
 
-    textFacets.forEach(function (facet) {
-      $(facetDivId).append(facetFilter.generateTextFacet(facet));
-    });
+  if (typeof facetConf.itemFormat != 'undefined') {
+    facetFilter.setFormat(facetConf.itemFormat);
+  } else {
+    facetFilter.setFormat();
+  }
+  // console.log(facetFilter);
+  createFacets(facetFilter);
+}
 
-    $(facetDivId).append(
-      '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
-    );
-    displayObjects(facetFilter);
-    bindControls(facetFilter);
+function createFacets(facetFilter) {
+  facetFilter.countAllTags();
+
+  createSorter(facetFilter);
+
+  let textFacets = facetFilter.getTextFacetNames();
+  let numberFacets = facetFilter.getNumberFacetNames();
+  let tagFacets = facetFilter.getTagFacetNames();
+
+  numberFacets.forEach(function (facet) {
+    $(facetFilter.facetDivId).append(facetFilter.generateNumberFacet(facet));
   });
+
+  tagFacets.forEach(function (facet) {
+    $(facetFilter.facetDivId).append(facetFilter.generateTagFacet(facet));
+  });
+
+  textFacets.forEach(function (facet) {
+    $(facetFilter.facetDivId).append(facetFilter.generateTextFacet(facet));
+  });
+
+  $(facetFilter.facetDivId).append(
+    '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
+  );
+  displayObjects(facetFilter);
+  bindControls(facetFilter);
 }
 
 function bindControls(facetFilter) {
-  console.log('bindControls');
-  $(facetFilter.facetDivId + ' input').on('change', function () {
-    filterObjectsByFacets(facetFilter);
-    console.log('filtering', facetFilter.data);
-  });
+  // on form input change
+  // fires when a checkbox(string) is clicked or number is changed
+  $(facetFilter.facetDivId + ' input')
+    .off() // remove any existing event handlers
+    .on('change', function () {
+      filterObjectsByFacets(facetFilter);
+      // console.log('filtering', facetFilter.data);
+    });
 
+  // on click a facet tag name (tag facet)
   $(facetFilter.facetDivId + ' .facet-tag').on('click', async function () {
-    console.log('click');
-
     $(this).toggleClass('active');
     facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
     await filterObjectsByFacets(facetFilter);
-    console.log('remaining data', facetFilter.data);
+    // console.log('remaining data', facetFilter.data);
     refocusOnFacet($(this), facetFilter);
   });
   $('#show-all').on('click', function () {
@@ -70,11 +85,11 @@ function bindControls(facetFilter) {
     displayObjects(facetFilter);
   });
   $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
-    console.log('clicked remove tag');
+    // console.log('clicked remove tag');
     facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
     facetFilter.reset();
     filterObjectsByFacets(facetFilter);
-    filterObjectsByFacets(facetFilter);
+    // filterObjectsByFacets(facetFilter);
     displayObjects(facetFilter);
     refocusOnFacet($(this));
   });
@@ -117,8 +132,8 @@ function createSorter(facetFilter) {
   });
 }
 function displayObjects(facetFilter) {
-  console.log('populating', facetFilter.contentDivId);
-  console.log(facetFilter.data);
+  // console.log('populating', facetFilter.contentDivId);
+  // console.log(facetFilter.data);
   $(facetFilter.contentDivId).empty();
   facetFilter.data.forEach(function (object) {
     $(facetFilter.contentDivId).append(ejs.render(facetFilter.format, object));
