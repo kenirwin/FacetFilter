@@ -63,7 +63,7 @@ A very simple JSON object for configuring the interface might look like:
 
 ### Interface Setup
 
-When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` into a web-available directory and use code similar to the following to include the relevant dependencies and the two scripts.
+When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` into a web-available directory and use code similar to the following to include the relevant dependencies and the two scripts, as well as the configuration script followed by the command to create the facets and display the content: `facets(conf);`.
 
 ```
 <!DOCTYPE html>
@@ -77,28 +77,48 @@ When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` int
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/faces.css">
     <script src="FacetFilter.js"></script>
-    <script>
-        const itemFormat = '<a href="<%= url %>"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %><br><%= decades %></div></li></a><li>'
-        const dataFile = 'data/faces.json';
-    </script>
     <script src="RenderFacets.js"></script>
+    <script>
+        conf = {
+            itemFormat: '<a href="<%= url %>"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %><br><%= decades %></div></li></a><li>',
+            dataFile: 'data/faces.json',
+            facetDivId: '#facets',
+            contentDivId: '#content'
+            }
+            facets(conf);
+    </script>
 </head>
 <body class="">
     <h1>Facet Demo</h1>
     <div class="row">
         <div id="facets" class="col-md-3 form">
         </div>
-        <ul id="objects" class="col-md-9">
+        <ul id="content" class="col-md-9">
         </ul>
     </div>
 </body>
 </html>
 ```
 
-Once you have copied this code, there are two elements to configure: `itemFormat` and `dataFile`. The `dataFile` should point to the JSON object described above. `itemFormat` defines an EJS-compatible string referencing fieldnames to be included in a template, e.g. the follwing, which creates a Bootstrap card for each entry based on the data for `url`,`photo`,`firstName`,`lastName`:
+Once you have copied this code, there are several options to configure
+
+#### Required elements
+
+- `facetDivId` is the selector for the div where you want the facets to display, e.g. `'#facets'`
+- `contentDivId` is the selector for the div where you want the main content to display, e.g. `'objects'`
+
+#### Semi-required: must include EITHER `dataFile` OR `data` & `schema` objects
+
+- `dataFile`: should point to the JSON object described above, including both a `data` and a `schema` object.
+- `data`: pass a JavaScript object instead of a data file. if used, must also pass a `schema` object.
+- `schema`: pass a JavaScript object instead of a data file. if used, must also pass a `data` object.
+
+#### Optional Formatter
+
+- `itemFormat` defines an EJS-compatible string referencing fieldnames to be included in a template, e.g. the follwing, which creates a Bootstrap card for each entry based on the data for `url`,`photo`,`firstName`,`lastName`:
 
 ```
 const itemFormat = '<a href="<%= url %>"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %></div></li></a><li>'
 ```
 
-Note: `itemFormat` and `dataFile` should be defined before loading `RenderFacets.js`. If `itemFormat` is left undefined, the object will be listed as a list of text attributes. See the [Unformatted](https://kenirwin.github.io/FacetFilter/unformatted.html) demo for an example.
+If `itemFormat` is left undefined, the object will be listed as a list of text attributes. See the [Unformatted](https://kenirwin.github.io/FacetFilter/unformatted.html) demo for an example.

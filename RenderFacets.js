@@ -1,12 +1,35 @@
-$.getJSON(dataFile, function (json) {
-  var conf = json;
-  var facetFilter = new FacetFilter(conf.schema, conf.data);
-  if (typeof itemFormat !== 'undefined') {
-    facetFilter.setFormat(itemFormat);
+function facets(facetConf) {
+  let dataFile = facetConf.dataFile;
+  let facetFilter;
+  if (facetConf.hasOwnProperty('schema') && facetConf.hasOwnProperty('data')) {
+    facetFilter = new FacetFilter(facetConf.schema, facetConf.data);
+  } else if (facetConf.hasOwnProperty('dataFile')) {
+    $.ajax({
+      type: 'GET',
+      url: dataFile,
+      dataType: 'json',
+      success: function (fileContents) {
+        facetFilter = new FacetFilter(fileContents.schema, fileContents.data);
+      },
+      async: false,
+    });
+  } else {
+    console.error('Error: no dataFile or schema/data provided');
+  }
+
+  facetFilter.facetDivId = facetConf.facetDivId;
+  facetFilter.contentDivId = facetConf.contentDivId;
+
+  if (typeof facetConf.itemFormat != 'undefined') {
+    facetFilter.setFormat(facetConf.itemFormat);
   } else {
     facetFilter.setFormat();
   }
+  // console.log(facetFilter);
+  createFacets(facetFilter);
+}
 
+function createFacets(facetFilter) {
   facetFilter.countAllTags();
 
   createSorter(facetFilter);
@@ -16,38 +39,41 @@ $.getJSON(dataFile, function (json) {
   let tagFacets = facetFilter.getTagFacetNames();
 
   numberFacets.forEach(function (facet) {
-    $('#facets').append(facetFilter.generateNumberFacet(facet));
+    $(facetFilter.facetDivId).append(facetFilter.generateNumberFacet(facet));
   });
 
   tagFacets.forEach(function (facet) {
-    $('#facets').append(facetFilter.generateTagFacet(facet));
+    $(facetFilter.facetDivId).append(facetFilter.generateTagFacet(facet));
   });
 
   textFacets.forEach(function (facet) {
-    $('#facets').append(facetFilter.generateTextFacet(facet));
+    $(facetFilter.facetDivId).append(facetFilter.generateTextFacet(facet));
   });
 
-  $('#facets').append(
+  $(facetFilter.facetDivId).append(
     '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
   );
-  displayObjects(facetFilter.data, facetFilter.format);
+  displayObjects(facetFilter);
   bindControls(facetFilter);
-});
+}
 
 function bindControls(facetFilter) {
-  $('#facets input').on('change', function () {
-    filterObjectsByFacets(facetFilter);
-    console.log('filtering', facetFilter.data);
-  });
+  // on form input change
+  // fires when a checkbox(string) is clicked or number is changed
+  $(facetFilter.facetDivId + ' input')
+    .off() // remove any existing event handlers
+    .on('change', function () {
+      filterObjectsByFacets(facetFilter);
+      // console.log('filtering', facetFilter.data);
+    });
 
-  $('#facets .facet-tag').on('click', async function () {
-    // console.log($(this));
-
+  // on click a facet tag name (tag facet)
+  $(facetFilter.facetDivId + ' .facet-tag').on('click', async function () {
     $(this).toggleClass('active');
     facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
     await filterObjectsByFacets(facetFilter);
-    console.log('remaining data', facetFilter.data);
-    refocusOnFacet($(this));
+    // console.log('remaining data', facetFilter.data);
+    refocusOnFacet($(this), facetFilter);
   });
   $('#show-all').on('click', function () {
     location.reload();
@@ -56,24 +82,39 @@ function bindControls(facetFilter) {
     // console.log('sorter changed: ', $(this).val());
     facetFilter.sortDataByFacet($(this).val());
     // console.log('sorted data', facetFilter.data);
-    displayObjects(facetFilter.data, facetFilter.format);
+    displayObjects(facetFilter);
   });
-  $('#facets .remove-tag').on('click', function () {
+  $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
+    // console.log('clicked remove tag');
     facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
     facetFilter.reset();
     filterObjectsByFacets(facetFilter);
-    filterObjectsByFacets(facetFilter);
-    displayObjects(facetFilter.data, facetFilter.format);
+    // filterObjectsByFacets(facetFilter);
+    displayObjects(facetFilter);
     refocusOnFacet($(this));
+  });
+
+  $(document).on('keydown', function (e) {
+    focusable =
+      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+    switch (e.key) {
+      case 'ArrowLeft':
+        $(facetFilter.facetDivId).find(focusable).first().focus();
+        break;
+      case 'ArrowRight':
+        $(facetFilter.contentDivId).find(focusable).first().focus();
+        break;
+    }
   });
 }
 
-function refocusOnFacet(link) {
+function refocusOnFacet(link, facetFilter) {
   let facet = $(link).data('facet');
   let value = $(link).data('value');
   setTimeout(function () {
     $(
-      '#facets .facet-tag[data-facet="' +
+      facetFilter.facetDivId +
+        ' .facet-tag[data-facet="' +
         facet +
         '"][data-value="' +
         value +
@@ -83,17 +124,19 @@ function refocusOnFacet(link) {
 }
 function createSorter(facetFilter) {
   let sorters = facetFilter.getSortableFields();
-  $('#facets').append(
+  $(facetFilter.facetDivId).append(
     '<label for="sorter" class="visually-hidden">Sort By</label><span class="input-group mb-3"><span class="input-group-text" id="basic-sort"><i class="bi bi-sort-down"></i></span><select id="sorter" class="form-control"><option>Sort by:</option></select></span>'
   );
   sorters.forEach(function (field) {
     $('#sorter').append('<option value="' + field + '">' + field + '</option>');
   });
 }
-function displayObjects(data, format) {
-  $('#objects').empty();
-  data.forEach(function (object) {
-    $('#objects').append(ejs.render(format, object));
+function displayObjects(facetFilter) {
+  // console.log('populating', facetFilter.contentDivId);
+  // console.log(facetFilter.data);
+  $(facetFilter.contentDivId).empty();
+  facetFilter.data.forEach(function (object) {
+    $(facetFilter.contentDivId).append(ejs.render(facetFilter.format, object));
   });
 }
 
@@ -101,7 +144,7 @@ function updateTagFacets(facetFilter) {
   let tagFacets = facetFilter.getTagFacetNames();
   tagFacets.forEach(function (facet) {
     html = facetFilter.generateTagFacet(facet);
-    $('#facets [data-facet="' + facet + '"]').html(html);
+    $(facetFilter.facetDivId + ' [data-facet="' + facet + '"]').html(html);
   });
 }
 
@@ -122,7 +165,9 @@ function filterObjectsByFacets(facetFilter) {
 
   textFacets.forEach(function (field) {
     const values = [];
-    $('#facets input[data-field="' + field + '"]:checked').each(function () {
+    $(
+      facetFilter.facetDivId + ' input[data-field="' + field + '"]:checked'
+    ).each(function () {
       values.push($(this).val());
     });
     facetFilter.applyTextFilter(field, values);
@@ -138,22 +183,9 @@ function filterObjectsByFacets(facetFilter) {
 
   facetFilter.countAllTags();
   // console.log(facetFilter.tagCounts);
-  displayObjects(facetFilter.data, facetFilter.format);
+  displayObjects(facetFilter);
   updateTagFacets(facetFilter);
   bindControls(facetFilter);
 }
 
 /* Keyboard navigation */
-
-$(document).on('keydown', function (e) {
-  focusable =
-    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
-  switch (e.key) {
-    case 'ArrowLeft':
-      $('#facets').find(focusable).first().focus();
-      break;
-    case 'ArrowRight':
-      $('#objects').find(focusable).first().focus();
-      break;
-  }
-});

@@ -9,11 +9,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/colors.css">
     <script src="FacetFilter.js"></script>
-    <script>
-        const itemFormat = '<a href="https://cataas.com/cat"><li class="object <%= color %>"><%= label %></li></a>'
-        const dataFile = 'data/colors.json';
-    </script>
     <script src="RenderFacets.js"></script>
+    <script>
+        $(document).ready(function() {
+            const conf = {
+                facetDivId: '#facets',
+                contentDivId: '#objects',
+
+                // url-based data source
+                itemFormat: '<a href="https://cataas.com/cat"><li class="object <%= color %>"><%= label %></li></a>',
+                dataFile: 'data/colors.json',
+
+                // inline data source
+            // itemFormat: '<a href="https://cataas.com/cat"><li class="object <%= color %>" style="background-color: <%= label %>; font-size: 12pt"><%= label %></li></a>',
+            // data: [{label: 'FireBrick', color: 'red'}, {label: 'DodgerBlue', color: 'blue'}, {label: 'Crimson', color: 'red'},{label: 'Navy', color: 'blue'}, {label: 'ForestGreen', color: 'green'}, {label: 'LimeGreen', color: 'green'}],
+            // schema: [{fieldName: 'color', fieldType: 'tag', sortable: true, filterable: true},{name: 'label', type: 'string'}]
+        };
+        facets(conf);
+        });
+    </script>
 </head>
 <body class="container">
     <nav class="navbar navbar-expand-lg bg-light">
