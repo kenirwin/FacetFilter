@@ -63,7 +63,7 @@ A very simple JSON object for configuring the interface might look like:
 
 ### Interface Setup
 
-When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` into a web-available directory and use code similar to the following to include the relevant dependencies and the two scripts, as well as the configuration script followed by the command to create the facets and display the content: `createFacets(conf);`.
+When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` into a web-available directory and use code similar to the following to include the relevant dependencies and the two scripts, as well as the configuration script followed by the command to create the facets and display the content: `facets(conf);`.
 
 ```
 <!DOCTYPE html>
@@ -85,7 +85,7 @@ When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` int
             facetDivId: '#facets',
             contentDivId: '#content'
             }
-            createFacets(conf);
+            facets(conf);
     </script>
 </head>
 <body class="">
@@ -100,11 +100,21 @@ When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` int
 </html>
 ```
 
-Once you have copied this code, there are four elements to configure:
+Once you have copied this code, there are several options to configure
 
-- `dataFile` should point to the JSON object described above.
+#### Required elements
+
 - `facetDivId` is the selector for the div where you want the facets to display, e.g. `'#facets'`
 - `contentDivId` is the selector for the div where you want the main content to display, e.g. `'objects'`
+
+#### Semi-required: must include EITHER `dataFile` OR `data` & `schema` objects
+
+- `dataFile`: should point to the JSON object described above, including both a `data` and a `schema` object.
+- `data`: pass a JavaScript object instead of a data file. if used, must also pass a `schema` object.
+- `schema`: pass a JavaScript object instead of a data file. if used, must also pass a `data` object.
+
+#### Optional Formatter
+
 - `itemFormat` defines an EJS-compatible string referencing fieldnames to be included in a template, e.g. the follwing, which creates a Bootstrap card for each entry based on the data for `url`,`photo`,`firstName`,`lastName`:
 
 ```
