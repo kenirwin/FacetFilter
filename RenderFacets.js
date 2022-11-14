@@ -2,12 +2,14 @@ function createFacets(facetConf) {
   let dataFile = facetConf.dataFile;
   const tempFormat = facetConf.itemFormat;
   const facetDivId = facetConf.facetDivId;
+  const contentDivId = facetConf.contentDivId;
 
   $.getJSON(dataFile, function (json) {
     var conf = json;
     var facetFilter = new FacetFilter(conf.schema, conf.data);
     facetFilter.facetDivId = facetDivId;
-
+    facetFilter.contentDivId = contentDivId;
+    console.log(facetFilter.facetDivId, facetFilter.contentDivId);
     if (typeof tempFormat != 'undefined') {
       facetFilter.setFormat(facetConf.itemFormat);
     } else {
@@ -37,7 +39,11 @@ function createFacets(facetConf) {
     $(facetDivId).append(
       '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
     );
-    displayObjects(facetFilter.data, facetFilter.format);
+    displayObjects(
+      facetFilter.data,
+      facetFilter.format,
+      facetFilter.contentDivId
+    );
     bindControls(facetFilter);
   });
 }
@@ -73,8 +79,25 @@ function bindControls(facetFilter) {
     facetFilter.reset();
     filterObjectsByFacets(facetFilter);
     filterObjectsByFacets(facetFilter);
-    displayObjects(facetFilter.data, facetFilter.format);
+    displayObjects(
+      facetFilter.data,
+      facetFilter.format,
+      facetFilter.contentDivId
+    );
     refocusOnFacet($(this));
+  });
+
+  $(document).on('keydown', function (e) {
+    focusable =
+      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+    switch (e.key) {
+      case 'ArrowLeft':
+        $(facetFilter.facetDivId).find(focusable).first().focus();
+        break;
+      case 'ArrowRight':
+        $(facetFilter.contentDivId).find(focusable).first().focus();
+        break;
+    }
   });
 }
 
@@ -100,10 +123,11 @@ function createSorter(facetFilter) {
     $('#sorter').append('<option value="' + field + '">' + field + '</option>');
   });
 }
-function displayObjects(data, format) {
-  $('#objects').empty();
+function displayObjects(data, format, contentDivId) {
+  console.log('populating', contentDivId);
+  $(contentDivId).empty();
   data.forEach(function (object) {
-    $('#objects').append(ejs.render(format, object));
+    $(contentDivId).append(ejs.render(format, object));
   });
 }
 
@@ -156,16 +180,3 @@ function filterObjectsByFacets(facetFilter) {
 }
 
 /* Keyboard navigation */
-
-$(document).on('keydown', function (e) {
-  focusable =
-    'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
-  switch (e.key) {
-    case 'ArrowLeft':
-      $(facetFilter.facetDivId).find(focusable).first().focus();
-      break;
-    case 'ArrowRight':
-      $('#objects').find(focusable).first().focus();
-      break;
-  }
-});

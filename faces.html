@@ -15,6 +15,7 @@
             itemFormat: '<a href="<%= url %>"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %><br><%= decades %></div></li></a><li>',
             dataFile: 'data/faces.json',
             facetDivId: '#facets',
+            contentDivId: '#faces',
         }
         createFacets(conf);
     </script>
@@ -47,7 +48,7 @@
     <div class="row">
         <div id="facets" class="col-md-3 form">
         </div>
-        <ul id="objects" class="col-md-9">
+        <ul id="faces" class="col-md-9">
         </ul>
     </div>
 
