@@ -5,7 +5,32 @@ class FacetFilter {
     this.originalData = data;
     this.filters = {};
     this.tagCounts = {};
+    this.handleAllMissingValues();
     // this.countAllTags();
+  }
+
+  handleAllMissingValues() {
+    this.schema.forEach((facet) => {
+      console.log('handling missing values for :', facet.fieldName);
+      this.handleMissingValuesForField(facet.fieldName, facet.fieldType);
+    });
+  }
+
+  handleMissingValuesForField(field, fieldType) {
+    this.data.forEach(function (object) {
+      if (object[field] == (null || '') || object[field] == undefined) {
+        switch (fieldType) {
+          case 'string':
+            console.log('was', field, object[field]);
+            object[field] = 'No Data';
+            console.log('now', field, object[field]);
+            break;
+          case 'tag':
+            object[field] = [];
+            break;
+        }
+      }
+    });
   }
 
   setFormat(format) {
@@ -94,11 +119,26 @@ class FacetFilter {
     });
     values = values.flat();
     if (type == 'number') {
-      values = values.sort(this.compareNumbers);
+      values = values
+        .filter((item) => typeof item != 'undefined')
+        .sort(this.compareNumbers);
     } else {
-      values.sort();
+      values.sort(this.sortNoDataToLast);
     }
     return [...new Set(values)];
+  }
+
+  sortNoDataToLast(a, b) {
+    if (a == 'No Data') {
+      return 1;
+    } else if (b == 'No Data') {
+      return -1;
+    } else if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    }
+    return 0;
   }
 
   countAllTags() {
@@ -238,7 +278,7 @@ class FacetFilter {
   generateTagFacet(fieldName) {
     const values = this.getKnownValues(fieldName, 'tag').filter((item) => item);
     let html = '';
-    let addClass, itemCount, removeButton;
+    let addClass, itemCount, removeButton, holdUntilEnd;
     values.map((value) => {
       addClass = '';
       removeButton = '';
@@ -250,8 +290,12 @@ class FacetFilter {
         removeButton = `<a href="#" class="remove-tag" data-facet="${fieldName}" data-value="${value}"><i class="bi bi-x-circle text-danger"></i></a>`;
       }
       itemCount = this.tagCounts[fieldName][value];
+      // if (fieldName == 'No Data') {
+      //   holdUntilEnd = `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;
+      // }
       html += `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;
     });
+    // html += holdUntilEnd;
     return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldName}</legend>${html}</fieldset>`;
     // let options = values.map((value) => {
     //   let id = fieldName + '-' + value;

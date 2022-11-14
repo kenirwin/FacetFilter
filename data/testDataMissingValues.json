@@ -1,0 +1,147 @@
+{
+    "schema": [
+        {
+            "fieldName": "label",
+            "fieldType": "string",
+            "sortable": true,
+            "filterable": false
+        },
+        {
+            "fieldName": "letter",
+            "fieldType": "string",
+            "sortable": true,
+            "filterable": false
+        },
+        {
+            "fieldName": "dataTags",
+            "fieldType": "tag",
+            "sortable": false
+        },
+        {
+            "fieldName": "tags",
+            "fieldType": "tag",
+            "sortable": false
+        },
+        {
+            "fieldName": "number",
+            "fieldType": "number",
+            "sortable": true
+        },
+        {
+            "fieldName": "color",
+            "fieldType": "string",
+            "options": [
+                "red",
+                "orange",
+                "yellow",
+                "green",
+                "blue",
+                "purple"
+            ],
+            "sortable": true
+        }
+    ],
+    "data": [
+        {
+            "label": "noTags",
+            "letter": "X",
+            "number": 9,
+            "color": "black"
+        },
+        {
+            "label": "noNumber",
+            "letter": "X",
+            "dataTags": [
+                "pointy",
+                "consonants"
+            ],
+            "color": "black"
+        },
+        {
+            "label": "noColor",
+            "letter": "X",
+            "dataTags": [
+                "pointy",
+                "consonants"
+            ],
+            "number": 9
+        },
+        {
+            "label": "noLetter",
+            "number": 9,
+            "dataTags": [
+                "pointy",
+                "consonants"
+            ],
+            "color": "black"
+        },
+        {
+            "label": "noDataTags",
+            "letter": "X",
+            "number": 9,
+            "color": "black"
+        },
+        {
+            "label": "all",
+            "letter": "X",
+            "number": 9,
+            "color": "black",
+            "dataTags": [
+                "pointy",
+                "consonants"
+            ]
+        },
+        {
+            "label": "A3",
+            "letter": "A",
+            "dataTags": [
+                "vowels",
+                "pointy"
+            ],
+            "number": 3,
+            "type": "vowel",
+            "color": "orange",
+            "tags": [
+                "language"
+            ]
+        },
+        {
+            "label": "A6",
+            "letter": "A",
+            "dataTags": [
+                "vowels",
+                "pointy"
+            ],
+            "number": 6,
+            "type": "vowel",
+            "color": "blue",
+            "tags": [
+                "literature",
+                "science"
+            ]
+        },
+        {
+            "label": "B13",
+            "letter": "B",
+            "dataTags": [
+                "consonants",
+                "curvy"
+            ],
+            "number": 13,
+            "type": "consonant",
+            "color": "red"
+        },
+        {
+            "label": "U2",
+            "letter": "U",
+            "dataTags": [
+                "vowels",
+                "curvy",
+                "band-names"
+            ],
+            "number": 2,
+            "type": "vowel",
+            "color": "yellow"
+        }
+    ]
+}

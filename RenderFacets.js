@@ -26,6 +26,7 @@ function facets(facetConf) {
     facetFilter.setFormat();
   }
   // console.log(facetFilter);
+  console.log('facetFilter', facetFilter);
   createFacets(facetFilter);
 }
 
@@ -133,7 +134,7 @@ function createSorter(facetFilter) {
 }
 function displayObjects(facetFilter) {
   // console.log('populating', facetFilter.contentDivId);
-  // console.log(facetFilter.data);
+  console.log(facetFilter.data);
   $(facetFilter.contentDivId).empty();
   facetFilter.data.forEach(function (object) {
     $(facetFilter.contentDivId).append(ejs.render(facetFilter.format, object));

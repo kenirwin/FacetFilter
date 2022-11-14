@@ -3,6 +3,10 @@ const setup = require('./data/testData.json');
 const data = setup.data;
 const schema = setup.schema;
 
+const scantSetup = require('./data/testDataMissingValues.json');
+const scantData = scantSetup.data;
+const scantSchema = scantSetup.schema;
+
 describe('FacetFilter constructor', () => {
   it('should load schema and data', () => {
     const facetFilter = new FacetFilter(schema, data);
@@ -13,6 +17,18 @@ describe('FacetFilter constructor', () => {
   });
 });
 
+// describe('FacetFilter handleMissingValuesForField', () => {
+//   it('should return empty array for missing tags', () => {
+//     const facetFilter = new FacetFilter(scantSchema, scantData);
+//     facetFilter.handleMissingValuesForField('dataTags', 'tag');
+//     expect(facetFilter.data[0]).toHaveProperty('dataTags', []);
+//   });
+//   it('should add a value of "No Data" for missing string values', () => {
+//     const facetFilter = new FacetFilter(scantSchema, scantData);
+//     facetFilter.handleMissingValuesForField('color', 'string');
+//     expect(facetFilter.data[2]).toHaveProperty('color', 'No Data');
+//   });
+// });
 describe('FacetFilter.setFormat', () => {
   it('should set a default format if no argument', () => {
     const facetFilter = new FacetFilter(schema, data);
@@ -78,6 +94,13 @@ describe('FacetFilter applyTextFilter', () => {
     facetFilter.applyTextFilter('letter', 'A');
     expect(facetFilter.data.length).toEqual(1);
     expect(facetFilter.data[0].label).toEqual('A6');
+  });
+  it('should filter correctly filter out strings a different value is missing from data', () => {
+    const facetFilter = new FacetFilter(scantSchema, scantData);
+    facetFilter.applyTextFilter('letter', 'A');
+    expect(facetFilter.data.length).toEqual(2);
+    expect(facetFilter.data[0].label).toEqual('A3');
+    expect(facetFilter.data[1].label).toEqual('A6');
   });
 });
 
@@ -166,10 +189,21 @@ describe('getKnownValues', () => {
     const knownValues = facetFilter.getKnownValues('letter', 'string');
     expect(knownValues).toEqual(['A', 'B', 'U']);
   });
+  it('should get all text values for a text field', () => {
+    const facetFilter = new FacetFilter(scantSchema, scantData);
+    const knownValues = facetFilter.getKnownValues('letter', 'string');
+    expect(knownValues).toEqual(['A', 'B', 'U', 'X', 'No Data']);
+  });
   it('should get all number values for a number field', () => {
     const facetFilter = new FacetFilter(schema, data);
     const knownValues = facetFilter.getKnownValues('number', 'number');
     expect(knownValues).toEqual([2, 3, 6, 13]);
+  });
+  it('should get all number values for a number field but skip null values', () => {
+    const facetFilter = new FacetFilter(scantSchema, scantData);
+    const knownValues = facetFilter.getKnownValues('number', 'number');
+    expect(knownValues.length).toEqual(5);
+    expect(knownValues).toEqual([2, 3, 6, 9, 13]);
   });
   it('should get all tag values for a tag field', () => {
     const facetFilter = new FacetFilter(schema, data);
