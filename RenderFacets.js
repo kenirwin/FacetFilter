@@ -39,11 +39,7 @@ function createFacets(facetConf) {
     $(facetDivId).append(
       '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
     );
-    displayObjects(
-      facetFilter.data,
-      facetFilter.format,
-      facetFilter.contentDivId
-    );
+    displayObjects(facetFilter);
     bindControls(facetFilter);
   });
 }
@@ -62,7 +58,7 @@ function bindControls(facetFilter) {
     facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
     await filterObjectsByFacets(facetFilter);
     console.log('remaining data', facetFilter.data);
-    refocusOnFacet($(this));
+    refocusOnFacet($(this), facetFilter);
   });
   $('#show-all').on('click', function () {
     location.reload();
@@ -71,7 +67,7 @@ function bindControls(facetFilter) {
     // console.log('sorter changed: ', $(this).val());
     facetFilter.sortDataByFacet($(this).val());
     // console.log('sorted data', facetFilter.data);
-    displayObjects(facetFilter.data, facetFilter.format);
+    displayObjects(facetFilter);
   });
   $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
     console.log('clicked remove tag');
@@ -79,11 +75,7 @@ function bindControls(facetFilter) {
     facetFilter.reset();
     filterObjectsByFacets(facetFilter);
     filterObjectsByFacets(facetFilter);
-    displayObjects(
-      facetFilter.data,
-      facetFilter.format,
-      facetFilter.contentDivId
-    );
+    displayObjects(facetFilter);
     refocusOnFacet($(this));
   });
 
@@ -101,12 +93,13 @@ function bindControls(facetFilter) {
   });
 }
 
-function refocusOnFacet(link) {
+function refocusOnFacet(link, facetFilter) {
   let facet = $(link).data('facet');
   let value = $(link).data('value');
   setTimeout(function () {
     $(
-      '#facets .facet-tag[data-facet="' +
+      facetFilter.facetDivId +
+        ' .facet-tag[data-facet="' +
         facet +
         '"][data-value="' +
         value +
@@ -123,11 +116,12 @@ function createSorter(facetFilter) {
     $('#sorter').append('<option value="' + field + '">' + field + '</option>');
   });
 }
-function displayObjects(data, format, contentDivId) {
-  console.log('populating', contentDivId);
-  $(contentDivId).empty();
-  data.forEach(function (object) {
-    $(contentDivId).append(ejs.render(format, object));
+function displayObjects(facetFilter) {
+  console.log('populating', facetFilter.contentDivId);
+  console.log(facetFilter.data);
+  $(facetFilter.contentDivId).empty();
+  facetFilter.data.forEach(function (object) {
+    $(facetFilter.contentDivId).append(ejs.render(facetFilter.format, object));
   });
 }
 
@@ -174,7 +168,7 @@ function filterObjectsByFacets(facetFilter) {
 
   facetFilter.countAllTags();
   // console.log(facetFilter.tagCounts);
-  displayObjects(facetFilter.data, facetFilter.format);
+  displayObjects(facetFilter);
   updateTagFacets(facetFilter);
   bindControls(facetFilter);
 }
