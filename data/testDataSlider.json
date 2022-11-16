@@ -9,6 +9,13 @@
         {
             "fieldName": "decade",
             "fieldType": "arbitrary-value-slider",
+            "values": [
+                "1920s",
+                "1930s",
+                "1940s",
+                "1950s",
+                "1960s"
+            ],
             "sortable": true,
             "filterable": true
         }

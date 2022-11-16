@@ -5,13 +5,15 @@ class FacetFilter {
     this.originalData = data;
     this.filters = {};
     this.tagCounts = {};
+    this.sliderRanges = {};
+    // this.slider
     this.handleAllMissingValues();
     // this.countAllTags();
   }
 
   handleAllMissingValues() {
     this.schema.forEach((facet) => {
-      console.log('handling missing values for :', facet.fieldName);
+      // console.log('handling missing values for :', facet.fieldName);
       this.handleMissingValuesForField(facet.fieldName, facet.fieldType);
     });
   }
@@ -54,6 +56,18 @@ class FacetFilter {
     this.data = this.originalData;
     // this.format = {};
     // this.countAllTags();
+  }
+
+  addSliderRange(fieldName, min, max) {
+    this.sliderRanges[fieldName] = { min, max };
+  }
+  removeSliderRange(fieldName) {
+    delete this.sliderRanges[fieldName];
+  }
+  getIncludedSliderValues(fieldName, min, max) {
+    let fieldSchema = this.getFacetByFieldName(fieldName);
+    let arr = fieldSchema.values;
+    return arr.slice(arr.indexOf(min), arr.indexOf(max) + 1);
   }
 
   addTagFilter(fieldName, value) {
@@ -208,7 +222,7 @@ class FacetFilter {
   }
 
   sortDataByFacet(fieldName) {
-    console.log('sortDataByFacet:', fieldName);
+    // console.log('sortDataByFacet:', fieldName);
     const facet = this.getFacetByFieldName(fieldName);
     if (facet.type == 'number') {
       this.data.sort((a, b) => a[fieldName] - b[fieldName]);
@@ -234,9 +248,9 @@ class FacetFilter {
           aCopy = aCopy.toUpperCase() || '';
           bCopy = bCopy.toUpperCase() || '';
         } catch (e) {
-          console.log('error sorting:', e);
-          console.log('a:', aCopy);
-          console.log('b:', bCopy);
+          // console.log('error sorting:', e);
+          // console.log('a:', aCopy);
+          // console.log('b:', bCopy);
         }
 
         if (aCopy < bCopy) {

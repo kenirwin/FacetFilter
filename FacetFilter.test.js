@@ -59,6 +59,26 @@ describe('FacetFilter.reset', () => {
   });
 });
 
+describe('FacetFilter.addSliderRange', () => {
+  it('should add a slider filter to the sliderFilters object', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    facetFilter.addSliderRange('decade', '1920s', '1930s');
+    expect(facetFilter.sliderRanges.decade).toEqual({
+      min: '1920s',
+      max: '1930s',
+    });
+  });
+});
+
+describe('FacetFilter.removeSliderRange', () => {
+  it('should add a slider filter to the sliderFilters object', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    facetFilter.addSliderRange('decade', '1920s', '1930s');
+    facetFilter.removeSliderRange('decade');
+    expect(facetFilter.sliderRanges.decade).toEqual(undefined);
+  });
+});
+
 describe('FacetFilter.addTagFilter', () => {
   it('should add a tag filter', () => {
     const facetFilter = new FacetFilter(schema, data);
@@ -107,6 +127,38 @@ describe('FacetFilter applyTextFilter', () => {
     expect(facetFilter.data[1].label).toEqual('A6');
   });
 });
+
+describe('getIncludedSliderValues', () => {
+  it('should return an array of values that are within the slider range', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    const values = facetFilter.getIncludedSliderValues(
+      'decade',
+      '1920s',
+      '1930s'
+    );
+    expect(values).toEqual(['1920s', '1930s']);
+  });
+  it('should return an array of one when slider range matches that', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    const values = facetFilter.getIncludedSliderValues(
+      'decade',
+      '1920s',
+      '1920s'
+    );
+    expect(values).toEqual(['1920s']);
+  });
+});
+
+// describe('FacetFilter applySliderFilter', () => {
+//   it('should correctly filter based on slider min/max values', () => {
+//     // const facetFilter = new FacetFilter(sliderSchema, sliderData);
+//     // facetFilter.addSliderFilter('decade', '1920s', '1930s');
+//     // facetFilter.applySliderFilter();
+//     // expect(facetFilter.data.length).toEqual(2);
+//     // expect(facetFilter.data[0].label).toEqual('A3');
+//     // expect(facetFilter.data[1].label).toEqual('A6');
+//   });
+// });
 
 describe('FacetFilter applyRangeFilter', () => {
   it('should filter correctly by a min and max', () => {
