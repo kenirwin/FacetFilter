@@ -70,12 +70,39 @@ describe('FacetFilter.addSliderRange', () => {
   });
 });
 
-describe('FacetFilter.removeSliderRange', () => {
-  it('should add a slider filter to the sliderFilters object', () => {
-    const facetFilter = new FacetFilter(sliderSchema, sliderData);
-    facetFilter.addSliderRange('decade', '1920s', '1930s');
-    facetFilter.removeSliderRange('decade');
-    expect(facetFilter.sliderRanges.decade).toEqual(undefined);
+// describe('FacetFilter.removeSliderRange', () => {
+//   it('should add a slider filter to the sliderFilters object', () => {
+//     const facetFilter = new FacetFilter(sliderSchema, sliderData);
+//     facetFilter.addSliderRange('decade', '1920s', '1930s');
+//     facetFilter.removeSliderRange('decade');
+//     expect(facetFilter.sliderRanges.decade).toEqual(undefined);
+//   });
+// });
+
+describe('FacetFilter.sharesSomeValues', () => {
+  it('should return true if both arrays contain one common value', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const array1 = ['a', 'b', 'c'];
+    const array2 = ['c', 'd', 'e'];
+    expect(facetFilter.sharesSomeValues(array1, array2)).toEqual(true);
+  });
+  it('should return false if both arrays contain no common values', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const array1 = ['a', 'b', 'c'];
+    const array2 = ['d', 'e', 'f'];
+    expect(facetFilter.sharesSomeValues(array1, array2)).toEqual(false);
+  });
+  it('should return false if one array is empty', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const array1 = [];
+    const array2 = ['d', 'e', 'f'];
+    expect(facetFilter.sharesSomeValues(array1, array2)).toEqual(false);
+  });
+  it('should return true if arrays are identical', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const array1 = ['a', 'b', 'c'];
+    const array2 = ['a', 'b', 'c'];
+    expect(facetFilter.sharesSomeValues(array1, array2)).toEqual(true);
   });
 });
 

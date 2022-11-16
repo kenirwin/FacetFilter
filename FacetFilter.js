@@ -61,15 +61,17 @@ class FacetFilter {
   addSliderRange(fieldName, min, max) {
     this.sliderRanges[fieldName] = { min, max };
   }
-  removeSliderRange(fieldName) {
-    delete this.sliderRanges[fieldName];
-  }
+  // removeSliderRange(fieldName) {
+  //   delete this.sliderRanges[fieldName];
+  // }
   getIncludedSliderValues(fieldName, min, max) {
     let fieldSchema = this.getFacetByFieldName(fieldName);
     let arr = fieldSchema.values;
     return arr.slice(arr.indexOf(min), arr.indexOf(max) + 1);
   }
-
+  sharesSomeValues(needle, haystack) {
+    return needle.some((h) => haystack.includes(h));
+  }
   addTagFilter(fieldName, value) {
     if (this.filters[fieldName] == null) {
       this.filters[fieldName] = [];
