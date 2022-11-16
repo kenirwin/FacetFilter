@@ -7,6 +7,10 @@ const scantSetup = require('./data/testDataMissingValues.json');
 const scantData = scantSetup.data;
 const scantSchema = scantSetup.schema;
 
+const sliderSetup = require('./data/testDataSlider.json');
+const sliderData = sliderSetup.data;
+const sliderSchema = sliderSetup.schema;
+
 describe('FacetFilter constructor', () => {
   it('should load schema and data', () => {
     const facetFilter = new FacetFilter(schema, data);
