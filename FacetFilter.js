@@ -335,9 +335,10 @@ class FacetFilter {
     let range = this.getFacetByFieldName(fieldName).values;
     let min = range[0];
     let max = range[range.length - 1];
+    let valuesArray = this.getFacetByFieldName(fieldName).values;
     let js = `<script>
     var ${fieldName}Slider = document.getElementById('facet-${fieldName}');
-    var valuesFor${fieldName}Slider = ["1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"];
+    var valuesFor${fieldName}Slider = ${JSON.stringify(valuesArray)};
 
 var format = {
     to: function(value) {
@@ -370,7 +371,7 @@ var activePips = [null, null];
 // it is written expecting non-numeric values
 // may need to be re-written for numeric values
 ${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
-  console.log('update', values, handle);
+
     // Remove the active class from the current pip
     if (activePips[handle]) {
         activePips[handle].classList.remove('active-pip');
@@ -391,7 +392,6 @@ ${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
     if (activePips[handle]) {
         activePips[handle].classList.add('active-pip');
     }
-     console.log('activepips', activePips);
 });
 
 
