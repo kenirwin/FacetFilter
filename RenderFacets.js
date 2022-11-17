@@ -116,18 +116,26 @@ function bindControls(facetFilter) {
     refocusOnFacet($(this));
   });
 
-  $(document).on('keydown', function (e) {
-    // focusable =
-    //   'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
-    // switch (e.key) {
-    //   case 'ArrowLeft':
-    //     $(facetFilter.facetDivId).find(focusable).first().focus();
-    //     break;
-    //   case 'ArrowRight':
-    //     $(facetFilter.contentDivId).find(focusable).first().focus();
-    //     break;
-    // }
-  });
+  $(document)
+    .off()
+    .on('keydown', function (e) {
+      focusable =
+        'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+      let target = $(':focus');
+      if (target.parents('[data-type="slider"]').length) {
+        // if part of slider
+        console.log('part of slider');
+        return;
+      } // otherwise, use custom keyboard navigation
+      switch (e.key) {
+        case 'ArrowLeft':
+          $(facetFilter.facetDivId).find(focusable).first().focus();
+          break;
+        case 'ArrowRight':
+          $(facetFilter.contentDivId).find(focusable).first().focus();
+          break;
+      }
+    });
 }
 
 function refocusOnFacet(link, facetFilter) {
