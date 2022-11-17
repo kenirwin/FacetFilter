@@ -96,7 +96,7 @@ function bindControls(facetFilter) {
   $(document)
     .off()
     .on('facetChange', function (event, { facet, facetId, values }) {
-      console.log('facetChange', facet, facetId, values);
+      // console.log('facetChange', facet, facetId, values);
       facetFilter.addSliderRange(facet, values[0], values[1]);
       facetFilter.reset();
       filterObjectsByFacets(facetFilter);

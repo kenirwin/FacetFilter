@@ -335,9 +335,10 @@ class FacetFilter {
     let range = this.getFacetByFieldName(fieldName).values;
     let min = range[0];
     let max = range[range.length - 1];
+    let valuesArray = this.getFacetByFieldName(fieldName).values;
     let js = `<script>
     var ${fieldName}Slider = document.getElementById('facet-${fieldName}');
-    var valuesFor${fieldName}Slider = ["1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"];
+    var valuesFor${fieldName}Slider = ${JSON.stringify(valuesArray)};
 
 var format = {
     to: function(value) {
@@ -363,6 +364,37 @@ ${fieldName}Slider.noUiSlider.on('change', function () {
   let params = { facet: '${fieldName}', facetId: 'facet-${fieldName}', values: values }
   $(document).trigger('facetChange', params);
 });
+
+var activePips = [null, null];
+
+// this section adds classes on the current pips (the ones that are selected)
+// it is written expecting non-numeric values
+// may need to be re-written for numeric values
+${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
+
+    // Remove the active class from the current pip
+    if (activePips[handle]) {
+        activePips[handle].classList.remove('active-pip');
+    }
+    
+     // Match the formatting for the pip
+     var dataValue = values[handle];
+     if (! isNaN(dataValue)) {
+      dataValue = Math.round(dataValue);
+     }
+
+    var indexOfValue = valuesFor${fieldName}Slider.indexOf(dataValue);
+
+     // Find the pip matching the value
+    activePips[handle] = ${fieldName}Slider.querySelector('.noUi-value[data-value="' + indexOfValue + '"]');
+     
+    // Add the active class
+    if (activePips[handle]) {
+        activePips[handle].classList.add('active-pip');
+    }
+});
+
+
    </script>`;
     return js;
   }
