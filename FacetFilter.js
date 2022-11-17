@@ -125,6 +125,15 @@ class FacetFilter {
     });
   }
 
+  applySliderFilter(fieldName, permittedValues) {
+    this.data = this.data.filter((item) => {
+      if (!Array.isArray(item[fieldName])) {
+        item[fieldName] = [item[fieldName]];
+      }
+      return this.sharesSomeValues(item[fieldName], permittedValues);
+    });
+  }
+
   compareNumbers(a, b) {
     return a - b;
   }
@@ -205,6 +214,9 @@ class FacetFilter {
   }
   getTagFacetNames() {
     return this.getFacetsByType('tag');
+  }
+  getSliderFacetNames() {
+    return this.getFacetsByType('slider');
   }
 
   /* sorting */
@@ -289,6 +301,54 @@ class FacetFilter {
     <label for="${id}-min">Minimum</label><input class="form-control" type="number" id="${id}-min" data-field="${fieldName}" value="${min}" />
     <label for="${id}-max">Maximum</label><input class="form-control" type="number" id="${id}-max" data-field="${fieldName}" value="${max}" /></div>
     </fieldset>`;
+  }
+
+  generateSliderHtml(fieldName) {
+    return (
+      `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="slider"></div>` +
+      '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.css" />'
+    );
+  }
+
+  generateSliderJavaScript(fieldName) {
+    let range = this.getFacetByFieldName(fieldName).values;
+    let min = range[0];
+    let max = range[range.length - 1];
+    let js = `<script>
+    var ${fieldName}Slider = document.getElementById('facet-${fieldName}');
+    var valuesFor${fieldName}Slider = ["1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"];
+
+var format = {
+    to: function(value) {
+        return valuesFor${fieldName}Slider[Math.round(value)];
+    },
+    from: function (value) {
+        return valuesFor${fieldName}Slider.indexOf(value);
+    }
+};
+
+noUiSlider.create(${fieldName}Slider, {
+    // start values are parsed by 'format'
+    start: ['1920s', '2020s'],
+    range: { min: 0, max: valuesFor${fieldName}Slider.length - 1 },
+    step: 1,
+    tooltips: true,
+    format: format,
+    pips: { mode: 'steps', format: format, density: 50 },
+});
+
+${fieldName}Slider.noUiSlider.on('change', function () {
+   console.log(${fieldName}Slider.noUiSlider.get())
+});
+   </script>`;
+    return js;
+  }
+
+  generateSliderFacet(fieldName) {
+    let contents = this.generateSliderHtml(fieldName);
+    // this.generateSliderCss(fieldName);
+    contents += this.generateSliderJavaScript(fieldName);
+    return contents;
   }
 
   generateTagFacet(fieldName) {

@@ -38,6 +38,11 @@ function createFacets(facetFilter) {
   let textFacets = facetFilter.getTextFacetNames();
   let numberFacets = facetFilter.getNumberFacetNames();
   let tagFacets = facetFilter.getTagFacetNames();
+  let sliderFacets = facetFilter.getSliderFacetNames();
+
+  sliderFacets.forEach(function (facet) {
+    $(facetFilter.facetDivId).append(facetFilter.generateSliderFacet(facet));
+  });
 
   numberFacets.forEach(function (facet) {
     $(facetFilter.facetDivId).append(facetFilter.generateNumberFacet(facet));

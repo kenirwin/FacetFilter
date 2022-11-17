@@ -106,6 +106,18 @@ describe('FacetFilter.sharesSomeValues', () => {
   });
 });
 
+describe('FacetFilter.applySliderFilter', () => {
+  it('should return an array of objects that match the slider filter', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    facetFilter.applySliderFilter('decade', ['1920s', '1930s']);
+    expect(facetFilter.data.length).toEqual(4);
+    expect(facetFilter.data[0].label).toEqual('Roaring Twenties');
+    expect(facetFilter.data[1].label).toEqual('Depression');
+    expect(facetFilter.data[2].label).toEqual('Jazz Age');
+    expect(facetFilter.data[3].label).toEqual('World War II (Global)');
+  });
+});
+
 describe('FacetFilter.addTagFilter', () => {
   it('should add a tag filter', () => {
     const facetFilter = new FacetFilter(schema, data);
