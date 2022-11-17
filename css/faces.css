@@ -55,7 +55,7 @@
     /* slider formatting */
     .noUi-target {
       margin-top: 5em;
-      margin-bottom: 3em;
+      margin-bottom: 5em;
       margin-left: 1.5em;
         width: 80%;
         height: 100%;
@@ -64,3 +64,17 @@
         -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
+    .noUi-value {
+      font-weight: bold;
+      color: #333 !important;
+    }
+     .noUi-value-horizontal {
+      -webkit-transform: translate(-50%, 25px);
+      transform: translate(-50%, 25px);
+      writing-mode: vertical-lr;
+  }
+  
+  .active-pip {
+      font-weight: bold;
+      color: red !important;
+  }
