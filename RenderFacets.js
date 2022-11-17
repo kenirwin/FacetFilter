@@ -93,18 +93,20 @@ function bindControls(facetFilter) {
   });
 
   // on change a slider (slider facet)
-  $(document).on('facetChange', function (event, { facet, facetId, values }) {
-    console.log('facetChange', facet, facetId, values);
-    facetFilter.addSliderRange(facet, values[0], values[1]);
-    facetFilter.reset();
-    filterObjectsByFacets(facetFilter);
-    facetFilter.applyAllSliderFilters();
-    displayObjects(facetFilter);
-    facetFilter.countAllTags();
-    updateTagFacets(facetFilter);
-    bindControls(facetFilter);
-    // refocusOnFacet($('this')); // need to get this from the event
-  });
+  $(document)
+    .off()
+    .on('facetChange', function (event, { facet, facetId, values }) {
+      console.log('facetChange', facet, facetId, values);
+      facetFilter.addSliderRange(facet, values[0], values[1]);
+      facetFilter.reset();
+      filterObjectsByFacets(facetFilter);
+      facetFilter.applyAllSliderFilters();
+      displayObjects(facetFilter);
+      facetFilter.countAllTags();
+      updateTagFacets(facetFilter);
+      bindControls(facetFilter);
+      // refocusOnFacet($('this')); // need to get this from the event
+    });
 
   // on click a facet tag name (tag facet)
   $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
