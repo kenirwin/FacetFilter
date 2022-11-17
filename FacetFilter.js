@@ -125,6 +125,11 @@ class FacetFilter {
     });
   }
 
+  updateDataBasedOnSlider(fieldName, min, max) {
+    let permittedValues = this.getIncludedSliderValues(fieldName, min, max);
+    this.applySliderFilter(fieldName, permittedValues);
+  }
+
   applySliderFilter(fieldName, permittedValues) {
     this.data = this.data.filter((item) => {
       if (!Array.isArray(item[fieldName])) {
@@ -338,7 +343,9 @@ noUiSlider.create(${fieldName}Slider, {
 });
 
 ${fieldName}Slider.noUiSlider.on('change', function () {
-   console.log(${fieldName}Slider.noUiSlider.get())
+  let values = ${fieldName}Slider.noUiSlider.get();
+  let params = { facet: '${fieldName}', facetId: 'facet-${fieldName}', values: values }
+  $(document).trigger('facetChange', params);
 });
    </script>`;
     return js;

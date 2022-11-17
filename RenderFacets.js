@@ -90,6 +90,18 @@ function bindControls(facetFilter) {
     // console.log('sorted data', facetFilter.data);
     displayObjects(facetFilter);
   });
+
+  // on change a slider (slider facet)
+  $(document).on('facetChange', function (event, { facet, facetId, values }) {
+    console.log('facetChange', facet, facetId, values);
+    facetFilter.reset();
+
+    filterObjectsByFacets(facetFilter);
+    facetFilter.updateDataBasedOnSlider(facet, values[0], values[1]);
+    displayObjects(facetFilter);
+    // refocusOnFacet($('this')); // need to get this from the event
+  });
+  // on click a facet tag name (tag facet)
   $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
     // console.log('clicked remove tag');
     facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
@@ -101,16 +113,16 @@ function bindControls(facetFilter) {
   });
 
   $(document).on('keydown', function (e) {
-    focusable =
-      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
-    switch (e.key) {
-      case 'ArrowLeft':
-        $(facetFilter.facetDivId).find(focusable).first().focus();
-        break;
-      case 'ArrowRight':
-        $(facetFilter.contentDivId).find(focusable).first().focus();
-        break;
-    }
+    // focusable =
+    //   'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+    // switch (e.key) {
+    //   case 'ArrowLeft':
+    //     $(facetFilter.facetDivId).find(focusable).first().focus();
+    //     break;
+    //   case 'ArrowRight':
+    //     $(facetFilter.contentDivId).find(focusable).first().focus();
+    //     break;
+    // }
   });
 }
 
