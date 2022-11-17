@@ -54,8 +54,10 @@
 
     /* slider formatting */
     .noUi-target {
-      margin: 4em 0;
-        width: 95%;
+      margin-top: 5em;
+      margin-bottom: 3em;
+      margin-left: 1.5em;
+        width: 80%;
         height: 100%;
         position: relative;
         border-radius: 5px;
