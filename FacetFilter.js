@@ -310,7 +310,9 @@ class FacetFilter {
 
   generateSliderHtml(fieldName) {
     return (
+      `<fieldset class="facet"><legend class="facet-name">${fieldName}</legend>` +
       `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="slider"></div>` +
+      `</fieldset>` +
       '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.css" />'
     );
   }

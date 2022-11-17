@@ -18,6 +18,7 @@ function facets(facetConf) {
   }
 
   facetFilter.facetDivId = facetConf.facetDivId;
+  console.log(facetFilter.facetDivId);
   facetFilter.contentDivId = facetConf.contentDivId;
 
   if (typeof facetConf.itemFormat != 'undefined') {
@@ -95,19 +96,21 @@ function bindControls(facetFilter) {
   $(document).on('facetChange', function (event, { facet, facetId, values }) {
     console.log('facetChange', facet, facetId, values);
     facetFilter.reset();
-
     filterObjectsByFacets(facetFilter);
     facetFilter.updateDataBasedOnSlider(facet, values[0], values[1]);
     displayObjects(facetFilter);
+    facetFilter.countAllTags();
+    updateTagFacets(facetFilter);
+    bindControls(facetFilter);
     // refocusOnFacet($('this')); // need to get this from the event
   });
+
   // on click a facet tag name (tag facet)
   $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
     // console.log('clicked remove tag');
     facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
     facetFilter.reset();
     filterObjectsByFacets(facetFilter);
-    // filterObjectsByFacets(facetFilter);
     displayObjects(facetFilter);
     refocusOnFacet($(this));
   });
