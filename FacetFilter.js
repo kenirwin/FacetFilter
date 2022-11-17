@@ -138,6 +138,20 @@ class FacetFilter {
       return this.sharesSomeValues(item[fieldName], permittedValues);
     });
   }
+  applyAllSliderFilters() {
+    // console.log('sliderranges', this.sliderRanges);
+    let sliders = this.getSliderFacetNames();
+    console.log('sliders', sliders);
+    sliders.forEach((slider) => {
+      if (this.sliderRanges[slider] != null) {
+        this.updateDataBasedOnSlider(
+          slider,
+          this.sliderRanges[slider].min,
+          this.sliderRanges[slider].max
+        );
+      }
+    });
+  }
 
   compareNumbers(a, b) {
     return a - b;

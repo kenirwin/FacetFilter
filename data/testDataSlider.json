@@ -8,7 +8,7 @@
         },
         {
             "fieldName": "decade",
-            "fieldType": "arbitrary-value-slider",
+            "fieldType": "slider",
             "values": [
                 "1920s",
                 "1930s",

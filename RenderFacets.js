@@ -95,9 +95,10 @@ function bindControls(facetFilter) {
   // on change a slider (slider facet)
   $(document).on('facetChange', function (event, { facet, facetId, values }) {
     console.log('facetChange', facet, facetId, values);
+    facetFilter.addSliderRange(facet, values[0], values[1]);
     facetFilter.reset();
     filterObjectsByFacets(facetFilter);
-    facetFilter.updateDataBasedOnSlider(facet, values[0], values[1]);
+    facetFilter.applyAllSliderFilters();
     displayObjects(facetFilter);
     facetFilter.countAllTags();
     updateTagFacets(facetFilter);
@@ -183,6 +184,7 @@ function filterObjectsByFacets(facetFilter) {
   facetFilter.reset();
 
   facetFilter.applyAllTagFilters();
+  facetFilter.applyAllSliderFilters();
 
   textFacets.forEach(function (field) {
     const values = [];
