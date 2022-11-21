@@ -18,6 +18,7 @@ function facets(facetConf) {
   }
 
   facetFilter.facetDivId = facetConf.facetDivId;
+  facetFilter.pageConf = facetConf.pageConf;
   console.log(facetFilter.facetDivId);
   facetFilter.contentDivId = facetConf.contentDivId;
 
@@ -162,6 +163,7 @@ function displayObjects(facetFilter) {
   facetFilter.data.forEach(function (object) {
     $(facetFilter.contentDivId).append(ejs.render(facetFilter.format, object));
   });
+  paginate(facetFilter.pageConf);
 }
 
 function updateTagFacets(facetFilter) {

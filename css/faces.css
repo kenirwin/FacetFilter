@@ -17,9 +17,9 @@
 
     /* Object styles */
 
-    ul {
+    ul#faces {
         list-style: none;
-        width: 400px;
+        /* width: 400px; */
       }
       #faces li {
         display: inline-grid;
