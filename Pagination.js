@@ -84,16 +84,28 @@ function updatePageControls(page) {
   $('.page-item').removeClass('active');
   $('.page-item:nth-child(' + buttonIndex + ')').addClass('active');
   if (buttonIndex == 2) {
-    $('.page-item:nth-child(1)').addClass('disabled');
+    $('.page-item:nth-child(1)')
+      .addClass('disabled')
+      .attr('aria-disabled', 'true')
+      .attr('tabindex', '-1');
   } else {
-    $('.page-item:nth-child(1)').removeClass('disabled');
+    $('.page-item:nth-child(1)')
+      .removeClass('disabled')
+      .attr('aria-disabled', 'false')
+      .attr('tabindex', '0');
   }
 
   console.log('buttonIndex', buttonIndex, 'maxButtonIndex', maxButtonIndex);
   if (buttonIndex == maxButtonIndex) {
-    $('.page-item:nth-child(' + nextButtonIndex + ')').addClass('disabled');
+    $('.page-item:nth-child(' + nextButtonIndex + ')')
+      .addClass('disabled')
+      .attr('aria-disabled', 'true')
+      .attr('tabindex', '-1');
   } else {
-    $('.page-item:nth-child(' + numPages + ')').removeClass('disabled');
+    $('.page-item:nth-child(' + numPages + ')')
+      .removeClass('disabled')
+      .attr('aria-disabled', 'false')
+      .attr('tabindex', '0');
   }
 }
 
