@@ -13,22 +13,37 @@ function paginate({
   showHidePageContents(contentDivId, data, 1, itemsPerPage);
   $(paginationDivId + ' .page-item').click(function (e) {
     e.preventDefault();
-    let page = $(this).index() + 1;
-    updatePageControls(page);
-    showHidePageContents(contentDivId, data, page, itemsPerPage);
+    if ($(this).hasClass('page-arrow')) {
+      // this is not working
+    } else {
+      let page = $(this).index(); // skip the previous button
+      console.log('page', page);
+      updatePageControls(page);
+      showHidePageContents(contentDivId, data, page, itemsPerPage);
+    }
   });
 }
 
 function createPagination(pages, paginationDivId) {
-  $(paginationDivId).empty();
+  $(paginationDivId).empty().append(`<li class="page-item page-arrow">
+      <a class="page-link" data-direction="previous" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>`);
   for (let i = 1; i <= pages; i++) {
     $(paginationDivId).append(
-      `<li class="page-item"><a class="page-link" href="#">${i}</a></li>`
+      `<li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`
     );
   }
+  $(paginationDivId).append(`<li class="page-item page-arrow">
+      <a class="page-link" data-direction="next" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>`);
 }
 
 function updatePageControls(page) {
+  page = page + 1; // skip the previous button
   $('.page-item').removeClass('active');
   $('.page-item:nth-child(' + page + ')').addClass('active');
 }
