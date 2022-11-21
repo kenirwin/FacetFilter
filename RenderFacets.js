@@ -163,7 +163,9 @@ function displayObjects(facetFilter) {
   facetFilter.data.forEach(function (object) {
     $(facetFilter.contentDivId).append(ejs.render(facetFilter.format, object));
   });
-  paginate(facetFilter.pageConf);
+  if (typeof facetFilter.pageConf != 'undefined') {
+    paginate(facetFilter.pageConf);
+  }
 }
 
 function updateTagFacets(facetFilter) {
