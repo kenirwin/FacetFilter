@@ -13,14 +13,24 @@ function paginate({
   showHidePageContents(contentDivId, data, 1, itemsPerPage);
   $(paginationDivId + ' .page-item').click(function (e) {
     e.preventDefault();
+    let page;
     if ($(this).hasClass('page-arrow')) {
-      // this is not working
+      let activePage = Number($(paginationDivId + ' .page-item.active').text());
+      console.log('activePage', activePage);
+      if ($(this).find('a').data('direction') == 'next' && activePage < pages) {
+        page = activePage + 1;
+      } else if (
+        $(this).find('a').data('direction') == 'previous' &&
+        activePage > 1
+      ) {
+        page = activePage - 1;
+      }
     } else {
-      let page = $(this).index(); // skip the previous button
+      page = $(this).index(); // skip the previous button
       console.log('page', page);
-      updatePageControls(page);
-      showHidePageContents(contentDivId, data, page, itemsPerPage);
     }
+    updatePageControls(page);
+    showHidePageContents(contentDivId, data, page, itemsPerPage);
   });
 }
 
