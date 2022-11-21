@@ -15,15 +15,10 @@ function paginate({
     e.preventDefault();
     let page;
     if ($(this).hasClass('page-arrow')) {
-      let activePage = Number($(paginationDivId + ' .page-item.active').text());
-      console.log('activePage', activePage);
-      if ($(this).find('a').data('direction') == 'next' && activePage < pages) {
-        page = activePage + 1;
-      } else if (
-        $(this).find('a').data('direction') == 'previous' &&
-        activePage > 1
-      ) {
-        page = activePage - 1;
+      if ($(this).find('a').data('direction') == 'next') {
+        page = getNextPage();
+      } else if ($(this).find('a').data('direction') == 'previous') {
+        page = getPreviousPage();
       }
     } else {
       page = $(this).index(); // skip the previous button
@@ -32,6 +27,33 @@ function paginate({
     updatePageControls(page);
     showHidePageContents(contentDivId, data, page, itemsPerPage);
   });
+}
+
+function getCurrentPage() {
+  return Number($('.page-item.active').text());
+}
+
+function getTotalPages() {
+  return $('.page-item').length - 2; // skip the previous and next buttons
+}
+
+function getNextPage() {
+  let activePage = getCurrentPage();
+  let pages = getTotalPages();
+  if (activePage < pages) {
+    return activePage + 1;
+  } else {
+    return activePage;
+  }
+}
+
+function getPreviousPage() {
+  let activePage = getCurrentPage();
+  if (activePage > 1) {
+    return activePage - 1;
+  } else {
+    return activePage;
+  }
 }
 
 function createPagination(pages, paginationDivId) {
@@ -53,9 +75,17 @@ function createPagination(pages, paginationDivId) {
 }
 
 function updatePageControls(page) {
+  console.log('updatePageControls', page);
   page = page + 1; // skip the previous button
+  numPages = $('.page-item').length; // skip the previous and next buttons
+  console.log('page', page, 'of', numPages);
   $('.page-item').removeClass('active');
   $('.page-item:nth-child(' + page + ')').addClass('active');
+  if (page == 2) {
+    $('.page-item:nth-child(1)').addClass('disabled');
+  } else if (page == numPages) {
+    $('.page-item:nth-child(' + numPages + ')').addClass('disabled');
+  }
 }
 
 function showHidePageContents(contentDivId, data, page, itemsPerPage) {
