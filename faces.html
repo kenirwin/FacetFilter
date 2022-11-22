@@ -18,6 +18,7 @@
             dataSelector: '#faces .object-wrapper',
             itemsPerPage: 10,
             paginationDivId: '#pagination',
+            paginationCountId: '#pagination-count',
             contentDivId: '#faces',
             };
             const conf = {
@@ -62,6 +63,9 @@
             <ul id="faces">
             </ul>
             <nav aria-label="Page navigation">
+                <div id="pagination-count-wrapper" class="d-flex justify-content-center">
+                    <span id="pagination-count" class="justify-content-center"></span>&nbsp;items match criteria
+                </div>
                 <ul id="pagination" class="pagination justify-content-center"></ul>
             </nav>
         </div>

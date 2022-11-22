@@ -2,13 +2,15 @@ function paginate({
   dataSelector,
   itemsPerPage,
   paginationDivId,
+  paginationCountId,
   contentDivId,
 }) {
   let data = $(dataSelector);
   let pages = Math.ceil(data.length / itemsPerPage);
-  console.log('items', data.length);
-  console.log('pages', pages);
-  createPagination(pages, paginationDivId);
+  //   console.log('items', data.length);
+  //   console.log('pages', pages);
+  createPagination(pages, paginationDivId, data);
+  updateCount(paginationCountId, data);
   updatePageControls(1);
   showHidePageContents(contentDivId, data, 1, itemsPerPage);
   $(paginationDivId + ' .page-item').click(function (e) {
@@ -22,7 +24,7 @@ function paginate({
       }
     } else {
       page = $(this).index(); // skip the previous button
-      console.log('page', page);
+      //   console.log('page', page);
     }
     updatePageControls(page);
     showHidePageContents(contentDivId, data, page, itemsPerPage);
@@ -56,7 +58,10 @@ function getPreviousPage() {
   }
 }
 
-function createPagination(pages, paginationDivId) {
+function updateCount(paginationCountId, data) {
+  $(paginationCountId).text(data.length);
+}
+function createPagination(pages, paginationDivId, items) {
   $(paginationDivId).empty().append(`<li class="page-item page-arrow">
       <a class="page-link" data-direction="previous" href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
@@ -75,12 +80,12 @@ function createPagination(pages, paginationDivId) {
 }
 
 function updatePageControls(page) {
-  console.log('updatePageControls', page);
+  //   console.log('updatePageControls', page);
   let buttonIndex = page + 1; // skip the previous button
   let numPages = getTotalPages(); // skip the previous and next buttons
   let maxButtonIndex = numPages + 1;
   nextButtonIndex = maxButtonIndex + 1;
-  console.log('page', page, 'of', numPages);
+  //   console.log('page', page, 'of', numPages);
   $('.page-item').removeClass('active');
   $('.page-item:nth-child(' + buttonIndex + ')').addClass('active');
   if (buttonIndex == 2) {
@@ -95,7 +100,7 @@ function updatePageControls(page) {
       .attr('tabindex', '0');
   }
 
-  console.log('buttonIndex', buttonIndex, 'maxButtonIndex', maxButtonIndex);
+  //   console.log('buttonIndex', buttonIndex, 'maxButtonIndex', maxButtonIndex);
   if (buttonIndex == maxButtonIndex) {
     $('.page-item:nth-child(' + nextButtonIndex + ')')
       .addClass('disabled')
@@ -113,7 +118,7 @@ function showHidePageContents(contentDivId, data, page, itemsPerPage) {
   const start = (page - 1) * itemsPerPage;
   const end = page * itemsPerPage;
   $(contentDivId + ' .object-wrapper').each(function (index) {
-    console.log(index, $(this).text());
+    // console.log(index, $(this).text());
     if (index >= start && index < end) {
       $(this).show();
     } else {
