@@ -20,7 +20,7 @@
         },
         {
             "fieldName": "gender",
-            "fieldType": "tag",
+            "fieldType": "string",
             "sortable": true,
             "filterable": true
         },
