@@ -5,13 +5,15 @@ class FacetFilter {
     this.originalData = data;
     this.filters = {};
     this.tagCounts = {};
+    this.sliderRanges = {};
+    // this.slider
     this.handleAllMissingValues();
     // this.countAllTags();
   }
 
   handleAllMissingValues() {
     this.schema.forEach((facet) => {
-      console.log('handling missing values for :', facet.fieldName);
+      // console.log('handling missing values for :', facet.fieldName);
       this.handleMissingValuesForField(facet.fieldName, facet.fieldType);
     });
   }
@@ -56,6 +58,20 @@ class FacetFilter {
     // this.countAllTags();
   }
 
+  addSliderRange(fieldName, min, max) {
+    this.sliderRanges[fieldName] = { min, max };
+  }
+  // removeSliderRange(fieldName) {
+  //   delete this.sliderRanges[fieldName];
+  // }
+  getIncludedSliderValues(fieldName, min, max) {
+    let fieldSchema = this.getFacetByFieldName(fieldName);
+    let arr = fieldSchema.values;
+    return arr.slice(arr.indexOf(min), arr.indexOf(max) + 1);
+  }
+  sharesSomeValues(needle, haystack) {
+    return needle.some((h) => haystack.includes(h));
+  }
   addTagFilter(fieldName, value) {
     if (this.filters[fieldName] == null) {
       this.filters[fieldName] = [];
@@ -106,6 +122,34 @@ class FacetFilter {
       return values.every((value) => {
         return item[filterName].includes(value);
       });
+    });
+  }
+
+  updateDataBasedOnSlider(fieldName, min, max) {
+    let permittedValues = this.getIncludedSliderValues(fieldName, min, max);
+    this.applySliderFilter(fieldName, permittedValues);
+  }
+
+  applySliderFilter(fieldName, permittedValues) {
+    this.data = this.data.filter((item) => {
+      if (!Array.isArray(item[fieldName])) {
+        item[fieldName] = [item[fieldName]];
+      }
+      return this.sharesSomeValues(item[fieldName], permittedValues);
+    });
+  }
+  applyAllSliderFilters() {
+    // console.log('sliderranges', this.sliderRanges);
+    let sliders = this.getSliderFacetNames();
+    console.log('sliders', sliders);
+    sliders.forEach((slider) => {
+      if (this.sliderRanges[slider] != null) {
+        this.updateDataBasedOnSlider(
+          slider,
+          this.sliderRanges[slider].min,
+          this.sliderRanges[slider].max
+        );
+      }
     });
   }
 
@@ -190,6 +234,9 @@ class FacetFilter {
   getTagFacetNames() {
     return this.getFacetsByType('tag');
   }
+  getSliderFacetNames() {
+    return this.getFacetsByType('slider');
+  }
 
   /* sorting */
 
@@ -208,7 +255,7 @@ class FacetFilter {
   }
 
   sortDataByFacet(fieldName) {
-    console.log('sortDataByFacet:', fieldName);
+    // console.log('sortDataByFacet:', fieldName);
     const facet = this.getFacetByFieldName(fieldName);
     if (facet.type == 'number') {
       this.data.sort((a, b) => a[fieldName] - b[fieldName]);
@@ -234,9 +281,9 @@ class FacetFilter {
           aCopy = aCopy.toUpperCase() || '';
           bCopy = bCopy.toUpperCase() || '';
         } catch (e) {
-          console.log('error sorting:', e);
-          console.log('a:', aCopy);
-          console.log('b:', bCopy);
+          // console.log('error sorting:', e);
+          // console.log('a:', aCopy);
+          // console.log('b:', bCopy);
         }
 
         if (aCopy < bCopy) {
@@ -271,8 +318,92 @@ class FacetFilter {
     return `<fieldset class="facet form-group" id="facet-${fieldName}" data-facet="${fieldName}" data-type="number">
     <legend class="facet-name">${fieldName}</legend>
     <label for="${id}-min">Minimum</label><input class="form-control" type="number" id="${id}-min" data-field="${fieldName}" value="${min}" />
-    <label for="${id}-max">Maximum</label><input class="form-control" type="number" id="${id}-max" data-field="${fieldName}" value="${max}" /></div>
+    <label for="${id}-max">Maximum</label><input class="form-control" type="number" id="${id}-max" data-field="${fieldName}" value="${max}" />
     </fieldset>`;
+  }
+
+  generateSliderHtml(fieldName) {
+    return (
+      `<fieldset class="facet"><legend class="facet-name">${fieldName}</legend>` +
+      `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="slider"></div>` +
+      `</fieldset>` +
+      '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.css" />'
+    );
+  }
+
+  generateSliderJavaScript(fieldName) {
+    let range = this.getFacetByFieldName(fieldName).values;
+    let min = range[0];
+    let max = range[range.length - 1];
+    let valuesArray = this.getFacetByFieldName(fieldName).values;
+    let js = `<script>
+    var ${fieldName}Slider = document.getElementById('facet-${fieldName}');
+    var valuesFor${fieldName}Slider = ${JSON.stringify(valuesArray)};
+
+var format = {
+    to: function(value) {
+        return valuesFor${fieldName}Slider[Math.round(value)];
+    },
+    from: function (value) {
+        return valuesFor${fieldName}Slider.indexOf(value);
+    }
+};
+
+noUiSlider.create(${fieldName}Slider, {
+    // start values are parsed by 'format'
+    start: ['1920s', '2020s'],
+    range: { min: 0, max: valuesFor${fieldName}Slider.length - 1 },
+    step: 1,
+    tooltips: true,
+    format: format,
+    pips: { mode: 'steps', format: format, density: 50 },
+});
+
+${fieldName}Slider.noUiSlider.on('change', function () {
+  let values = ${fieldName}Slider.noUiSlider.get();
+  let params = { facet: '${fieldName}', facetId: 'facet-${fieldName}', values: values }
+  $(document).trigger('facetChange', params);
+});
+
+var activePips = [null, null];
+
+// this section adds classes on the current pips (the ones that are selected)
+// it is written expecting non-numeric values
+// may need to be re-written for numeric values
+${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
+
+    // Remove the active class from the current pip
+    if (activePips[handle]) {
+        activePips[handle].classList.remove('active-pip');
+    }
+    
+     // Match the formatting for the pip
+     var dataValue = values[handle];
+     if (! isNaN(dataValue)) {
+      dataValue = Math.round(dataValue);
+     }
+
+    var indexOfValue = valuesFor${fieldName}Slider.indexOf(dataValue);
+
+     // Find the pip matching the value
+    activePips[handle] = ${fieldName}Slider.querySelector('.noUi-value[data-value="' + indexOfValue + '"]');
+     
+    // Add the active class
+    if (activePips[handle]) {
+        activePips[handle].classList.add('active-pip');
+    }
+});
+
+
+   </script>`;
+    return js;
+  }
+
+  generateSliderFacet(fieldName) {
+    let contents = this.generateSliderHtml(fieldName);
+    // this.generateSliderCss(fieldName);
+    contents += this.generateSliderJavaScript(fieldName);
+    return contents;
   }
 
   generateTagFacet(fieldName) {

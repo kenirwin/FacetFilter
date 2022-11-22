@@ -20,13 +20,26 @@
         },
         {
             "fieldName": "gender",
-            "fieldType": "tag",
+            "fieldType": "string",
             "sortable": true,
             "filterable": true
         },
         {
             "fieldName": "decades",
-            "fieldType": "tag",
+            "fieldType": "slider",
+            "values": [
+                "1920s",
+                "1930s",
+                "1940s",
+                "1950s",
+                "1960s",
+                "1970s",
+                "1980s",
+                "1990s",
+                "2000s",
+                "2010s",
+                "2020s"
+            ],
             "sortable": true,
             "filterable": true
         },

@@ -18,6 +18,8 @@ function facets(facetConf) {
   }
 
   facetFilter.facetDivId = facetConf.facetDivId;
+  facetFilter.pageConf = facetConf.pageConf;
+  console.log(facetFilter.facetDivId);
   facetFilter.contentDivId = facetConf.contentDivId;
 
   if (typeof facetConf.itemFormat != 'undefined') {
@@ -38,6 +40,11 @@ function createFacets(facetFilter) {
   let textFacets = facetFilter.getTextFacetNames();
   let numberFacets = facetFilter.getNumberFacetNames();
   let tagFacets = facetFilter.getTagFacetNames();
+  let sliderFacets = facetFilter.getSliderFacetNames();
+
+  sliderFacets.forEach(function (facet) {
+    $(facetFilter.facetDivId).append(facetFilter.generateSliderFacet(facet));
+  });
 
   numberFacets.forEach(function (facet) {
     $(facetFilter.facetDivId).append(facetFilter.generateNumberFacet(facet));
@@ -85,27 +92,44 @@ function bindControls(facetFilter) {
     // console.log('sorted data', facetFilter.data);
     displayObjects(facetFilter);
   });
+
+  // on change a slider (slider facet)
+  $(document)
+    .off()
+    .on('facetChange', function (event, { facet, facetId, values }) {
+      // console.log('facetChange', facet, facetId, values);
+      facetFilter.addSliderRange(facet, values[0], values[1]);
+      facetFilter.reset();
+      filterObjectsByFacets(facetFilter);
+      facetFilter.applyAllSliderFilters();
+      displayObjects(facetFilter);
+      facetFilter.countAllTags();
+      updateTagFacets(facetFilter);
+      bindControls(facetFilter);
+      // refocusOnFacet($('this')); // need to get this from the event
+    });
+
+  // on click a facet tag name (tag facet)
   $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
     // console.log('clicked remove tag');
     facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
     facetFilter.reset();
     filterObjectsByFacets(facetFilter);
-    // filterObjectsByFacets(facetFilter);
     displayObjects(facetFilter);
     refocusOnFacet($(this));
   });
 
   $(document).on('keydown', function (e) {
-    focusable =
-      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
-    switch (e.key) {
-      case 'ArrowLeft':
-        $(facetFilter.facetDivId).find(focusable).first().focus();
-        break;
-      case 'ArrowRight':
-        $(facetFilter.contentDivId).find(focusable).first().focus();
-        break;
-    }
+    // focusable =
+    //   'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]';
+    // switch (e.key) {
+    //   case 'ArrowLeft':
+    //     $(facetFilter.facetDivId).find(focusable).first().focus();
+    //     break;
+    //   case 'ArrowRight':
+    //     $(facetFilter.contentDivId).find(focusable).first().focus();
+    //     break;
+    // }
   });
 }
 
@@ -139,6 +163,9 @@ function displayObjects(facetFilter) {
   facetFilter.data.forEach(function (object) {
     $(facetFilter.contentDivId).append(ejs.render(facetFilter.format, object));
   });
+  if (typeof facetFilter.pageConf != 'undefined') {
+    paginate(facetFilter.pageConf);
+  }
 }
 
 function updateTagFacets(facetFilter) {
@@ -163,6 +190,7 @@ function filterObjectsByFacets(facetFilter) {
   facetFilter.reset();
 
   facetFilter.applyAllTagFilters();
+  facetFilter.applyAllSliderFilters();
 
   textFacets.forEach(function (field) {
     const values = [];

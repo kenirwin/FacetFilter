@@ -7,6 +7,10 @@ const scantSetup = require('./data/testDataMissingValues.json');
 const scantData = scantSetup.data;
 const scantSchema = scantSetup.schema;
 
+const sliderSetup = require('./data/testDataSlider.json');
+const sliderData = sliderSetup.data;
+const sliderSchema = sliderSetup.schema;
+
 describe('FacetFilter constructor', () => {
   it('should load schema and data', () => {
     const facetFilter = new FacetFilter(schema, data);
@@ -52,6 +56,65 @@ describe('FacetFilter.reset', () => {
     facetFilter.data = [];
     facetFilter.reset();
     expect(facetFilter.data).toEqual(data);
+  });
+});
+
+describe('FacetFilter.addSliderRange', () => {
+  it('should add a slider filter to the sliderFilters object', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    facetFilter.addSliderRange('decade', '1920s', '1930s');
+    expect(facetFilter.sliderRanges.decade).toEqual({
+      min: '1920s',
+      max: '1930s',
+    });
+  });
+});
+
+// describe('FacetFilter.removeSliderRange', () => {
+//   it('should add a slider filter to the sliderFilters object', () => {
+//     const facetFilter = new FacetFilter(sliderSchema, sliderData);
+//     facetFilter.addSliderRange('decade', '1920s', '1930s');
+//     facetFilter.removeSliderRange('decade');
+//     expect(facetFilter.sliderRanges.decade).toEqual(undefined);
+//   });
+// });
+
+describe('FacetFilter.sharesSomeValues', () => {
+  it('should return true if both arrays contain one common value', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const array1 = ['a', 'b', 'c'];
+    const array2 = ['c', 'd', 'e'];
+    expect(facetFilter.sharesSomeValues(array1, array2)).toEqual(true);
+  });
+  it('should return false if both arrays contain no common values', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const array1 = ['a', 'b', 'c'];
+    const array2 = ['d', 'e', 'f'];
+    expect(facetFilter.sharesSomeValues(array1, array2)).toEqual(false);
+  });
+  it('should return false if one array is empty', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const array1 = [];
+    const array2 = ['d', 'e', 'f'];
+    expect(facetFilter.sharesSomeValues(array1, array2)).toEqual(false);
+  });
+  it('should return true if arrays are identical', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const array1 = ['a', 'b', 'c'];
+    const array2 = ['a', 'b', 'c'];
+    expect(facetFilter.sharesSomeValues(array1, array2)).toEqual(true);
+  });
+});
+
+describe('FacetFilter.applySliderFilter', () => {
+  it('should return an array of objects that match the slider filter', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    facetFilter.applySliderFilter('decade', ['1920s', '1930s']);
+    expect(facetFilter.data.length).toEqual(4);
+    expect(facetFilter.data[0].label).toEqual('Roaring Twenties');
+    expect(facetFilter.data[1].label).toEqual('Depression');
+    expect(facetFilter.data[2].label).toEqual('Jazz Age');
+    expect(facetFilter.data[3].label).toEqual('World War II (Global)');
   });
 });
 
@@ -103,6 +166,38 @@ describe('FacetFilter applyTextFilter', () => {
     expect(facetFilter.data[1].label).toEqual('A6');
   });
 });
+
+describe('getIncludedSliderValues', () => {
+  it('should return an array of values that are within the slider range', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    const values = facetFilter.getIncludedSliderValues(
+      'decade',
+      '1920s',
+      '1930s'
+    );
+    expect(values).toEqual(['1920s', '1930s']);
+  });
+  it('should return an array of one when slider range matches that', () => {
+    const facetFilter = new FacetFilter(sliderSchema, sliderData);
+    const values = facetFilter.getIncludedSliderValues(
+      'decade',
+      '1920s',
+      '1920s'
+    );
+    expect(values).toEqual(['1920s']);
+  });
+});
+
+// describe('FacetFilter applySliderFilter', () => {
+//   it('should correctly filter based on slider min/max values', () => {
+//     // const facetFilter = new FacetFilter(sliderSchema, sliderData);
+//     // facetFilter.addSliderFilter('decade', '1920s', '1930s');
+//     // facetFilter.applySliderFilter();
+//     // expect(facetFilter.data.length).toEqual(2);
+//     // expect(facetFilter.data[0].label).toEqual('A3');
+//     // expect(facetFilter.data[1].label).toEqual('A6');
+//   });
+// });
 
 describe('FacetFilter applyRangeFilter', () => {
   it('should filter correctly by a min and max', () => {

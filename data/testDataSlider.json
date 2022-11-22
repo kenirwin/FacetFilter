@@ -1,0 +1,48 @@
+{
+    "schema": [
+        {
+            "fieldName": "label",
+            "fieldType": "string",
+            "sortable": true,
+            "filterable": false
+        },
+        {
+            "fieldName": "decade",
+            "fieldType": "slider",
+            "values": [
+                "1920s",
+                "1930s",
+                "1940s",
+                "1950s",
+                "1960s"
+            ],
+            "sortable": true,
+            "filterable": true
+        }
+    ],
+    "data": [
+        {
+            "label": "Roaring Twenties",
+            "decade": "1920s"
+        },
+        {
+            "label": "Depression",
+            "decade": "1930s"
+        },
+        {
+            "label": "American WWII",
+            "decade": "1940s"
+        },
+        {
+            "label": "Jazz Age",
+            "decade": "1920s"
+        },
+        {
+            "label": "World War II (Global)",
+            "decade": [
+                "1930s",
+                "1940s"
+            ]
+        }
+    ]
+}
