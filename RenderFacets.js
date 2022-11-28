@@ -75,6 +75,11 @@ function bindControls(facetFilter) {
       // console.log('filtering', facetFilter.data);
     });
 
+  // on arbitrary input change
+  $(facetFilter.facetDivId).bind('facetFilter.update', function () {
+    filterObjectsByFacets(facetFilter);
+  });
+
   // on click a facet tag name (tag facet)
   $(facetFilter.facetDivId + ' .facet-tag').on('click', async function () {
     $(this).toggleClass('active');
