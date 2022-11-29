@@ -86,8 +86,11 @@ function updatePageControls(page) {
   let maxButtonIndex = numPages + 1;
   nextButtonIndex = maxButtonIndex + 1;
   //   console.log('page', page, 'of', numPages);
-  $('.page-item').removeClass('active');
-  $('.page-item:nth-child(' + buttonIndex + ')').addClass('active');
+  $('.page-item').removeClass('active').find('a').removeAttr('aria-current');
+  $('.page-item:nth-child(' + buttonIndex + ')')
+    .addClass('active')
+    .find('a')
+    .attr('aria-current', 'page');
   if (buttonIndex == 2) {
     $('.page-item:nth-child(1)')
       .addClass('disabled')
