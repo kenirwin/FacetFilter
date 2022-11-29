@@ -63,17 +63,17 @@ function updateCount(paginationCountId, data) {
 }
 function createPagination(pages, paginationDivId, items) {
   $(paginationDivId).empty().append(`<li class="page-item page-arrow">
-      <a class="page-link" data-direction="previous" href="#" aria-label="Previous">
+      <a class="page-link" data-direction="previous" href="#" aria-label="Previous Page">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>`);
   for (let i = 1; i <= pages; i++) {
     $(paginationDivId).append(
-      `<li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`
+      `<li class="page-item"><a class="page-link" href="#" data-page="${i}" aria-label="Page ${i}">${i}</a></li>`
     );
   }
   $(paginationDivId).append(`<li class="page-item page-arrow">
-      <a class="page-link" data-direction="next" href="#" aria-label="Next">
+      <a class="page-link" data-direction="next" href="#" aria-label="Next Page">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>`);
@@ -91,11 +91,13 @@ function updatePageControls(page) {
   if (buttonIndex == 2) {
     $('.page-item:nth-child(1)')
       .addClass('disabled')
+      .find('a')
       .attr('aria-disabled', 'true')
       .attr('tabindex', '-1');
   } else {
     $('.page-item:nth-child(1)')
       .removeClass('disabled')
+      .find('a')
       .attr('aria-disabled', 'false')
       .attr('tabindex', '0');
   }
