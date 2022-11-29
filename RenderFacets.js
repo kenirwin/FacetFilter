@@ -98,6 +98,16 @@ function bindControls(facetFilter) {
     displayObjects(facetFilter);
   });
 
+  // when needed: console log the current focused element
+  // document.addEventListener(
+  //   'focusin',
+  //   function () {
+  //     console.log('focused: ', document.activeElement);
+  //   },
+  //   true
+  // );
+
+  $(document).on('focus');
   // on change a slider (slider facet)
   $(document)
     .off()
