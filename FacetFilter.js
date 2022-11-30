@@ -351,12 +351,16 @@ var format = {
 
 noUiSlider.create(${fieldName}Slider, {
     // start values are parsed by 'format'
-    start: ['1920s', '2020s'],
+    start: ['${min}', '${max}'],
     range: { min: 0, max: valuesFor${fieldName}Slider.length - 1 },
     step: 1,
     tooltips: true,
     format: format,
     pips: { mode: 'steps', format: format, density: 50 },
+    handleAttributes: [
+      { 'aria-label': '${fieldName} minimum' },
+      { 'aria-label': '${fieldName} maximum' },
+    ],
 });
 
 ${fieldName}Slider.noUiSlider.on('change', function () {
