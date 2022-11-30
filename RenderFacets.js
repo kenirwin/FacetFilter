@@ -65,6 +65,11 @@ function createFacets(facetFilter) {
   bindControls(facetFilter);
 }
 
+function treatAsClick(e) {
+  // return true if the event is a click or an enter-or-spacebar keypress
+  return e.type == 'click' || ['Enter', ' '].includes(e.key);
+}
+
 function bindControls(facetFilter) {
   // on form input change
   // fires when a checkbox(string) is clicked or number is changed
@@ -81,18 +86,44 @@ function bindControls(facetFilter) {
   });
 
   // on click a facet tag name (tag facet)
-  $(facetFilter.facetDivId + ' .facet-tag').on('click', async function () {
-    $(this).toggleClass('active');
-    facetFilter.addTagFilter($(this).data('facet'), $(this).data('value'));
-    await filterObjectsByFacets(facetFilter);
-    // console.log('remaining data', facetFilter.data);
-    refocusOnFacet($(this), facetFilter);
-  });
+  $(facetFilter.facetDivId + ' .facet-tag').on(
+    'click keydown',
+    async function () {
+      if (treatAsClick(event)) {
+        event.preventDefault();
+        $(this).toggleClass('active');
+        if ($(this).attr('aria-pressed') == 'true') {
+          // remove tag filter
+          facetFilter.removeTagFilter(
+            $(this).data('facet'),
+            $(this).data('value')
+          );
+          facetFilter.reset();
+          filterObjectsByFacets(facetFilter);
+          displayObjects(facetFilter);
+          refocusOnFacet($(this));
+        } else {
+          // add tag filter
+          $(this).attr('aria-pressed', 'true');
+          facetFilter.addTagFilter(
+            $(this).data('facet'),
+            $(this).data('value')
+          );
+          await filterObjectsByFacets(facetFilter);
+          // console.log('remaining data', facetFilter.data);
+          refocusOnFacet($(this), facetFilter);
+        }
+      }
+    }
+  );
+
   $('#show-all').on('click keydown', function (e) {
-    if (e.type == 'click' || ['Enter', ' '].includes(e.key)) {
+    if (treatAsClick(e)) {
+      e.preventDefault();
       location.reload();
     }
   });
+
   $('#sorter').on('change', function () {
     // console.log('sorter changed: ', $(this).val());
     facetFilter.sortDataByFacet($(this).val());
@@ -126,15 +157,10 @@ function bindControls(facetFilter) {
       // refocusOnFacet($('this')); // need to get this from the event
     });
 
-  // on click a facet tag name (tag facet)
-  $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
-    // console.log('clicked remove tag');
-    facetFilter.removeTagFilter($(this).data('facet'), $(this).data('value'));
-    facetFilter.reset();
-    filterObjectsByFacets(facetFilter);
-    displayObjects(facetFilter);
-    refocusOnFacet($(this));
-  });
+  // // on click a facet tag name (tag facet)
+  // $(facetFilter.facetDivId + ' .remove-tag').on('click', function () {
+
+  // });
 
   $(document).on('keydown', function (e) {
     // focusable =
