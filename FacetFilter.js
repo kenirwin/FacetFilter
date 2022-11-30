@@ -428,7 +428,7 @@ ${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
       // if (fieldName == 'No Data') {
       //   holdUntilEnd = `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;
       // }
-      html += `<li class="${addClass}"><a href="#" role="button" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;
+      html += `<li class="${addClass}"><a href="#" role="button" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} <span class="visually-hidden">filter</span> (${itemCount})</a> ${removeButton}</li>`;
     });
     // html += holdUntilEnd;
     return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldName}</legend>${html}</fieldset>`;
