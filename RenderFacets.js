@@ -59,7 +59,7 @@ function createFacets(facetFilter) {
   });
 
   $(facetFilter.facetDivId).append(
-    '<div class="btn btn-primary form-control" id="show-all">Show All</div>'
+    '<div role="button" class="btn btn-primary form-control" id="show-all" tabindex="0">Show All</div>'
   );
   displayObjects(facetFilter);
   bindControls(facetFilter);
@@ -88,8 +88,10 @@ function bindControls(facetFilter) {
     // console.log('remaining data', facetFilter.data);
     refocusOnFacet($(this), facetFilter);
   });
-  $('#show-all').on('click', function () {
-    location.reload();
+  $('#show-all').on('click keydown', function (e) {
+    if (e.type == 'click' || ['Enter', ' '].includes(e.key)) {
+      location.reload();
+    }
   });
   $('#sorter').on('change', function () {
     // console.log('sorter changed: ', $(this).val());
