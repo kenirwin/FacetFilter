@@ -413,22 +413,24 @@ ${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
   generateTagFacet(fieldName) {
     const values = this.getKnownValues(fieldName, 'tag').filter((item) => item);
     let html = '';
-    let addClass, itemCount, removeButton, holdUntilEnd;
+    let addClass, itemCount, removeButton, ariaPressed, holdUntilEnd;
     values.map((value) => {
       addClass = '';
       removeButton = '';
+      ariaPressed = false;
       if (
         this.filters.hasOwnProperty(fieldName) &&
         this.filters[fieldName].includes(value)
       ) {
         addClass = 'fw-bold';
-        removeButton = `<a href="#" class="remove-tag" data-facet="${fieldName}" data-value="${value}"><i class="bi bi-x-circle text-danger"></i></a>`;
+        removeButton = `<span class="remove-tag" data-facet="${fieldName}" data-value="${value}"><span class="visually-hidden">Click to remove this filter</span><i class="bi bi-x-circle text-danger"></i></span>`;
+        ariaPressed = true;
       }
       itemCount = this.tagCounts[fieldName][value];
       // if (fieldName == 'No Data') {
       //   holdUntilEnd = `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;
       // }
-      html += `<li class="${addClass}"><a href="#" role="button" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} <span class="visually-hidden">filter</span> (${itemCount})</a> ${removeButton}</li>`;
+      html += `<li class="${addClass}"><a href="#" role="button" aria-pressed="${ariaPressed}" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} <span class="visually-hidden">filter</span> (${itemCount}) ${removeButton}</a></li>`;
     });
     // html += holdUntilEnd;
     return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldName}</legend>${html}</fieldset>`;
