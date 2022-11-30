@@ -215,7 +215,10 @@ function updateTagFacets(facetFilter) {
   let tagFacets = facetFilter.getTagFacetNames();
   tagFacets.forEach(function (facet) {
     html = facetFilter.generateTagFacet(facet);
-    $(facetFilter.facetDivId + ' [data-facet="' + facet + '"]').html(html);
+    console.log('html', html);
+    $(facetFilter.facetDivId + ' [data-facet="' + facet + '"]').replaceWith(
+      html
+    );
   });
 }
 
