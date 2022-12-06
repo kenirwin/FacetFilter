@@ -2,33 +2,39 @@
     "schema": [
         {
             "fieldName": "label",
+            "fieldLabel": "Label",
             "fieldType": "string",
             "sortable": true,
             "filterable": false
         },
         {
             "fieldName": "letter",
+            "fieldLabel": "Letter",
             "fieldType": "string",
             "sortable": true,
             "filterable": false
         },
         {
             "fieldName": "dataTags",
+            "fieldLabel": "Data Tags",
             "fieldType": "tag",
             "sortable": false
         },
         {
             "fieldName": "tags",
+            "fieldLabel": "Tags",
             "fieldType": "tag",
             "sortable": false
         },
         {
             "fieldName": "number",
+            "fieldLabel": "Number",
             "fieldType": "number",
             "sortable": true
         },
         {
             "fieldName": "color",
+            "fieldLabel": "Color",
             "fieldType": "string",
             "options": [
                 "red",

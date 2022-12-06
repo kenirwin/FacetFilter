@@ -254,6 +254,18 @@ class FacetFilter {
     return sortableFields;
   }
 
+  getFacetByFieldName(fieldName) {
+    return this.schema.find((facet) => facet.fieldName == fieldName);
+  }
+
+  getFacetLabel(fieldName) {
+    let facet = this.getFacetByFieldName(fieldName);
+    if (facet == null) {
+      return fieldName;
+    }
+    return facet.fieldLabel;
+  }
+
   sortDataByFacet(fieldName) {
     // console.log('sortDataByFacet:', fieldName);
     const facet = this.getFacetByFieldName(fieldName);
