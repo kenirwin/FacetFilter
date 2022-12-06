@@ -15,9 +15,10 @@ The interfaces is built on a JSON object with two main properties: schema and da
 The schema has a "fields" array; that array holds one object for each data field used in by the data objects:
 
 1. fieldName: the name of the field; fieldName should use letters and numbers only (e.g. "address1" or "firstName") with no spaces or dashes. Do _not_ use "first name" or "first-name".
-2. type: can be "number", "string", or "tag" -- tags are arrays, e.g. ["propOne","propTwo"]
-3. sortable: true/false; should this field appear in the list of sort options? If data are sorted by tag, only the first tag value will be used in the sorting process.
-4. filterable: true/false; should a facet be displayed for this value. Facets should typically be use on fields where multiple objects will have the same values (e.g. "color" or "shape") rather than more-or-less unique properties like "name, "address", etc.
+2. fieldLabel (optional): how the field should be labeled for the user. If fieldLabel isn't present, the fieldName will be presented to the user instead. fieldLabels are useful if you have a multiword fieldName like "firstName" that you'd like to present as "First Name".
+3. fieldType: can be "number", "string", or "tag" -- tags are arrays, e.g. ["propOne","propTwo"]
+4. sortable: true/false; should this field appear in the list of sort options? If data are sorted by tag, only the first tag value will be used in the sorting process.
+5. filterable: true/false; should a facet be displayed for this value. Facets should typically be use on fields where multiple objects will have the same values (e.g. "color" or "shape") rather than more-or-less unique properties like "name, "address", etc.
 
 A very simple JSON object for configuring the interface might look like:
 
@@ -37,6 +38,7 @@ A very simple JSON object for configuring the interface might look like:
         },
         {
             "fieldName": "letterType",
+            "fieldLabel": "Letter Type"
             "fieldType": "tag",
             "sortable": false
         }
