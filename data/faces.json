@@ -2,30 +2,35 @@
     "schema": [
         {
             "fieldName": "firstName",
+            "fieldLabel": "First Name",
             "fieldType": "string",
             "sortable": false,
             "filterable": false
         },
         {
             "fieldName": "lastName",
+            "fieldLabel": "Last Name",
             "fieldType": "string",
             "sortable": true,
             "filterable": false
         },
         {
             "fieldName": "raceOrEthnicity",
+            "fieldLabel": "Race or Ethnicity",
             "fieldType": "tag",
             "sortable": false,
             "filterable": true
         },
         {
             "fieldName": "gender",
+            "fieldLabel": "Gender",
             "fieldType": "string",
             "sortable": true,
             "filterable": true
         },
         {
             "fieldName": "decades",
+            "fieldLabel": "Decades Covered",
             "fieldType": "slider",
             "values": [
                 "1920s",
@@ -45,18 +50,21 @@
         },
         {
             "fieldName": "theme",
+            "fieldLabel": "Theme",
             "fieldType": "tag",
             "sortable": false,
             "filterable": true
         },
         {
             "fieldName": "photo",
+            "fieldLabel": "Photo",
             "fieldType": "string",
             "sortable": false,
             "filterable": false
         },
         {
             "fieldName": "url",
+            "fieldLabel": "URL",
             "fieldType": "string",
             "sortable": false,
             "filterable": false
