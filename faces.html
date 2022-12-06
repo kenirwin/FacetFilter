@@ -36,6 +36,17 @@
         // for (const key of urlParams.keys()) console.log(key);
         // let items = $('#facet-raceOrEthnicity li a').filter('[data-value="Black"]').click();
         // console.log(items, items);
+        let maxTags = 3;
+        $('.facet[data-type="tag"]')
+            .find('li:gt(' + (maxTags - 1) +')')
+            .hide()
+            .end()
+            .append(
+                $('<li class="btn btn-sm btn-primary">Show More...</li>').click( function(){
+                    $(this).siblings(':hidden').show().end().remove();
+                })
+            );
+
         });
 
     </script>
