@@ -366,6 +366,7 @@ describe('getFacetByFieldName', () => {
     const facet = facetFilter.getFacetByFieldName('letter');
     expect(facet).toEqual({
       fieldName: 'letter',
+      fieldLabel: 'Letter',
       fieldType: 'string',
       sortable: true,
       filterable: false,
@@ -397,5 +398,18 @@ describe('sortDataByFacet', () => {
     expect(facetFilter.data[1].label).toEqual('A3');
     expect(facetFilter.data[2].label).toEqual('A6');
     expect(facetFilter.data[3].label).toEqual('B13');
+  });
+});
+
+describe('getFacetLabel', () => {
+  it('should get the label for a facet', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const label = facetFilter.getFacetLabel('letter');
+    expect(label).toEqual('Letter');
+  });
+  it('should get the fieldName if no fieldLabel given', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const label = facetFilter.getFacetLabel('color');
+    expect(label).toEqual('color');
   });
 });
