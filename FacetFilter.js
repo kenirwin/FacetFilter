@@ -260,7 +260,7 @@ class FacetFilter {
 
   getFacetLabel(fieldName) {
     let facet = this.getFacetByFieldName(fieldName);
-    if (facet == null) {
+    if (facet.fieldLabel == null) {
       return fieldName;
     }
     return facet.fieldLabel;
@@ -313,11 +313,12 @@ class FacetFilter {
 
   generateTextFacet(fieldName) {
     const values = this.getKnownValues(fieldName, 'text');
+    const fieldLabel = this.getFacetLabel(fieldName);
     let options = values.map((value) => {
       let id = fieldName + '-' + value;
       return `<span class="checkbox-set"><label for="${id}">${value}</label><input type="checkbox" class="form-check-inline" id="${id}" value="${value}" data-field="${fieldName}" checked /></span>`;
     });
-    return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="text"><legend class="facet-name">${fieldName}</legend><div class="facet-options">${options.join(
+    return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="text"><legend class="facet-name">${fieldLabel}</legend><div class="facet-options">${options.join(
       ''
     )}</div></fieldset>`;
   }
@@ -327,16 +328,18 @@ class FacetFilter {
     let min = values[0];
     let max = values[values.length - 1];
     let id = fieldName;
+    const fieldLabel = this.getFacetLabel(fieldName);
     return `<fieldset class="facet form-group" id="facet-${fieldName}" data-facet="${fieldName}" data-type="number">
-    <legend class="facet-name">${fieldName}</legend>
+    <legend class="facet-name">${fieldLabel}</legend>
     <label for="${id}-min">Minimum</label><input class="form-control" type="number" id="${id}-min" data-field="${fieldName}" value="${min}" />
     <label for="${id}-max">Maximum</label><input class="form-control" type="number" id="${id}-max" data-field="${fieldName}" value="${max}" />
     </fieldset>`;
   }
 
   generateSliderHtml(fieldName) {
+    const fieldLabel = this.getFacetLabel(fieldName);
     return (
-      `<fieldset class="facet"><legend class="facet-name">${fieldName}</legend>` +
+      `<fieldset class="facet"><legend class="facet-name">${fieldLabel}</legend>` +
       `<div class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="slider"></div>` +
       `</fieldset>` +
       '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.css" />'
@@ -426,6 +429,7 @@ ${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
     const values = this.getKnownValues(fieldName, 'tag').filter((item) => item);
     let html = '';
     let addClass, itemCount, removeButton, ariaPressed, holdUntilEnd;
+    const fieldLabel = this.getFacetLabel(fieldName);
     values.map((value) => {
       addClass = '';
       removeButton = '';
@@ -445,7 +449,7 @@ ${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
       html += `<li class="${addClass}"><a href="#" role="button" aria-pressed="${ariaPressed}" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} <span class="visually-hidden">filter</span> (${itemCount}) ${removeButton}</a></li>`;
     });
     // html += holdUntilEnd;
-    return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldName}</legend>${html}</fieldset>`;
+    return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldLabel}</legend>${html}</fieldset>`;
     // let options = values.map((value) => {
     //   let id = fieldName + '-' + value;
     //   return `<span class="checkbox-set"><label for="${id}">${value}</label><input type="checkbox" class="form-check-inline" id="${id}" value="${value}" data-field="${fieldName}" checked /></span>`;

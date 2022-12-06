@@ -34,7 +34,6 @@
         },
         {
             "fieldName": "color",
-            "fieldLabel": "Color",
             "fieldType": "string",
             "options": [
                 "red",

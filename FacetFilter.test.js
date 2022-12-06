@@ -407,4 +407,9 @@ describe('getFacetLabel', () => {
     const label = facetFilter.getFacetLabel('letter');
     expect(label).toEqual('Letter');
   });
+  it('should get the fieldName if no fieldLabel given', () => {
+    const facetFilter = new FacetFilter(schema, data);
+    const label = facetFilter.getFacetLabel('color');
+    expect(label).toEqual('color');
+  });
 });
