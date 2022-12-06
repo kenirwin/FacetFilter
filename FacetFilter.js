@@ -266,6 +266,12 @@ class FacetFilter {
     return facet.fieldLabel;
   }
 
+  sortTagsByCounts(values, fieldName) {
+    values.sort((a, b) => {
+      return this.tagCounts[fieldName][b] - this.tagCounts[fieldName][a];
+    });
+  }
+
   sortDataByFacet(fieldName) {
     // console.log('sortDataByFacet:', fieldName);
     const facet = this.getFacetByFieldName(fieldName);
@@ -427,9 +433,16 @@ ${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
 
   generateTagFacet(fieldName) {
     const values = this.getKnownValues(fieldName, 'tag').filter((item) => item);
+    console.log('facet values:', values);
     let html = '';
     let addClass, itemCount, removeButton, ariaPressed, holdUntilEnd;
     const fieldLabel = this.getFacetLabel(fieldName);
+    if (
+      this.pageConf.hasOwnProperty('sortTagsByCount') &&
+      this.pageConf.sortTagsByCount == true
+    ) {
+      this.sortTagsByCounts(values, fieldName);
+    }
     values.map((value) => {
       addClass = '';
       removeButton = '';
