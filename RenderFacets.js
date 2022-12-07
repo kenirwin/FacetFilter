@@ -1,5 +1,6 @@
 function facets(facetConf) {
   let facetFilter;
+
   if (
     facetConf.hasOwnProperty('schemaFile') &&
     facetConf.hasOwnProperty('dataFile')
@@ -11,6 +12,9 @@ function facets(facetConf) {
         dataType: 'json',
         success: function (fileContents) {
           dataJson = fileContents;
+          if (facetConf.hasOwnProperty('dataObjectPath')) {
+            dataJson = getNestedObject(dataJson, facetConf.dataObjectPath);
+          }
         },
         async: false,
       }),
@@ -49,6 +53,14 @@ function facets(facetConf) {
     console.error('Error: no dataFile or schema/data provided');
   }
 }
+
+function getNestedObject(obj, path) {
+  for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
+    obj = obj[path[i]];
+  }
+  return obj;
+}
+
 function pageSetup(facetFilter, facetConf) {
   facetFilter.facetDivId = facetConf.facetDivId;
   facetFilter.pageConf = facetConf.pageConf;
