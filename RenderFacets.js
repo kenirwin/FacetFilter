@@ -1,8 +1,39 @@
 function facets(facetConf) {
-  // let dataFile = facetConf.dataFile;
-  // let facetFilter;
-  if (facetConf.hasOwnProperty('schema') && facetConf.hasOwnProperty('data')) {
-    facetFilter = new FacetFilter(facetConf.schema, facetConf.data);
+  let facetFilter;
+  if (
+    facetConf.hasOwnProperty('schemaFile') &&
+    facetConf.hasOwnProperty('dataFile')
+  ) {
+    $.when(
+      $.ajax({
+        type: 'GET',
+        url: facetConf.dataFile,
+        dataType: 'json',
+        success: function (fileContents) {
+          dataJson = fileContents;
+        },
+        async: false,
+      }),
+      $.ajax({
+        type: 'GET',
+        url: facetConf.schemaFile,
+        dataType: 'json',
+        success: function (fileContents) {
+          schemaJson = fileContents;
+        },
+        async: false,
+      })
+    ).then(function () {
+      if (dataJson && schemaJson) {
+        facetFilter = new FacetFilter(schemaJson, dataJson);
+        console.log(facetFilter);
+        pageSetup(facetFilter, facetConf);
+      } else {
+        console.error('failed to load data and schema');
+        console.error('dataJson', dataJson);
+        console.error('schemaJson', schemaJson);
+      }
+    });
   } else if (facetConf.hasOwnProperty('dataAndSchemaFile')) {
     $.ajax({
       type: 'GET',
@@ -10,13 +41,15 @@ function facets(facetConf) {
       dataType: 'json',
       success: function (fileContents) {
         facetFilter = new FacetFilter(fileContents.schema, fileContents.data);
+        pageSetup(facetFilter, facetConf);
       },
       async: false,
     });
   } else {
     console.error('Error: no dataFile or schema/data provided');
   }
-
+}
+function pageSetup(facetFilter, facetConf) {
   facetFilter.facetDivId = facetConf.facetDivId;
   facetFilter.pageConf = facetConf.pageConf;
   console.log(facetFilter.facetDivId);
