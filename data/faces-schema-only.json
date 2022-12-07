@@ -1,0 +1,71 @@
+[
+    {
+        "fieldName": "firstName",
+        "fieldLabel": "First Name",
+        "fieldType": "string",
+        "sortable": false,
+        "filterable": false
+    },
+    {
+        "fieldName": "lastName",
+        "fieldLabel": "Last Name",
+        "fieldType": "string",
+        "sortable": true,
+        "filterable": false
+    },
+    {
+        "fieldName": "raceOrEthnicity",
+        "fieldLabel": "Race or Ethnicity",
+        "fieldType": "tag",
+        "sortable": false,
+        "filterable": true
+    },
+    {
+        "fieldName": "gender",
+        "fieldLabel": "Gender",
+        "fieldType": "string",
+        "sortable": true,
+        "filterable": true
+    },
+    {
+        "fieldName": "decades",
+        "fieldLabel": "Decades Covered",
+        "fieldType": "slider",
+        "values": [
+            "1920s",
+            "1930s",
+            "1940s",
+            "1950s",
+            "1960s",
+            "1970s",
+            "1980s",
+            "1990s",
+            "2000s",
+            "2010s",
+            "2020s"
+        ],
+        "sortable": true,
+        "filterable": true
+    },
+    {
+        "fieldName": "theme",
+        "fieldLabel": "Theme",
+        "fieldType": "tag",
+        "sortable": false,
+        "filterable": true
+    },
+    {
+        "fieldName": "photo",
+        "fieldLabel": "Photo",
+        "fieldType": "string",
+        "sortable": false,
+        "filterable": false
+    },
+    {
+        "fieldName": "url",
+        "fieldLabel": "URL",
+        "fieldType": "string",
+        "sortable": false,
+        "filterable": false
+    }
+]

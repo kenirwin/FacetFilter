@@ -25,7 +25,9 @@
             };
             const conf = {
             itemFormat: '<a href="<%= url %>" class="object-wrapper"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %><br><%= decades %></div></li></a>',
-            dataFile: 'data/faces.json',
+            // dataAndSchemaFile: 'data/faces.json',
+            dataFile: 'data/faces-data-only.json',
+            schemaFile: 'data/faces-schema-only.json',
             facetDivId: '#facets',
             contentDivId: '#faces',
             pageConf

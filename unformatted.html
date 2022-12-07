@@ -12,10 +12,14 @@
     <script src="RenderFacets.js"></script> 
     <script>
         $(document).ready(function() {
+            const pageConf = { 
+
+            };
             const conf = {
-            dataFile: 'data/colors.json',
+            dataAndSchemaFile: 'data/colors.json',
             facetDivId: '#facets',
-            contentDivId: '#objects'
+            contentDivId: '#objects',
+            pageConf
         } ;
         facets(conf);
         });
