@@ -1,12 +1,12 @@
 function facets(facetConf) {
-  let dataFile = facetConf.dataFile;
-  let facetFilter;
+  // let dataFile = facetConf.dataFile;
+  // let facetFilter;
   if (facetConf.hasOwnProperty('schema') && facetConf.hasOwnProperty('data')) {
     facetFilter = new FacetFilter(facetConf.schema, facetConf.data);
-  } else if (facetConf.hasOwnProperty('dataFile')) {
+  } else if (facetConf.hasOwnProperty('dataAndSchemaFile')) {
     $.ajax({
       type: 'GET',
-      url: dataFile,
+      url: facetConf.dataAndSchemaFile,
       dataType: 'json',
       success: function (fileContents) {
         facetFilter = new FacetFilter(fileContents.schema, fileContents.data);

@@ -12,14 +12,15 @@
     <script src="RenderFacets.js"></script>
     <script>
         $(document).ready(function() {
+            const pageConf = {}
             const conf = {
                 facetDivId: '#facets',
                 contentDivId: '#objects',
 
                 // url-based data source
                 itemFormat: '<a href="https://cataas.com/cat"><li class="object <%= color %>"><%= label %></li></a>',
-                dataFile: 'data/colors.json',
-
+                dataAndSchemaFile: 'data/colors.json',
+                pageConf
                 // inline data source
             // itemFormat: '<a href="https://cataas.com/cat"><li class="object <%= color %>" style="background-color: <%= label %>; font-size: 12pt"><%= label %></li></a>',
             // data: [{label: 'FireBrick', color: 'red'}, {label: 'DodgerBlue', color: 'blue'}, {label: 'Crimson', color: 'red'},{label: 'Navy', color: 'blue'}, {label: 'ForestGreen', color: 'green'}, {label: 'LimeGreen', color: 'green'}],
