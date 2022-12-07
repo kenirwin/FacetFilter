@@ -81,11 +81,13 @@ When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` int
     <script src="FacetFilter.js"></script>
     <script src="RenderFacets.js"></script>
     <script>
+        pageConf = { }
         conf = {
             itemFormat: '<a href="<%= url %>"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %><br><%= decades %></div></li></a><li>',
-            dataFile: 'data/faces.json',
+            dataSchemaAndDataFile: 'data/faces.json',
             facetDivId: '#facets',
-            contentDivId: '#content'
+            contentDivId: '#content',
+            pageConf
             }
             facets(conf);
     </script>
@@ -102,18 +104,24 @@ When setting up the interface, put the `FacetFilter.js` and `RenderFacet.js` int
 </html>
 ```
 
-Once you have copied this code, there are several options to configure
+#### Alternate schema & data setup
+
+You can put the schema and data in a single file as shown above, or have separate files. If using separate files, replaces the `schemaAndDataFile` with `schemaFile: '...'` and `dataFile: '...'`.
+
+### Configuration
+
+Once you have copied this code, there are several options to configure.
 
 #### Required elements
 
 - `facetDivId` is the selector for the div where you want the facets to display, e.g. `'#facets'`
 - `contentDivId` is the selector for the div where you want the main content to display, e.g. `'objects'`
 
-#### Semi-required: must include EITHER `dataFile` OR `data` & `schema` objects
+#### Semi-required: must include EITHER `dataAndSchemaFile` OR `dataFile` & `schemaFile` objects
 
-- `dataFile`: should point to the JSON object described above, including both a `data` and a `schema` object.
-- `data`: pass a JavaScript object instead of a data file. if used, must also pass a `schema` object.
-- `schema`: pass a JavaScript object instead of a data file. if used, must also pass a `data` object.
+- `dataAndDataFile`: should point to the JSON object described above, including both a `data` and a `schema` object.
+- `dataFile`: pass a JavaScript object instead of a data file. if used, must also pass a `schemaFile` object.
+- `schemaFile`: pass a JavaScript object instead of a data file. if used, must also pass a `dataFile` object.
 
 #### Optional Formatter
 
