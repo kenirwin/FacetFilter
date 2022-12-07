@@ -122,6 +122,7 @@ Once you have copied this code, there are several options to configure.
 - `dataAndDataFile`: should point to the JSON object described above, including both a `data` and a `schema` object.
 - `dataFile`: pass a JavaScript object instead of a data file. if used, must also pass a `schemaFile` object.
 - `schemaFile`: pass a JavaScript object instead of a data file. if used, must also pass a `dataFile` object.
+- `dataObjectPath`: if your `dataFile` object is not just an array of the data objects to be presented, but that data is wrapped inside other objects, use this optional parameter to specify the path to the data array, e.g. `'wrapper.deeper.data'` to read from the `./data/faces-data-nested.json` file in this repo.
 
 #### Optional Formatter
 
