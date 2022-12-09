@@ -27,17 +27,21 @@ function facets(facetConf) {
         },
         async: false,
       })
-    ).then(function () {
-      if (dataJson && schemaJson) {
-        facetFilter = new FacetFilter(schemaJson, dataJson);
-        console.log(facetFilter);
-        pageSetup(facetFilter, facetConf);
-      } else {
-        console.error('failed to load data and schema');
-        console.error('dataJson', dataJson);
-        console.error('schemaJson', schemaJson);
-      }
-    });
+    )
+      .then(function () {
+        if (dataJson && schemaJson) {
+          facetFilter = new FacetFilter(schemaJson, dataJson);
+          console.log(facetFilter);
+          pageSetup(facetFilter, facetConf);
+        } else {
+          console.error('failed to load data and schema');
+          console.error('dataJson', dataJson);
+          console.error('schemaJson', schemaJson);
+        }
+      })
+      .then(function () {
+        urlFilters(window.location.search, facetConf);
+      });
   } else if (facetConf.hasOwnProperty('dataAndSchemaFile')) {
     $.ajax({
       type: 'GET',
@@ -133,7 +137,7 @@ function bindControls(facetFilter) {
   // on click a facet tag name (tag facet)
   $(facetFilter.facetDivId + ' .facet-tag').on(
     'click keydown',
-    async function () {
+    async function (event) {
       if (treatAsClick(event)) {
         event.preventDefault();
         $(this).toggleClass('active');
