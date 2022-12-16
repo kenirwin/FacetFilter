@@ -110,6 +110,10 @@ function createFacets(facetFilter) {
   $(facetFilter.facetDivId).append(
     '<div role="button" class="btn btn-primary form-control" id="show-all" tabindex="0">Show All</div>'
   );
+
+  $(facetFilter.facetDivId).prepend(
+    '<span class="input-group mb-3"><input type="text" class="form-control" id="search" placeholder="Search"><input-group-text" id="search"><button class="btn btn-outline-primary" id="search-submit"><i class="bi bi-search"></a></span>'
+  );
   displayObjects(facetFilter);
   bindControls(facetFilter);
 }
@@ -128,6 +132,16 @@ function bindControls(facetFilter) {
       filterObjectsByFacets(facetFilter);
       // console.log('filtering', facetFilter.data);
     });
+
+  // on search
+  $(facetFilter.facetDivId + ' #search-submit').on('click', function () {
+    filterObjectsBySearch(facetFilter);
+  });
+  $(facetFilter.facetDivId + ' #search').on('keyup', function (e) {
+    if (e.key === 'Enter') {
+      filterObjectsBySearch(facetFilter);
+    }
+  });
 
   // on arbitrary input change
   $(facetFilter.facetDivId).bind('facetFilter.update', function () {
@@ -271,6 +285,14 @@ function updateTagFacets(facetFilter) {
   });
 }
 
+function filterObjectsBySearch(facetFilter) {
+  let search = $('#search').val();
+  facetFilter.reset();
+  // facetFilter.applyAllTagFilters();
+  // facetFilter.applyAllSliderFilters();
+  facetFilter.applySearchFilter(search, ['firstName', 'lastName']);
+  displayObjects(facetFilter);
+}
 function filterObjectsByFacets(facetFilter) {
   let tagFacets = facetFilter.getTagFacetNames();
 
