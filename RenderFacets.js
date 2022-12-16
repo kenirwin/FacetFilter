@@ -116,7 +116,7 @@ function createFacets(facetFilter) {
   console.log('facetFilter', facetFilter);
 
   $(facetFilter.facetDivId).prepend(
-    '<span id="ff-search" class="input-group mb-3"><input type="text" class="form-control" id="search" placeholder="Search"><input-group-text" id="search"><button class="btn btn-outline-primary" id="search-submit"><i class="bi bi-search"></a></span>'
+    '<span id="ff-search" class="input-group mb-3"><input type="text" class="form-control" id="search" placeholder="Search"><span class="input-group-append" id="search"><button class="btn btn-outline-primary" id="search-submit" type="button"><i class="bi bi-search"></a></span></span>'
   );
   if (facetFilter.searchFields.length == 0) {
     $('#ff-search').hide();
