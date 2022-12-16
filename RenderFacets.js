@@ -113,9 +113,15 @@ function createFacets(facetFilter) {
     '<div role="button" class="btn btn-primary form-control" id="show-all" tabindex="0">Show All</div>'
   );
 
+  console.log('facetFilter', facetFilter);
+
   $(facetFilter.facetDivId).prepend(
-    '<span class="input-group mb-3"><input type="text" class="form-control" id="search" placeholder="Search"><input-group-text" id="search"><button class="btn btn-outline-primary" id="search-submit"><i class="bi bi-search"></a></span>'
+    '<span id="ff-search" class="input-group mb-3"><input type="text" class="form-control" id="search" placeholder="Search"><input-group-text" id="search"><button class="btn btn-outline-primary" id="search-submit"><i class="bi bi-search"></a></span>'
   );
+  if (facetFilter.searchFields.length == 0) {
+    $('#ff-search').hide();
+  }
+
   displayObjects(facetFilter);
   bindControls(facetFilter);
 }
