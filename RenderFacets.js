@@ -110,7 +110,7 @@ function createFacets(facetFilter) {
   });
 
   $(facetFilter.facetDivId).append(
-    '<div role="button" class="btn btn-primary form-control" id="show-all" tabindex="0">Show All</div>'
+    '<div role="button" class="btn btn-primary form-control text-white" id="show-all" tabindex="0">Show All</div>'
   );
 
   console.log('facetFilter', facetFilter);
