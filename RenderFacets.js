@@ -276,11 +276,26 @@ function createSorter(facetFilter) {
 }
 function displayObjects(facetFilter) {
   // console.log('populating', facetFilter.contentDivId);
-  console.log(facetFilter.data);
+  // console.log(facetFilter.data);
   $(facetFilter.contentDivId).empty();
-  facetFilter.data.forEach(function (object) {
-    $(facetFilter.contentDivId).append(ejs.render(facetFilter.format, object));
-  });
+  if (facetFilter.data.length == 0) {
+    $(facetFilter.contentDivId).append(
+      '<p>No results found.</p><div role="button" class="btn btn-primary form-control text-white" id="no-results-show-all" tabindex="0">Show All</div>'
+    );
+    $('#no-results-show-all').on('click keydown', function (e) {
+      if (treatAsClick(e)) {
+        e.preventDefault();
+        location.reload();
+      }
+    });
+  } else {
+    facetFilter.data.forEach(function (object) {
+      $(facetFilter.contentDivId).append(
+        ejs.render(facetFilter.format, object)
+      );
+    });
+  }
+
   if (typeof facetFilter.pageConf != 'undefined') {
     paginate(facetFilter.pageConf);
   }
