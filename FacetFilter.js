@@ -70,7 +70,11 @@ class FacetFilter {
   }
 
   setSearchFields(fields) {
-    this.searchFields = fields;
+    if (Array.isArray(fields)) {
+      this.searchFields = fields;
+    } else {
+      this.searchFields = [];
+    }
   }
   setFormat(format) {
     if (format) {
@@ -496,7 +500,7 @@ ${fieldName}Slider.noUiSlider.on('update', function (values, handle) {
       // if (fieldName == 'No Data') {
       //   holdUntilEnd = `<li class="${addClass}"><a href="#" class="facet-tag" data-facet="${fieldName}" data-value="${value}">${value} (${itemCount})</a> ${removeButton}</li>`;
       // }
-      html += `<li class="${addClass}"><a href="#" role="button" aria-pressed="${ariaPressed}" class="facet-tag btn py-0" data-facet="${fieldName}" data-value="${value}">${value} <span class="visually-hidden">filter</span> (${itemCount}) ${removeButton}</a></li>`;
+      html += `<li class="${addClass}"><a href="#" role="button" aria-pressed="${ariaPressed}" class="facet-tag btn py-0 text-start" data-facet="${fieldName}" data-value="${value}">${value} <span class="visually-hidden">filter</span> (${itemCount}) ${removeButton}</a></li>`;
     });
     // html += holdUntilEnd;
     return `<fieldset class="facet" id="facet-${fieldName}" data-facet="${fieldName}" data-type="tag"><legend class="facet-name">${fieldLabel}</legend>${html}</fieldset>`;
