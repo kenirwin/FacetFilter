@@ -11,7 +11,7 @@ class FacetFilter {
     // this.countAllTags();
   }
 
-  filterBySearch(searchString, fields) {
+  applySearchFilter(searchString, fields) {
     // fields tells which fields we're searching in
     let searchTerms = searchString.split(' ');
     let searchResults = [];
