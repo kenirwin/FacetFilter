@@ -6,11 +6,45 @@ class FacetFilter {
     this.filters = {};
     this.tagCounts = {};
     this.sliderRanges = {};
+    this.searchFields = [];
     // this.slider
     this.handleAllMissingValues();
     // this.countAllTags();
   }
 
+  applySearchFilter(searchString) {
+    // fields tells which fields we're searching in
+    let searchTerms = searchString.split(' ');
+    let searchResults = [];
+    this.data.forEach((object) => {
+      let temp = [];
+      this.searchFields.forEach((field) => {
+        temp.push(object[field]);
+      });
+      let entry = temp.join(' ');
+      let match = true;
+      searchTerms.forEach((term) => {
+        let regex = new RegExp(term, 'i');
+        if (!entry.match(regex)) {
+          match = false;
+        }
+      });
+      if (match) {
+        searchResults.push(object);
+      }
+    });
+    this.data = searchResults;
+  }
+  // getSearchable(fields) {
+  //   let list = [];
+  //   this.data.forEach((object) => {
+  //     let temp = [];
+  //     fields.forEach((field) => {
+  //       temp.push(object[field]);
+  //     });
+  //     list.push(temp.join(' '));
+  //   });
+  // }
   handleAllMissingValues() {
     this.schema.forEach((facet) => {
       // console.log('handling missing values for :', facet.fieldName);
@@ -35,6 +69,9 @@ class FacetFilter {
     });
   }
 
+  setSearchFields(fields) {
+    this.searchFields = fields;
+  }
   setFormat(format) {
     if (format) {
       this.format = format;

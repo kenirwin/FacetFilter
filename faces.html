@@ -13,6 +13,7 @@
     <script src="RenderFacets.js"></script>
     <script src="Pagination.js"></script>
     <script src="UrlFilters.js"></script>
+    <!--script src="Search.js"></script-->
     <script>
         $(document).ready(function() {
             const pageConf = {
@@ -21,7 +22,7 @@
             paginationDivId: '#pagination',
             paginationCountId: '#pagination-count',
             contentDivId: '#faces',
-            sortTagsByCount: true
+            sortTagsByCount: true,
             };
             const conf = {
             itemFormat: '<a href="<%= url %>" class="object-wrapper"><li class="card object"><img class="card-img-top" src="<%= photo %>""><div class="card-body"><%= firstName %> <%= lastName %><br><%= decades %></div></li></a>',
@@ -30,9 +31,11 @@
             schemaFile: 'data/faces-schema-only.json',
             facetDivId: '#facets',
             contentDivId: '#faces',
+            searchableFields: ['firstName','lastName'],
             pageConf
         }
         facets(conf);
+        
 
         // const urlParams = new URLSearchParams(window.location.search);
         // for (const key of urlParams.keys()) console.log(key);
