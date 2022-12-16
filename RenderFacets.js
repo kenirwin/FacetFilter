@@ -31,6 +31,7 @@ function facets(facetConf) {
       .then(function () {
         if (dataJson && schemaJson) {
           facetFilter = new FacetFilter(schemaJson, dataJson);
+          facetFilter.setSearchFields(facetConf.searchableFields);
           console.log(facetFilter);
           pageSetup(facetFilter, facetConf);
         } else {
@@ -50,6 +51,7 @@ function facets(facetConf) {
       success: function (fileContents) {
         facetFilter = new FacetFilter(fileContents.schema, fileContents.data);
         pageSetup(facetFilter, facetConf);
+        facetFilter.setSearchFields(facetConf.searchableFields);
       },
       async: false,
     });
@@ -134,9 +136,13 @@ function bindControls(facetFilter) {
     });
 
   // on search
-  $(facetFilter.facetDivId + ' #search-submit').on('click', function () {
-    filterObjectsBySearch(facetFilter);
-  });
+  $(facetFilter.facetDivId + ' #search-submit').on(
+    'click',
+    function (e, facetConf) {
+      console.log('on search', facetConf);
+      filterObjectsBySearch(facetFilter, facetConf);
+    }
+  );
   $(facetFilter.facetDivId + ' #search').on('keyup', function (e) {
     if (e.key === 'Enter') {
       filterObjectsBySearch(facetFilter);
@@ -290,7 +296,7 @@ function filterObjectsBySearch(facetFilter) {
   facetFilter.reset();
   // facetFilter.applyAllTagFilters();
   // facetFilter.applyAllSliderFilters();
-  facetFilter.applySearchFilter(search, ['firstName', 'lastName']);
+  facetFilter.applySearchFilter(search);
   displayObjects(facetFilter);
 }
 function filterObjectsByFacets(facetFilter) {

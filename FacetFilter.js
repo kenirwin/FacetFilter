@@ -6,18 +6,19 @@ class FacetFilter {
     this.filters = {};
     this.tagCounts = {};
     this.sliderRanges = {};
+    this.searchFields = [];
     // this.slider
     this.handleAllMissingValues();
     // this.countAllTags();
   }
 
-  applySearchFilter(searchString, fields) {
+  applySearchFilter(searchString) {
     // fields tells which fields we're searching in
     let searchTerms = searchString.split(' ');
     let searchResults = [];
     this.data.forEach((object) => {
       let temp = [];
-      fields.forEach((field) => {
+      this.searchFields.forEach((field) => {
         temp.push(object[field]);
       });
       let entry = temp.join(' ');
@@ -68,6 +69,9 @@ class FacetFilter {
     });
   }
 
+  setSearchFields(fields) {
+    this.searchFields = fields;
+  }
   setFormat(format) {
     if (format) {
       this.format = format;
